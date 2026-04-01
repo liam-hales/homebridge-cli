@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/*
+.yarn/*
+
+# Misc
+.DS_Store
+
+# Build
+dist/*
+
+# TypeScript
+*.tsbuildinfo
