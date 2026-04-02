@@ -1251,7 +1251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.6.0, chalk@npm:^5.6.2":
+"chalk@npm:^5.6.0":
   version: 5.6.2
   resolution: "chalk@npm:5.6.2"
   checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
@@ -2316,7 +2316,6 @@ __metadata:
     "@stylistic/eslint-plugin": "npm:^5.10.0"
     "@types/node": "npm:^25.5.0"
     "@types/react": "npm:^19.2.14"
-    chalk: "npm:^5.6.2"
     dedent: "npm:^1.7.2"
     eslint: "npm:^10.1.0"
     eslint-import-resolver-typescript: "npm:^4.4.4"
