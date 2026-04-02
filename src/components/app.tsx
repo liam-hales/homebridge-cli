@@ -5,7 +5,7 @@ import { Header } from './index.js';
 
 /**
  * The root app component used as the
- * main entry point to render the app
+ * main entry point for the app
  *
  * @returns The `App` component
  */
