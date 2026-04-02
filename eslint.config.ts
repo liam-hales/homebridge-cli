@@ -29,6 +29,7 @@ export default defineConfig(
     tseslint.configs.stylisticTypeChecked,
     stylistic.configs.recommended,
     react.configs.flat.recommended,
+    react.configs.flat["jsx-runtime"],
     reactHooks.configs.flat.recommended,
     importX.flatConfigs.recommended,
     importX.flatConfigs.typescript,
