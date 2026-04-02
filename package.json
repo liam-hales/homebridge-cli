@@ -19,11 +19,11 @@
   },
   "packageManager": "yarn@4.12.0",
   "scripts": {
-    "dev": "tsx watch src/app.tsx",
+    "dev": "tsx src/main.tsx",
     "build": "tsc",
     "lint": "eslint",
     "deps": "ncu --packageManager yarn",
-    "cleanup": "rm -rf dist/"
+    "cleanup": "rm -rf dist/ tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "dedent": "^1.7.2",
