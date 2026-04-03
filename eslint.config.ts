@@ -125,6 +125,12 @@ export default defineConfig(
             trailingUnderscore: 'forbid',
           },
           {
+            selector: 'parameter',
+            format: ['camelCase'],
+            leadingUnderscore: 'allow',
+            trailingUnderscore: 'forbid',
+          },
+          {
             selector: 'enumMember',
             format: ['UPPER_CASE'],
             leadingUnderscore: 'forbid',
