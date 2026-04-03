@@ -103,8 +103,8 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                 width={20}
               >
                 {
-                // Map the commands into text components
-                // used to render the command names
+                  // Map the commands into text components
+                  // used to render the command names
                   commands.map((command, index) => {
                     const { name } = command;
 
