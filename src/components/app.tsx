@@ -1,7 +1,7 @@
-import { FunctionComponent, ReactElement } from 'react';
+import { FunctionComponent, ReactElement, useState } from 'react';
 import { Text, Box } from 'ink';
 import { colours } from '../constants.js';
-import { Header } from './index.js';
+import { Header, CommandInput } from './index.js';
 
 /**
  * The root app component used as the
@@ -10,6 +10,8 @@ import { Header } from './index.js';
  * @returns The `App` component
  */
 const App: FunctionComponent = (): ReactElement => {
+  const [inputValue, setInputValue] = useState('');
+
   return (
     <>
       <Box
@@ -47,6 +49,10 @@ const App: FunctionComponent = (): ReactElement => {
           to login to Homebridge
         </Text>
       </Box>
+      <CommandInput
+        value={inputValue}
+        onChange={setInputValue}
+      />
     </>
   );
 };
