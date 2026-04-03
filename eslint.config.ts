@@ -46,6 +46,7 @@ export default defineConfig(
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
         '@typescript-eslint/require-await': 'off',
         '@typescript-eslint/prefer-reduce-type-parameter': 'off',
+        '@typescript-eslint/no-unnecessary-type-arguments': 'off',
         'react/display-name': 'off',
 
         // General rules
