@@ -32,6 +32,12 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
       setListIndex(-1);
     }
 
+    // If the escape key is pressed then
+    // clear the input value
+    if (key.escape === true) {
+      onChange('');
+    }
+
     if (key.return === true && listIndex >= 0) {
       const { run } = commands[listIndex];
 
@@ -147,7 +153,11 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
               <Text color={colours.lightGrey}>
                 {`↑/↓ `}
               </Text>
-              to navigate
+              to navigate -
+              <Text color={colours.lightGrey}>
+                {` esc `}
+              </Text>
+              to clear
             </Text>
           </Box>
         )
