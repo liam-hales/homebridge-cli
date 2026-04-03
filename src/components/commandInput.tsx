@@ -104,20 +104,20 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
               >
                 {
                   // Map the commands into text components
-                  // used to render the command names
+                  // used to render the command usage values
                   commands.map((command, index) => {
-                    const { name } = command;
+                    const { usage } = command;
 
                     return (
                       <Text
-                        key={`command-name-${name}`}
+                        key={`command-usage-${usage}`}
                         color={
                           (index === listIndex)
                             ? colours.purple
                             : colours.white
                         }
                       >
-                        {name}
+                        {usage}
                       </Text>
                     );
                   })

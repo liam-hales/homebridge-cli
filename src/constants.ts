@@ -16,17 +16,20 @@ export const colours = {
  */
 export const commands = [
   {
-    name: '/init <hostname>',
+    id: 'init',
+    usage: '/init <hostname>',
     description: 'Used to connect to a Homebridge server',
     run: '/init',
   },
   {
-    name: '/login',
+    id: 'login',
+    usage: '/login',
     description: 'Used to login to Homebridge',
     run: '/login',
   },
   {
-    name: '/logout',
+    id: 'logout',
+    usage: '/logout',
     description: 'Used to logout of Homebridge and clear saved credentials',
     run: '/logout',
   },
