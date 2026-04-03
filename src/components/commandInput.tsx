@@ -1,6 +1,6 @@
-import { FunctionComponent, ReactElement } from 'react';
-import { Box, Text } from 'ink';
-import { colours } from '../constants.js';
+import { FunctionComponent, ReactElement, useState } from 'react';
+import { Box, Text, useInput } from 'ink';
+import { colours, commands } from '../constants.js';
 import TextInput from 'ink-text-input';
 
 /**
@@ -19,6 +19,49 @@ interface Props {
  * @returns The `CommandInput` component
  */
 const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactElement<Props> => {
+  const [listIndex, setListIndex] = useState(-1);
+
+  /**
+   * Used to monitor the user input and take
+   * acton based on the keys pressed
+   */
+  useInput((_, key) => {
+    // If there is no input then
+    // reset the list index
+    if (value === '') {
+      setListIndex(-1);
+    }
+
+    if (key.return === true && listIndex >= 0) {
+      const { run } = commands[listIndex];
+
+      // Call `onChange` with the command run
+      // value and reset the list index
+      onChange(run);
+      setListIndex(-1);
+    }
+
+    if (key.upArrow === true) {
+      const index = listIndex - 1;
+
+      // Only set the command list index if we
+      // are within the commands array length
+      if (index >= -1) {
+        setListIndex(index);
+      }
+    }
+
+    if (key.downArrow === true) {
+      const index = listIndex + 1;
+
+      // Only set the command list index if we
+      // are within the commands array length
+      if (index < commands.length) {
+        setListIndex(index);
+      }
+    }
+  });
+
   return (
     <>
       <Box
@@ -28,6 +71,11 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
         paddingX={1}
       >
         <TextInput
+          /*
+           * Set the `key` prop to force the correct cursor
+           * position when `onChange` is called manually
+           */
+          key={value}
           value={value}
           placeholder="/ Enter command"
           onChange={onChange}
@@ -36,24 +84,71 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
       {
         (value !== '') && (
           <Box
-            flexDirection="row"
+            flexDirection="column"
+            rowGap={1}
             marginX={1}
             marginY={1}
           >
             <Box
-              flexDirection="column"
-              width={20}
+              flexDirection="row"
             >
-              <Text>{'/init <host>'}</Text>
-              <Text>/login</Text>
+              <Box
+                flexDirection="column"
+                width={20}
+              >
+                {
+                // Map the commands into text components
+                // used to render the command names
+                  commands.map((command, index) => {
+                    const { name } = command;
+
+                    return (
+                      <Text
+                        key={`command-name-${name}`}
+                        color={
+                          (index === listIndex)
+                            ? colours.purple
+                            : colours.white
+                        }
+                      >
+                        {name}
+                      </Text>
+                    );
+                  })
+                }
+              </Box>
+              <Box
+                flexDirection="column"
+                flexGrow={1}
+              >
+                {
+                  // Map the commands into text components
+                  // used to render the command descriptions
+                  commands.map((command, index) => {
+                    const { description } = command;
+
+                    return (
+                      <Text
+                        key={`command-description-${description}`}
+                        color={
+                          (index === listIndex)
+                            ? colours.purple
+                            : colours.white
+                        }
+                      >
+                        {description}
+                      </Text>
+                    );
+                  })
+                }
+              </Box>
             </Box>
-            <Box
-              flexDirection="column"
-              flexGrow={1}
-            >
-              <Text>Used to connect to a Homebridge server</Text>
-              <Text>Used to login to Homebridge</Text>
-            </Box>
+            <Text color={colours.grey}>
+              <Text color={colours.lightGrey}>
+                {`↑/↓ `}
+              </Text>
+              to navigate
+            </Text>
           </Box>
         )
       }
