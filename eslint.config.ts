@@ -190,6 +190,7 @@ export default defineConfig(
             overrides: {
               '?': 'before',
               ':': 'before',
+              '|': 'before'
             },
           },
         ],
