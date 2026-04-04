@@ -1,4 +1,10 @@
 /**
+ * Describes the different
+ * modes the app can be in
+ */
+export type AppMode = 'idle' | 'running';
+
+/**
  * Used to create a map type from a
  * given object type and index key
  *
