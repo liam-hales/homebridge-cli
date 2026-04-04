@@ -76,6 +76,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
         width="100%"
         borderStyle="round"
         borderColor={colours.darkGrey}
+        paddingX={1}
       >
         <TextInput
           /*
