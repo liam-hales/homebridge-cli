@@ -69,12 +69,14 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
   });
 
   return (
-    <>
+    <Box
+      flexDirection="column"
+      rowGap={1}
+    >
       <Box
         width="100%"
         borderStyle="round"
         borderColor={colours.darkGrey}
-        paddingX={1}
       >
         <TextInput
           /*
@@ -93,7 +95,6 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
             flexDirection="column"
             rowGap={1}
             marginX={1}
-            marginY={1}
           >
             <Box
               flexDirection="row"
@@ -162,7 +163,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
           </Box>
         )
       }
-    </>
+    </Box>
   );
 };
 
