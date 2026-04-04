@@ -38,13 +38,12 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
       onChange('');
     }
 
-    if (key.return === true && listIndex >= 0) {
+    if (key.tab === true && listIndex >= 0) {
       const { run } = commands[listIndex];
 
-      // Call `onChange` with the command run
-      // value and reset the list index
+      // Call `onChange` with the
+      // command run value
       onChange(run);
-      setListIndex(-1);
     }
 
     if (key.upArrow === true) {
@@ -155,6 +154,10 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                 {`↑/↓ `}
               </Text>
               to navigate -
+              <Text color={colours.lightGrey}>
+                {` tab `}
+              </Text>
+              to select -
               <Text color={colours.lightGrey}>
                 {` esc `}
               </Text>
