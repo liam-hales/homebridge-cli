@@ -20,10 +20,10 @@
   "packageManager": "yarn@4.13.0",
   "scripts": {
     "dev": "tsx src/main.tsx",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "lint": "eslint",
     "deps": "ncu --packageManager yarn",
-    "cleanup": "rm -rf dist/ tsconfig.tsbuildinfo"
+    "cleanup": "rm -rf dist/ *.tsbuildinfo"
   },
   "dependencies": {
     "dedent": "^1.7.2",
