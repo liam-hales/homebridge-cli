@@ -1,6 +1,8 @@
 import { FunctionComponent, ReactElement, useState } from 'react';
 import { Box, Text, useInput } from 'ink';
-import { colours, commands } from '../constants.js';
+import { colours } from '../constants.js';
+import { commands } from '../commands/index.js';
+import { Keybindings } from './index.js';
 import TextInput from 'ink-text-input';
 
 /**
@@ -148,29 +150,21 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                 }
               </Box>
             </Box>
-            <Text color={colours.grey}>
-              <Text
-                color={colours.lightGrey}
-                bold={true}
-              >
-                {`↑/↓ `}
-              </Text>
-              to navigate -
-              <Text
-                color={colours.lightGrey}
-                bold={true}
-              >
-                {` tab `}
-              </Text>
-              to select -
-              <Text
-                color={colours.lightGrey}
-                bold={true}
-              >
-                {` esc `}
-              </Text>
-              to clear
-            </Text>
+            <Keybindings bindings={[
+              {
+                key: '↑/↓',
+                action: 'to navigate',
+              },
+              {
+                key: 'tab',
+                action: 'to select',
+              },
+              {
+                key: 'esc',
+                action: 'to clear',
+              },
+            ]}
+            />
           </Box>
         )
       }
