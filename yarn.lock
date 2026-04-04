@@ -2325,6 +2325,7 @@ __metadata:
     ink: "npm:^6.8.0"
     ink-text-input: "npm:^6.0.0"
     jiti: "npm:^2.6.1"
+    nanoid: "npm:^5.1.7"
     npm-check-updates: "npm:^20.0.0"
     react: "npm:^19.2.4"
     tsx: "npm:^4.21.0"
@@ -3012,6 +3013,15 @@ __metadata:
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: 10/aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^5.1.7":
+  version: 5.1.7
+  resolution: "nanoid@npm:5.1.7"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 10/9ca13b1e87c61b21afaa578f40afbb6488fbc24609c34bba744941f9f56feb5b416ea7dfcc1ec4927a8c0f52e5ea755633662dbd58b9e87fd7899c1d7b242ed6
   languageName: node
   linkType: hard
 
