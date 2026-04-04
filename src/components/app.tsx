@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactElement, useState } from 'react';
-import { Text, Box, useInput } from 'ink';
+import { Text, Box, useInput, useApp } from 'ink';
 import { colours } from '../constants.js';
 import { Header, CommandInput, BlockSwitch, Keybindings } from './index.js';
 import { AppMode, Block } from '../types.js';
@@ -13,6 +13,8 @@ import { commands } from '../commands/index.js';
  * @returns The `App` component
  */
 const App: FunctionComponent = (): ReactElement => {
+  const { exit } = useApp();
+
   const [mode, setMode] = useState<AppMode>('idle');
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
@@ -25,6 +27,12 @@ const App: FunctionComponent = (): ReactElement => {
    */
   const _executeInput = (input: string): void => {
     const blockId = nanoid(16);
+
+    // Check if the user
+    // wants to exit
+    if (input === 'exit') {
+      exit();
+    }
 
     try {
       // Attempt to find a command that matches
