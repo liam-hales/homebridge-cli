@@ -4,6 +4,7 @@ import Keybindings from './keybindings.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
+import BlockSwitch from './block/blockSwitch.js';
 
 export {
   App,
@@ -12,4 +13,5 @@ export {
   CommandInput,
   CommandBlock,
   ErrorBlock,
+  BlockSwitch,
 };
