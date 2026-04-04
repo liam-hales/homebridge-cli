@@ -2,6 +2,7 @@ import { FunctionComponent, ReactElement } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../constants.js';
 import dedent from 'dedent';
+import packageJson from '../../package.json' with { type: 'json' };
 
 /**
  * Used to render the app header which
@@ -10,6 +11,8 @@ import dedent from 'dedent';
  * @returns The `Header` component
  */
 const Header: FunctionComponent = (): ReactElement => {
+  const { version } = packageJson;
+
   return (
     <Box
       flexDirection="column"
@@ -17,18 +20,20 @@ const Header: FunctionComponent = (): ReactElement => {
       rowGap={1}
     >
       <Box
-        paddingLeft={1}
-        paddingRight={1}
+        paddingX={1}
         borderStyle="singleDouble"
-        borderColor="#a058d1"
+        borderColor={colours.purple}
       >
         <Text color={colours.lightGrey}>
-          Welcome to the
+          🚀  Welcome to the
           <Text
             color="white"
             bold={true}
           >
-            {' Homebridge CLI 🚀'}
+            {' Homebridge CLI'}
+          </Text>
+          <Text color={colours.grey}>
+            {` - v${version}`}
           </Text>
         </Text>
       </Box>
