@@ -93,12 +93,10 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
         (value !== '') && (
           <Box
             flexDirection="column"
-            rowGap={1}
+            rowGap={2}
             marginX={1}
           >
-            <Box
-              flexDirection="row"
-            >
+            <Box flexDirection="row">
               <Box
                 flexDirection="column"
                 width={20}
@@ -151,15 +149,24 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
               </Box>
             </Box>
             <Text color={colours.grey}>
-              <Text color={colours.lightGrey}>
+              <Text
+                color={colours.lightGrey}
+                bold={true}
+              >
                 {`↑/↓ `}
               </Text>
               to navigate -
-              <Text color={colours.lightGrey}>
+              <Text
+                color={colours.lightGrey}
+                bold={true}
+              >
                 {` tab `}
               </Text>
               to select -
-              <Text color={colours.lightGrey}>
+              <Text
+                color={colours.lightGrey}
+                bold={true}
+              >
                 {` esc `}
               </Text>
               to clear
