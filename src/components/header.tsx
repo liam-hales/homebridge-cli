@@ -11,7 +11,11 @@ import dedent from 'dedent';
  */
 const Header: FunctionComponent = (): ReactElement => {
   return (
-    <>
+    <Box
+      flexDirection="column"
+      alignItems="flex-start"
+      rowGap={1}
+    >
       <Box
         paddingLeft={1}
         paddingRight={1}
@@ -40,7 +44,7 @@ const Header: FunctionComponent = (): ReactElement => {
           `
         }
       </Text>
-    </>
+    </Box>
   );
 };
 
