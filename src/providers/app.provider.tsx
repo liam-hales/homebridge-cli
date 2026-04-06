@@ -34,7 +34,7 @@ interface Props {
 const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props> => {
   const { exit } = useApp();
 
-  const [mode, setMode] = useState<AppMode>('idle');
+  const [mode, setMode] = useState<AppMode>('starting');
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -94,6 +94,10 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       const apiStatus = await _getApiStatus(host, port);
       setApiStatus(apiStatus);
     }
+
+    // Once completed the initialisation,
+    // set the app mode state to `idle`
+    setMode('idle');
   };
 
   /**
