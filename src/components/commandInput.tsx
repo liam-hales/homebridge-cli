@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, useState } from 'react';
+import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
 import { Box, Text, useInput } from 'ink';
 import { colours } from '../constants.js';
 import { commands } from '../commands/index.js';
@@ -21,19 +21,24 @@ interface Props {
  * @returns The `CommandInput` component
  */
 const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactElement<Props> => {
-  const [listIndex, setListIndex] = useState(-1);
+  const [listIndex, setListIndex] = useState<number>(-1);
+
+  /**
+   * Used to reset the list index
+   * state when the value is empty
+   */
+  useEffect(() => {
+    if (value === '') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setListIndex(-1);
+    }
+  }, [value]);
 
   /**
    * Used to monitor the user input and take
    * acton based on the keys pressed
    */
   useInput((_, key) => {
-    // If there is no input then
-    // reset the list index
-    if (value === '') {
-      setListIndex(-1);
-    }
-
     // If the escape key is pressed then
     // clear the input value
     if (key.escape === true) {
