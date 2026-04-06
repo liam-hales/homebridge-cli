@@ -70,9 +70,9 @@ const ServerInfo: FunctionComponent<Props> = ({ status, config }): ReactElement<
                 color={colours.purple}
                 bold={true}
               >
-                {` ${config.host}:${config.port}, `}
+                {` ${config.host}:${config.port}`}
               </Text>
-              please check host
+              , please check host
             </Text>
           )
         }
