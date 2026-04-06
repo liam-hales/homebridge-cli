@@ -26,6 +26,7 @@
     "cleanup": "rm -rf dist/ *.tsbuildinfo"
   },
   "dependencies": {
+    "@network-utils/tcp-ping": "^1.2.3",
     "dedent": "^1.7.2",
     "ink": "^6.8.0",
     "ink-text-input": "^6.0.0",

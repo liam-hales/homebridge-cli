@@ -578,6 +578,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@network-utils/tcp-ping@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@network-utils/tcp-ping@npm:1.2.3"
+  checksum: 10/d4856b95bda58bb1472acb92b252503c88cfeb12386936f369370cb9a2c09eef93eebd26d135422677d750600716b492623a27e4f2fd2bf080692c241c1c5fe0
+  languageName: node
+  linkType: hard
+
 "@npmcli/agent@npm:^4.0.0":
   version: 4.0.0
   resolution: "@npmcli/agent@npm:4.0.0"
@@ -2401,6 +2408,7 @@ __metadata:
   resolution: "homebridge-cli@workspace:."
   dependencies:
     "@eslint/js": "npm:^10.0.1"
+    "@network-utils/tcp-ping": "npm:^1.2.3"
     "@stylistic/eslint-plugin": "npm:^5.10.0"
     "@types/node": "npm:^24.12.2"
     "@types/react": "npm:^19.2.14"
