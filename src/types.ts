@@ -7,6 +7,24 @@ import { Command } from './commands/index.js';
 export type AppMode = 'idle' | 'running';
 
 /**
+ * Describes the different
+ * server statuses
+ */
+export type ServerStatus = 'ping-success' | 'ping-fail';
+
+/**
+ * Describes the different
+ * Homebridge API statuses
+ */
+export type ApiStatus = 'api-up' | 'api-down';
+
+/**
+ * Describes the different
+ * login statuses
+ */
+export type LoginStatus = 'success' | 'failed';
+
+/**
  * The union type for
  * all block types
  */
@@ -28,6 +46,25 @@ export type Map<
     Readonly<Record<U, K>>
   >;
 };
+
+/**
+ * Describes the `config.json` file from
+ * the `.homebridge-cli` directory
+ */
+export interface Config {
+  readonly filePath: string;
+  readonly hostname: string;
+  readonly apiPath: string;
+}
+
+/**
+ * Describes the credentials used
+ * to log in to Homebridge
+ */
+export interface Credentials {
+  readonly username: string;
+  readonly password: string;
+}
 
 /**
  * Describes the command block used to
