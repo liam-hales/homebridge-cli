@@ -1,14 +1,13 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../../constants.js';
-import { ApiStatus, Config } from '../../types.js';
+import { ApiStatus } from '../../types.js';
 
 /**
  * The `ApiInfo` component props
  */
 interface Props {
   readonly status: ApiStatus;
-  readonly config: Config;
 }
 
 /**
@@ -18,7 +17,7 @@ interface Props {
  * @param props The component props
  * @returns The `ApiInfo` component
  */
-const ApiInfo: FunctionComponent<Props> = ({ status, config }): ReactElement<Props> => {
+const ApiInfo: FunctionComponent<Props> = ({ status }): ReactElement<Props> => {
   return (
     <Box
       flexDirection="column"
@@ -64,9 +63,14 @@ const ApiInfo: FunctionComponent<Props> = ({ status, config }): ReactElement<Pro
         }
         {
           (status === 'down') && (
-            <Text color={colours.lightGrey}>
-              └─ API unavailable, this CLI uses the same API that sits along side the Homebridge UI and is therefore required in order to function.
-            </Text>
+            <>
+              <Text color={colours.lightGrey}>
+                └─ API unavailable, this CLI is powered by the same API used by Homebridge UI and is therefore required in order to function
+              </Text>
+              <Text color={colours.lightGrey}>
+                └─ You will need to install Homebridge UI
+              </Text>
+            </>
           )
         }
       </Box>
