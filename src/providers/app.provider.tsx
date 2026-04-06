@@ -83,16 +83,12 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       const serverStatus = await _getServerStatus(host, port);
       setServerStatus(serverStatus);
 
-      // If the server is down
-      // then exit early
-      if (serverStatus === 'down') {
-        return;
+      if (serverStatus === 'up') {
+        // Get the API status and
+        // update the state
+        const apiStatus = await _getApiStatus(host, port);
+        setApiStatus(apiStatus);
       }
-
-      // Get the API status and
-      // update the state
-      const apiStatus = await _getApiStatus(host, port);
-      setApiStatus(apiStatus);
     }
 
     // Once completed the initialisation,
@@ -114,7 +110,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       address: host,
       port: port,
       attempts: 1,
-      timeout: 500,
+      timeout: 1000,
     });
 
     // If there are no errors then
@@ -136,19 +132,26 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
    * @returns The API status
    */
   const _getApiStatus = async (host: string, port: number): Promise<ApiStatus> => {
-    // Make a request to the `/api` endpoint
-    // to check if the API is up
-    const response = await fetch(`${host}:${port}/api`);
-    const text = await response.text();
+    try {
+      // Make a request to the `/api` endpoint
+      // to check if the API is up
+      const response = await fetch(`http://${host}:${port}/api`);
+      const text = await response.text();
 
-    // if the response is "Hello World!" with a
-    // `200` status code then the API is up
-    return (
-      response.status === 200 &&
-      text === 'Hello World!'
-    )
-      ? 'up'
-      : 'down';
+      // if the response is "Hello World!" with a
+      // `200` status code then the API is up
+      return (
+        response.status === 200 &&
+        text === 'Hello World!'
+      )
+        ? 'up'
+        : 'down';
+    }
+    // Catch any error that occurs while making the
+    // request and return the `down` status
+    catch {
+      return 'down';
+    }
   };
 
   /**
