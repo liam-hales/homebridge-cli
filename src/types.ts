@@ -10,13 +10,13 @@ export type AppMode = 'idle' | 'running';
  * Describes the different
  * server statuses
  */
-export type ServerStatus = 'ping-success' | 'ping-fail';
+export type ServerStatus = 'up' | 'down';
 
 /**
  * Describes the different
  * Homebridge API statuses
  */
-export type ApiStatus = 'api-up' | 'api-down';
+export type ApiStatus = 'up' | 'down';
 
 /**
  * Describes the different
