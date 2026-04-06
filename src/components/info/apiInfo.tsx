@@ -57,7 +57,7 @@ const ApiInfo: FunctionComponent<Props> = ({ status, config }): ReactElement<Pro
                 color={colours.purple}
                 bold={true}
               >
-                {` ${config.apiPath}`}
+                {' /api'}
               </Text>
             </Text>
           )

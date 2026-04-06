@@ -164,7 +164,6 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       return {
         ...JSON.parse(fileData) as Config,
         filePath: `~/${relativePath}`,
-        apiPath: '/api',
       };
     }
     catch {

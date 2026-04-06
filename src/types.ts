@@ -53,8 +53,8 @@ export type Map<
  */
 export interface Config {
   readonly filePath: string;
-  readonly hostname: string;
-  readonly apiPath: string;
+  readonly host: string;
+  readonly port: number;
 }
 
 /**
