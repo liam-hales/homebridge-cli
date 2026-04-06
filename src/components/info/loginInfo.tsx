@@ -2,7 +2,7 @@ import { FunctionComponent, ReactElement } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../../constants.js';
 import { Credentials, LoginStatus } from '../../types.js';
-import os from 'os';
+import os from 'node:os';
 
 /**
  * The `LoginInfo` component props
