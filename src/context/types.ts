@@ -1,4 +1,4 @@
-import { AppMode, Block, Config, ServerStatus, ApiStatus, LoginStatus } from '../types.js';
+import { AppMode, Block, Config, Credentials, ServerStatus, ApiStatus, LoginStatus } from '../types.js';
 
 /**
  * Describes the app state
@@ -12,6 +12,7 @@ export interface AppState {
   readonly apiStatus?: ApiStatus;
   readonly loginStatus?: LoginStatus;
   readonly config?: Config;
+  readonly credentials?: Credentials;
 }
 
 /**

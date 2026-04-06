@@ -1,12 +1,13 @@
 import { FunctionComponent, ReactElement, ReactNode, useEffect, useState } from 'react';
 import { AppContext } from '../context/index.js';
-import { ApiStatus, AppMode, Block, Config, LoginStatus, ServerStatus } from '../types.js';
+import { ApiStatus, AppMode, Block, Config, Credentials, LoginStatus, ServerStatus } from '../types.js';
 import { commands } from '../commands/index.js';
 import { nanoid } from 'nanoid';
 import { useApp, useInput } from 'ink';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
+import keytar from 'keytar';
 
 /**
  * The `AppProvider` component props
@@ -41,6 +42,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   const [loginStatus, setLoginStatus] = useState<LoginStatus | undefined>();
 
   const [config, setConfig] = useState<Config | undefined>();
+  const [credentials, setCredentials] = useState<Credentials | undefined>();
 
   /**
    * Used to call the `_init` function
@@ -62,13 +64,15 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   });
 
   /**
-   * Used to fetch the app config
+   * Used to fetch the app config and credentials
    * and initialise the state
    */
   const _init = async (): Promise<void> => {
     const config = _getConfig();
+    const credentials = await _getCredentials();
 
     setConfig(config);
+    setCredentials(credentials);
   };
 
   /**
@@ -96,6 +100,27 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       // file cannot be open then return
       return;
     }
+  };
+
+  /**
+   * Used to get the Homebridge server login
+   * credentials using `keytar` under the hood
+   */
+  const _getCredentials = async (): Promise<Credentials | undefined> => {
+    // Find all credentials and check
+    // if at least one exists
+    const credentials = await keytar.findCredentials('homebridge-cli');
+    if (credentials.length === 0) {
+      return;
+    }
+
+    // There will only be one set of credentials
+    // so we can use the first one
+    const [{ account, password }] = credentials;
+    return {
+      username: account,
+      password: password,
+    };
   };
 
   /**
@@ -175,6 +200,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         apiStatus: apiStatus,
         loginStatus: loginStatus,
         config: config,
+        credentials: credentials,
         setInputValue: setInputValue,
         executeInput: _executeInput,
       }
