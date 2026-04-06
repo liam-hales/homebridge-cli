@@ -4,10 +4,11 @@ import { ApiStatus, AppMode, Block, Config, Credentials, LoginStatus, ServerStat
 import { commands } from '../commands/index.js';
 import { nanoid } from 'nanoid';
 import { useApp, useInput } from 'ink';
-import path from 'path';
-import os from 'os';
-import fs from 'fs';
+import { ping } from '@network-utils/tcp-ping';
 import keytar from 'keytar';
+import path from 'node:path';
+import os from 'node:os';
+import fs from 'node:fs';
 
 /**
  * The `AppProvider` component props
@@ -64,8 +65,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   });
 
   /**
-   * Used to fetch the app config and credentials
-   * and initialise the state
+   * Used to load the config/credentials, perform the
+   * necessary checks and initialise the app state
    */
   const _init = async (): Promise<void> => {
     const config = _getConfig();
@@ -73,6 +74,77 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
 
     setConfig(config);
     setCredentials(credentials);
+
+    if (config != null) {
+      const { host, port } = config;
+
+      // Get the server status and
+      // update the state
+      const serverStatus = await _getServerStatus(host, port);
+      setServerStatus(serverStatus);
+
+      // If the server is down
+      // then exit early
+      if (serverStatus === 'down') {
+        return;
+      }
+
+      // Get the API status and
+      // update the state
+      const apiStatus = await _getApiStatus(host, port);
+      setApiStatus(apiStatus);
+    }
+  };
+
+  /**
+   * Obtains the server status by
+   * performing a TCP ping
+   *
+   * @param host The server host
+   * @param port The server port
+   *
+   * @returns The server status
+   */
+  const _getServerStatus = async (host: string, port: number): Promise<ServerStatus> => {
+    const { errors } = await ping({
+      address: host,
+      port: port,
+      attempts: 1,
+      timeout: 500,
+    });
+
+    // If there are no errors then
+    // the host is reachable
+    if (errors.length === 0) {
+      return 'up';
+    }
+
+    return 'down';
+  };
+
+  /**
+   * Obtains the API status by checking if the
+   * `/api` route returns the correct response
+   *
+   * @param host The server host
+   * @param port The server port
+   *
+   * @returns The API status
+   */
+  const _getApiStatus = async (host: string, port: number): Promise<ApiStatus> => {
+    // Make a request to the `/api` endpoint
+    // to check if the API is up
+    const response = await fetch(`${host}:${port}/api`);
+    const text = await response.text();
+
+    // if the response is "Hello World!" with a
+    // `200` status code then the API is up
+    return (
+      response.status === 200 &&
+      text === 'Hello World!'
+    )
+      ? 'up'
+      : 'down';
   };
 
   /**
