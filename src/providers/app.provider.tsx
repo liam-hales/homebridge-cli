@@ -217,6 +217,13 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     }
 
     try {
+      // Check if the user wants to clear the blocks, perform this
+      // within the `try` block so the `finally` blocks runs
+      if (input === 'clear') {
+        setBlocks([]);
+        return;
+      }
+
       // Attempt to find a command that matches
       // the users input via its run value
       const command = commands.find((command) => command.run === input);
