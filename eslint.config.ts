@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable import-x/no-named-as-default-member */
 /* eslint-disable import-x/no-named-as-default */
 
 import { defineConfig, globalIgnores } from 'eslint/config';
@@ -48,6 +47,7 @@ export default defineConfig(
         '@typescript-eslint/prefer-reduce-type-parameter': 'off',
         '@typescript-eslint/no-unnecessary-type-arguments': 'off',
         'react/display-name': 'off',
+        'import-x/no-named-as-default-member': 'off',
 
         // General rules
         'no-console': ['error'],
