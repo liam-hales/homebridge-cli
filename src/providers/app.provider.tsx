@@ -1,7 +1,8 @@
-import { FunctionComponent, ReactElement, ReactNode, useEffect, useState } from 'react';
+import { FunctionComponent, ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
 import { AppContext } from '../context/index.js';
 import { ApiStatus, AppMode, Block, Config, Credentials, LoginStatus, ServerStatus } from '../types.js';
 import { commands } from '../commands/index.js';
+import { ApiClient } from '../clients/index.js';
 import { nanoid } from 'nanoid';
 import { useApp, useInput } from 'ink';
 import { ping } from '@network-utils/tcp-ping';
@@ -45,12 +46,27 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   const [config, setConfig] = useState<Config | undefined>();
   const [credentials, setCredentials] = useState<Credentials | undefined>();
 
+  const apiClient = useMemo<ApiClient | undefined>(() => {
+    // Check if the config has been set
+    // before initialising the `ApiClient`
+    if (config != null) {
+      return new ApiClient(config.host, config.port);
+    }
+  }, [config]);
+
   /**
-   * Used to call the `_init` function
+   * Used to call the `_onStart` function
    * when the app starts
    */
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => void _init(), []);
+  useEffect(() => void _onStart(), []);
+
+  /**
+   * Used to call the `_init` function
+   * when the config or credentials change
+   */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => void _init(), [config, credentials]);
 
   /**
    * Used to monitor the user input and take
@@ -65,35 +81,57 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   });
 
   /**
-   * Used to load the config/credentials, perform the
-   * necessary checks and initialise the app state
+   * Used to load the config and
+   * credentials when the app strats
    */
-  const _init = async (): Promise<void> => {
+  const _onStart = async (): Promise<void> => {
     const config = _getConfig();
     const credentials = await _getCredentials();
 
     setConfig(config);
     setCredentials(credentials);
+  };
 
-    if (config != null) {
+  /**
+   * Used to perform the necessary server/API
+   * checks and initialise the app state
+   */
+  const _init = async (): Promise<void> => {
+    if (config == null) {
+      return;
+    }
+
+    try {
       const { host, port } = config;
 
-      // Get the server status and
-      // update the state
+      // Get the server status
+      // and set it to state
       const serverStatus = await _getServerStatus(host, port);
       setServerStatus(serverStatus);
 
-      if (serverStatus === 'up') {
-        // Get the API status and
-        // update the state
-        const apiStatus = await _getApiStatus(host, port);
-        setApiStatus(apiStatus);
+      if (serverStatus === 'down') {
+        return;
       }
-    }
 
+      // Get the API status from the
+      // API client and set it to state
+      const apiStatus = await apiClient?.getStatus();
+      setApiStatus(apiStatus);
+
+      if (credentials == null) {
+        return;
+      }
+
+      // Call the API client `login` function with the
+      // credentials and set the login status to state
+      const loginStatus = await apiClient?.login(credentials);
+      setLoginStatus(loginStatus);
+    }
     // Once completed the initialisation,
     // set the app mode state to `idle`
-    setMode('idle');
+    finally {
+      setMode('idle');
+    }
   };
 
   /**
@@ -120,38 +158,6 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     }
 
     return 'down';
-  };
-
-  /**
-   * Obtains the API status by checking if the
-   * `/api` route returns the correct response
-   *
-   * @param host The server host
-   * @param port The server port
-   *
-   * @returns The API status
-   */
-  const _getApiStatus = async (host: string, port: number): Promise<ApiStatus> => {
-    try {
-      // Make a request to the `/api` endpoint
-      // to check if the API is up
-      const response = await fetch(`http://${host}:${port}/api`);
-      const text = await response.text();
-
-      // if the response is "Hello World!" with a
-      // `200` status code then the API is up
-      return (
-        response.status === 200 &&
-        text === 'Hello World!'
-      )
-        ? 'up'
-        : 'down';
-    }
-    // Catch any error that occurs while making the
-    // request and return the `down` status
-    catch {
-      return 'down';
-    }
   };
 
   /**
