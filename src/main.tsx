@@ -1,6 +1,6 @@
 import { render } from 'ink';
 import { App } from './components/index.js';
-import AppProvider from './providers/app.provider.js';
+import { AppProvider } from './providers/index.js';
 
 /**
  * The main entry point to the app which renders the `App`
