@@ -155,6 +155,12 @@ export default defineConfig(
             leadingUnderscore: 'allow',
             trailingUnderscore: 'forbid',
           },
+          {
+            selector: 'classMethod',
+            format: ['camelCase'],
+            leadingUnderscore: 'allow',
+            trailingUnderscore: 'forbid',
+          },
         ],
         '@typescript-eslint/no-unnecessary-condition': [
           'error',
