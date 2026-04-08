@@ -1,4 +1,5 @@
 import { AppMode, Block, Config, Credentials, ServerStatus, ApiStatus, LoginStatus } from '../types.js';
+import { ApiClient } from '../clients/index.js';
 
 /**
  * Describes the app state
@@ -13,6 +14,7 @@ export interface AppState {
   readonly loginStatus?: LoginStatus;
   readonly config?: Config;
   readonly credentials?: Credentials;
+  readonly apiClient?: ApiClient;
 }
 
 /**
@@ -34,5 +36,5 @@ export interface AppActions {
    *
    * @param input The input
    */
-  readonly executeInput: (value: string) => void;
+  readonly executeInput: (input: string) => void;
 }

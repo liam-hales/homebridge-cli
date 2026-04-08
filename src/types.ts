@@ -22,7 +22,7 @@ export type ApiStatus = 'up' | 'down';
  * Describes the different
  * login statuses
  */
-export type LoginStatus = 'success' | 'failed';
+export type LoginStatus = 'authenticated' | 'failed';
 
 /**
  * The union type for
@@ -58,8 +58,8 @@ export interface Config {
 }
 
 /**
- * Describes the credentials used
- * to log in to Homebridge
+ * Describes the user credentials
+ * used to log in to Homebridge
  */
 export interface Credentials {
   readonly username: string;
