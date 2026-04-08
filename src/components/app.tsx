@@ -62,31 +62,26 @@ const App: FunctionComponent = (): ReactElement => {
       >
         <SetupInfo config={config} />
         {
-          (config != null) && (
-            <>
-              {
-                (serverStatus != null) && (
-                  <ServerInfo
-                    status={serverStatus}
-                    config={config}
-                  />
-                )
-              }
-              {
-                (apiStatus != null) && (
-                  <ApiInfo
-                    status={apiStatus}
-                    config={config}
-                  />
-                )
-              }
-            </>
+          (config != null && serverStatus != null) && (
+            <ServerInfo
+              status={serverStatus}
+              config={config}
+            />
           )
         }
-        <LoginInfo
-          status={loginStatus}
-          credentials={credentials}
-        />
+        {
+          (apiStatus != null) && (
+            <ApiInfo status={apiStatus} />
+          )
+        }
+        {
+          (apiStatus === 'up') && (
+            <LoginInfo
+              status={loginStatus}
+              credentials={credentials}
+            />
+          )
+        }
       </Box>
       {
         (blocks.length > 0) && (
