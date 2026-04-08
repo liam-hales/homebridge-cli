@@ -48,7 +48,7 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
       rowGap={1}
     >
       {
-        (status === 'success' && credentials != null)
+        (status === 'authenticated' && credentials != null)
           ? (
               <Text
                 color={colours.white}
@@ -104,7 +104,7 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
                 </Text>
               </Text>
               {
-                (status === 'success') && (
+                (status === 'authenticated') && (
                   <Text color={colours.lightGrey}>
                     └─ Successfully logged in with user
                     <Text
