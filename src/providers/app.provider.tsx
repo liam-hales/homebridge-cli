@@ -292,6 +292,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         loginStatus: loginStatus,
         config: config,
         credentials: credentials,
+        setMode: setMode,
         setInputValue: setInputValue,
         executeInput: _executeInput,
       }
