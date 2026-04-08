@@ -86,10 +86,8 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
         paddingX={1}
       >
         <TextInput
-          /*
-           * Set the `key` prop to force the correct cursor
-           * position when `onChange` is called manually
-           */
+          // Set the `key` prop to force the correct cursor
+          // position when `onChange` is called manually
           key={value}
           value={value}
           placeholder="/ Enter command"
