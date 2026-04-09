@@ -48,25 +48,26 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
       rowGap={1}
     >
       {
-        (status === 'authenticated' && credentials != null)
-          ? (
-              <Text
-                color={colours.white}
-                backgroundColor={colours.purple}
-                underline={true}
-              >
-                {' ✔ Login '}
-              </Text>
-            )
-          : (
-              <Text
-                color={colours.white}
-                backgroundColor={colours.red}
-                underline={true}
-              >
-                {' x Login '}
-              </Text>
-            )
+        (status === 'authenticated' && credentials != null) && (
+          <Text
+            color={colours.white}
+            backgroundColor={colours.purple}
+            underline={true}
+          >
+            {' ✔ Login '}
+          </Text>
+        )
+      }
+      {
+        (credentials == null || status === 'failed') && (
+          <Text
+            color={colours.white}
+            backgroundColor={colours.red}
+            underline={true}
+          >
+            {' x Login '}
+          </Text>
+        )
       }
       <Box
         flexDirection="column"
@@ -92,7 +93,7 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
           )
         }
         {
-          (credentials != null) && (
+          (credentials != null && status != null) && (
             <>
               <Text color={colours.lightGrey}>
                 └─ Credentials loaded from
