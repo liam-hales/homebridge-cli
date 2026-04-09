@@ -21,7 +21,7 @@ const CommandBlock: FunctionComponent<Props> = ({ input, children }): ReactEleme
   return (
     <Box
       flexDirection="column"
-      rowGap={1}
+      rowGap={2}
     >
       <Text
         color={colours.lightGrey}

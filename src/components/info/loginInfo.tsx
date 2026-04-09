@@ -124,9 +124,9 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
                       color={colours.purple}
                       bold={true}
                     >
-                      {` ${credentials.username}, `}
+                      {` ${credentials.username}`}
                     </Text>
-                    please check credentials
+                    , please check credentials
                   </Text>
                 )
               }
