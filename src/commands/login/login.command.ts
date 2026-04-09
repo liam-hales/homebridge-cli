@@ -1,3 +1,5 @@
+import Login from './login.js';
+
 /**
  * Defines the `/login` command
  * used to log in to Homebridge
@@ -7,6 +9,7 @@ const loginCommand = {
   usage: '/login',
   description: 'Used to log in to Homebridge',
   run: '/login',
+  component: Login,
 } as const;
 
 export default loginCommand;
