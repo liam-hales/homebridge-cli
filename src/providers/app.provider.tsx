@@ -203,12 +203,30 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     }
 
     // There will only be one set of credentials
-    // so we can use the first one
-    const [{ account, password }] = credentials;
+    // so we can use the last one
+    const [{ account, password }] = credentials.slice(-1);
     return {
       username: account,
       password: password,
     };
+  };
+
+  /**
+   * Used to set the Homebridge server login
+   * credentials using `keytar` under the hood
+   *
+   * @param username The username
+   * @param password The password
+   */
+  const _setCredentials = async (username: string, password: string): Promise<void> => {
+    await keytar.setPassword('homebridge-cli', username, password);
+
+    // Set the credentials to
+    // state once stored
+    setCredentials({
+      username: username,
+      password: password,
+    });
   };
 
   /**
@@ -298,6 +316,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         credentials: credentials,
         setMode: setMode,
         setInputValue: setInputValue,
+        setCredentials: _setCredentials,
         executeInput: _executeInput,
       }
     }

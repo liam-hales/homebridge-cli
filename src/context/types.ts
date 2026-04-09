@@ -39,6 +39,15 @@ export interface AppActions {
   readonly setInputValue: (value: string) => void;
 
   /**
+   * Used to set the Homebridge server login
+   * credentials using `keytar` under the hood
+   *
+   * @param username The username
+   * @param password The password
+   */
+  readonly setCredentials: (username: string, password: string) => Promise<void>;
+
+  /**
    * Used to validate and
    * execute a given input
    *
