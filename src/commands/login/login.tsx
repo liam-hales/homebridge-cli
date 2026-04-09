@@ -58,9 +58,14 @@ const Login: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
       flexDirection="column"
       rowGap={1}
     >
-      <Text color={colours.lightGrey}>
-        Enter Homebridge login credentials
-      </Text>
+      <Box
+        flexDirection="column"
+        marginLeft={1}
+      >
+        <Text color={colours.lightGrey}>
+          └─ Enter Homebridge login credentials
+        </Text>
+      </Box>
       <Box
         flexDirection="row"
         columnGap={1}
