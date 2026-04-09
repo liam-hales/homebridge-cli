@@ -1,15 +1,12 @@
 import { FunctionComponent, ReactElement } from 'react';
-import { ICommandBlock, IErrorBlock } from '../../types.js';
+import { Block } from '../../types.js';
 import { commandMap } from '../../commands/index.js';
 import { CommandBlock, ErrorBlock } from '../index.js';
 
 /**
  * The `BlockSwitch` component props
  */
-type Props = (
-  | Omit<ICommandBlock, 'id'>
-  | Omit<IErrorBlock, 'id'>
-);
+type Props = Block;
 
 /**
  * Used to render the appropriate block
@@ -19,7 +16,7 @@ type Props = (
  * @returns The `BlockSwitch` component
  */
 const BlockSwitch: FunctionComponent<Props> = (props): ReactElement<Props> => {
-  const { type, input } = props;
+  const { id, type, input } = props;
 
   // Switch for the block type
   // and render each type of block
@@ -30,7 +27,7 @@ const BlockSwitch: FunctionComponent<Props> = (props): ReactElement<Props> => {
 
       return (
         <CommandBlock input={input}>
-          <Content />
+          <Content blockId={id} />
         </CommandBlock>
       );
     }
