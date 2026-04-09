@@ -306,6 +306,9 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   return (
     <AppContext.Provider value={
       {
+        ...(mode === 'running') && {
+          activeBlockId: blocks.at(-1)?.id,
+        },
         mode: mode,
         blocks: blocks,
         inputValue: inputValue,

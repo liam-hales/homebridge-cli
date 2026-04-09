@@ -9,6 +9,7 @@ export interface AppState {
   readonly mode: AppMode;
   readonly blocks: Block[];
   readonly inputValue: string;
+  readonly activeBlockId?: string;
   readonly serverStatus?: ServerStatus;
   readonly apiStatus?: ApiStatus;
   readonly loginStatus?: LoginStatus;
