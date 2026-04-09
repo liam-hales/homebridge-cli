@@ -63,7 +63,7 @@ class ApiClient {
     try {
       const { accessToken } = await this._request<LoginResponse, Credentials>({
         method: 'post',
-        endpoint: '/login',
+        endpoint: '/auth/login',
         body: {
           username: username,
           password: password,
@@ -94,7 +94,7 @@ class ApiClient {
 
     // Make the request to the API using
     // the given options and app config
-    const response = await fetch(`http://${this._host}:${this._port}${endpoint}`, {
+    const response = await fetch(`http://${this._host}:${this._port}/api${endpoint}`, {
       method: method,
       ...(method === 'post') && {
         body: JSON.stringify(options.body),
