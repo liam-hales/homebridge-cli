@@ -163,6 +163,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   /**
    * Used to get the app `config.json` file
    * from the `.homebridge-cli` directory
+   *
+   * @return The app config
    */
   const _getConfig = (): Config | undefined => {
     // Define the relative and full file path to the
@@ -189,6 +191,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   /**
    * Used to get the Homebridge server login
    * credentials using `keytar` under the hood
+   *
+   * @return The credentials
    */
   const _getCredentials = async (): Promise<Credentials | undefined> => {
     // Find all credentials and check
