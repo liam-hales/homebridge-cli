@@ -98,7 +98,9 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
    * checks and initialise the app state
    */
   const _init = async (): Promise<void> => {
-    if (config == null) {
+    // If the app is still starting then return
+    // early to avoid checking too early
+    if (mode === 'starting' || config == null) {
       return;
     }
 
