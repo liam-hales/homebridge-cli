@@ -40,6 +40,15 @@ export interface AppActions {
   readonly setInputValue: (value: string) => void;
 
   /**
+   * Used to set the app `config.json` file
+   * to the `.homebridge-cli` directory
+   *
+   * @param host The server host
+   * @param port The server port
+   */
+  readonly setConfig: (host: string, port: number) => void;
+
+  /**
    * Used to set the Homebridge server login
    * credentials using `keytar` under the hood
    *

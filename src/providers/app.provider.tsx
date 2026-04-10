@@ -198,6 +198,41 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   };
 
   /**
+   * Used to set the app `config.json` file
+   * to the `.homebridge-cli` directory
+   *
+   * @param host The server host
+   * @param port The server port
+   */
+  const _setConfig = (host: string, port: number): void => {
+    // Define the relative and full file path to the
+    // config using the users home directory
+    const relativePath = '.homebridge-cli/config.json';
+    const fullPath = path.join(os.homedir(), relativePath);
+
+    const config: Config = {
+      host: host,
+      port: port,
+      filePath: `~/${relativePath}`,
+    };
+
+    // Stringify the config data ready
+    // to be written to the file
+    const data = JSON.stringify(config);
+
+    // Create the `~/.homebridge-cli` directory
+    // if it doesn't already exist
+    fs.mkdirSync(path.dirname(fullPath), {
+      recursive: true,
+    });
+
+    // Write the data to the file
+    // and set the config to state
+    fs.writeFileSync(fullPath, data, 'utf8');
+    setConfig(config);
+  };
+
+  /**
    * Used to get the Homebridge server login
    * credentials using `keytar` under the hood
    *
@@ -328,6 +363,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         credentials: credentials,
         setMode: setMode,
         setInputValue: setInputValue,
+        setConfig: _setConfig,
         setCredentials: _setCredentials,
         executeInput: _executeInput,
       }
