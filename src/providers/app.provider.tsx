@@ -88,6 +88,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     const config = _getConfig();
     const credentials = await _getCredentials();
 
+    setMode('checking');
     setConfig(config);
     setCredentials(credentials);
   };

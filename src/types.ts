@@ -4,7 +4,7 @@ import { Command } from './commands/index.js';
  * Describes the different
  * modes the app can be in
  */
-export type AppMode = 'starting' | 'idle' | 'running';
+export type AppMode = 'starting' | 'checking' | 'idle' | 'running';
 
 /**
  * Describes the different
