@@ -104,6 +104,12 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       return;
     }
 
+    // Reset the status state before
+    // running the below checks
+    setServerStatus(undefined);
+    setApiStatus(undefined);
+    setLoginStatus(undefined);
+
     try {
       const { host, port } = config;
 
