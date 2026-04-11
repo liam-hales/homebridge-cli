@@ -14,8 +14,8 @@ import {
 } from './index.js';
 
 /**
- * The root app component used as the
- * main entry point for the app
+ * The top level app component responsible for rendering the overall
+ * application, its layout and any downstream child components
  *
  * @returns The `App` component
  */
