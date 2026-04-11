@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { Box, useInput } from 'ink';
 import { useApp } from '../hooks/index.js';
+import { colours } from '../constants.js';
 import {
   Header,
   SetupInfo,
@@ -85,35 +86,45 @@ const App: FunctionComponent = (): ReactElement => {
       </Box>
       {
         (blocks.length > 0) && (
-          <Box
-            flexDirection="column"
-            rowGap={2}
-            marginX={1}
-          >
-            {
-              blocks.map((block) => {
-                const { id, type } = block;
+          <>
+            <Box
+              width="100%"
+              borderStyle="classic"
+              borderColor={colours.darkGrey}
+              borderBottom={false}
+              borderLeft={false}
+              borderRight={false}
+            />
+            <Box
+              flexDirection="column"
+              rowGap={3}
+              marginX={1}
+            >
+              {
+                blocks.map((block) => {
+                  const { id, type } = block;
 
-                return (
-                  <BlockSwitch
-                    key={`${type}-block-${id}`}
-                    {...block}
+                  return (
+                    <BlockSwitch
+                      key={`${type}-block-${id}`}
+                      {...block}
+                    />
+                  );
+                })
+              }
+              {
+                (mode === 'running') && (
+                  <Keybindings bindings={[
+                    {
+                      key: 'esc',
+                      action: 'to cancel',
+                    },
+                  ]}
                   />
-                );
-              })
-            }
-            {
-              (mode === 'running') && (
-                <Keybindings bindings={[
-                  {
-                    key: 'esc',
-                    action: 'to cancel',
-                  },
-                ]}
-                />
-              )
-            }
-          </Box>
+                )
+              }
+            </Box>
+          </>
         )
       }
       {
