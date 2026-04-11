@@ -45,15 +45,11 @@ const Login: FunctionComponent = (): ReactElement => {
     <Box
       flexDirection="column"
       rowGap={1}
+      marginLeft={1}
     >
-      <Box
-        flexDirection="column"
-        marginLeft={1}
-      >
-        <Text color={colours.lightGrey}>
-          └─ Enter Homebridge login credentials
-        </Text>
-      </Box>
+      <Text color={colours.lightGrey}>
+        └─ Enter Homebridge login credentials
+      </Text>
       <Box
         flexDirection="row"
         columnGap={1}

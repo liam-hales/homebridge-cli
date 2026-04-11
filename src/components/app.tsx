@@ -97,7 +97,7 @@ const App: FunctionComponent = (): ReactElement => {
             />
             <Box
               flexDirection="column"
-              rowGap={3}
+              rowGap={2}
               marginX={1}
             >
               {

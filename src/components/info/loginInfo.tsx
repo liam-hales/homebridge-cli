@@ -122,7 +122,7 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
                   <Text color={colours.lightGrey}>
                     └─ Failed to log in with user
                     <Text
-                      color={colours.purple}
+                      color={colours.red}
                       bold={true}
                     >
                       {` ${credentials.username}`}

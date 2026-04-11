@@ -45,6 +45,7 @@ const Init: FunctionComponent = (): ReactElement => {
     <Box
       flexDirection="column"
       rowGap={1}
+      marginLeft={1}
     >
       <Box
         flexDirection="column"
