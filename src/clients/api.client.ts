@@ -22,6 +22,14 @@ class ApiClient {
   }
 
   /**
+   * Used to clear authentication by
+   * resetting the auth access token
+   */
+  public async clearAuth(): Promise<void> {
+    this._authToken = undefined;
+  }
+
+  /**
    * Obtains the API status by checking if the
    * `/api` route returns the correct response
    *
