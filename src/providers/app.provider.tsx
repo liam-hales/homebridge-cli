@@ -73,11 +73,26 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
    * acton based on the keys pressed
    */
   useInput((_, key) => {
-    // If the user pressed the escape key then
-    // set the app mode back to `idle`
+    // Check if the user has cancelled the
+    // command by pressing the escape key
     if (key.escape === true) {
       setMode('idle');
+
+      // Set the active block as cancelled so we can distinguish
+      // the difference between an exited and cancelled block
+      setBlocks((previous) => {
+        return previous.map((block) => {
+          return (block.id === blocks.at(-1)?.id)
+            ? {
+                ...block,
+                didCancel: true,
+              }
+            : block;
+        });
+      });
     }
+  }, {
+    isActive: (mode !== 'idle'),
   });
 
   /**
@@ -328,6 +343,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
           type: 'command',
           id: blockId,
           input: input,
+          didCancel: false,
           commandId: command.id,
         },
       ]);

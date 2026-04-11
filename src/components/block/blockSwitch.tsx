@@ -1,6 +1,5 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { Block } from '../../types.js';
-import { commandMap } from '../../commands/index.js';
 import { CommandBlock, ErrorBlock } from '../index.js';
 
 /**
@@ -16,20 +15,13 @@ type Props = Block;
  * @returns The `BlockSwitch` component
  */
 const BlockSwitch: FunctionComponent<Props> = (props): ReactElement<Props> => {
-  const { id, type, input } = props;
+  const { type } = props;
 
   // Switch for the block type
   // and render each type of block
   switch (type) {
     case 'command': {
-      const { commandId } = props;
-      const { component: Content } = commandMap[commandId];
-
-      return (
-        <CommandBlock input={input}>
-          <Content blockId={id} />
-        </CommandBlock>
-      );
+      return <CommandBlock {...props} />;
     }
 
     case 'error': {

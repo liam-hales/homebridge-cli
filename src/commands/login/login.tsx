@@ -5,20 +5,13 @@ import { Box, Text, useInput } from 'ink';
 import { colours } from '../../constants.js';
 
 /**
- * The `Login` component props
- */
-interface Props {
-  readonly blockId: string;
-}
-
-/**
  * The component rendered when
  * the `/login` command is executed
  *
  * @returns The `Login` component
  */
-const Login: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
-  const { activeBlockId, setMode, setCredentials } = useApp();
+const Login: FunctionComponent = (): ReactElement => {
+  const { setCredentials } = useApp();
 
   const [stage, setStage] = useState<'set-username' | 'set-password'>('set-username');
   const [username, setUsername] = useState<string>('');
@@ -35,7 +28,6 @@ const Login: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
 
     if (stage === 'set-password' && password !== '') {
       await setCredentials(username, password);
-      setMode('idle');
     }
   };
 
@@ -47,10 +39,6 @@ const Login: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
     if (key.return === true) {
       void onEnter();
     }
-  }, {
-    // Only allow monitoring the user input
-    // when this is the active block
-    isActive: (blockId === activeBlockId),
   });
 
   return (
@@ -80,10 +68,7 @@ const Login: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
         <TextInput
           value={username}
           onChange={setUsername}
-          focus={(
-            stage === 'set-username' &&
-            blockId === activeBlockId
-          )}
+          focus={stage === 'set-username'}
         />
       </Box>
       {
@@ -102,7 +87,6 @@ const Login: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
             <TextInput
               value={password}
               onChange={setPassword}
-              focus={(blockId === activeBlockId)}
               mask="*"
             />
           </Box>

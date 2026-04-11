@@ -1,14 +1,14 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../../constants.js';
+import { commandMap } from '../../commands/index.js';
+import { useApp } from '../../hooks/index.js';
+import { ICommandBlock } from '../../types.js';
 
 /**
  * The `CommandBlock` component props
  */
-interface Props {
-  readonly input: string;
-  readonly children: ReactElement;
-}
+type Props = Omit<ICommandBlock, 'type'>;
 
 /**
  * Used to render the command block
@@ -17,7 +17,10 @@ interface Props {
  * @param props The component props
  * @returns The `CommandBlock` component
  */
-const CommandBlock: FunctionComponent<Props> = ({ input, children }): ReactElement<Props> => {
+const CommandBlock: FunctionComponent<Props> = ({ id, input, didCancel, commandId }): ReactElement<Props> => {
+  const { activeBlockId } = useApp();
+  const { component: Content, exitText } = commandMap[commandId];
+
   return (
     <Box
       flexDirection="column"
@@ -30,7 +33,30 @@ const CommandBlock: FunctionComponent<Props> = ({ input, children }): ReactEleme
       >
         {` ❯ ${input} `}
       </Text>
-      {children}
+      {
+        (id === activeBlockId)
+          ? <Content />
+          : (
+              <Box
+                flexDirection="column"
+                marginLeft={1}
+              >
+                {
+                  (didCancel === true)
+                    ? (
+                        <Text color={colours.lightGrey}>
+                          └─ Cancelled
+                        </Text>
+                      )
+                    : (
+                        <Text color={colours.lightGrey}>
+                          {`└─ ${exitText}`}
+                        </Text>
+                      )
+                }
+              </Box>
+            )
+      }
     </Box>
   );
 };

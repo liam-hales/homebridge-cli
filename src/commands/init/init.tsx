@@ -5,20 +5,13 @@ import { colours } from '../../constants.js';
 import TextInput from 'ink-text-input';
 
 /**
- * The `Init` component props
- */
-interface Props {
-  readonly blockId: string;
-}
-
-/**
  * The component rendered when
  * the `/init` command is executed
  *
  * @returns The `Init` component
  */
-const Init: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
-  const { activeBlockId, setMode, setConfig } = useApp();
+const Init: FunctionComponent = (): ReactElement => {
+  const { setConfig } = useApp();
 
   const [stage, setStage] = useState<'set-host' | 'set-port'>('set-host');
   const [host, setHost] = useState<string>('');
@@ -34,10 +27,7 @@ const Init: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
     }
 
     if (stage === 'set-port' && port !== '') {
-      const portNumber = Number.parseInt(port);
-
-      setConfig(host, portNumber);
-      setMode('idle');
+      setConfig(host, Number.parseInt(port));
     }
   };
 
@@ -49,10 +39,6 @@ const Init: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
     if (key.return === true) {
       void onEnter();
     }
-  }, {
-    // Only allow monitoring the user input
-    // when this is the active block
-    isActive: (blockId === activeBlockId),
   });
 
   return (
@@ -82,10 +68,7 @@ const Init: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
         <TextInput
           value={host}
           onChange={setHost}
-          focus={(
-            stage === 'set-host' &&
-            blockId === activeBlockId
-          )}
+          focus={stage === 'set-host'}
         />
       </Box>
       {
@@ -104,7 +87,6 @@ const Init: FunctionComponent<Props> = ({ blockId }): ReactElement<Props> => {
             <TextInput
               value={port}
               onChange={setPort}
-              focus={(blockId === activeBlockId)}
             />
           </Box>
         )
