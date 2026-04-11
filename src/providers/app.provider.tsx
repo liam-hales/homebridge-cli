@@ -179,12 +179,12 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     // Define the relative and full file path to the
     // config using the users home directory
     const relativePath = '.homebridge-cli/config.json';
-    const fullPath = path.join(os.homedir(), '.homebridge-cli/config.json');
+    const fullPath = path.join(os.homedir(), relativePath);
 
     try {
       // Read and parse the
       // config file data
-      const fileData = fs.readFileSync(fullPath, 'utf-8');
+      const fileData = fs.readFileSync(fullPath, 'utf8');
       return {
         ...JSON.parse(fileData) as Config,
         filePath: `~/${relativePath}`,
@@ -233,8 +233,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   };
 
   /**
-   * Used to get the Homebridge server login
-   * credentials using `keytar` under the hood
+   * Used to get the server login
+   * credentials from `keytar`
    *
    * @return The credentials
    */
@@ -256,8 +256,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   };
 
   /**
-   * Used to set the Homebridge server login
-   * credentials using `keytar` under the hood
+   * Used to set the server login
+   * credentials using `keytar`
    *
    * @param username The username
    * @param password The password

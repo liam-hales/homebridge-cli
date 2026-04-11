@@ -49,8 +49,8 @@ export interface AppActions {
   readonly setConfig: (host: string, port: number) => void;
 
   /**
-   * Used to set the Homebridge server login
-   * credentials using `keytar` under the hood
+   * Used to set the server login
+   * credentials using `keytar`
    *
    * @param username The username
    * @param password The password
