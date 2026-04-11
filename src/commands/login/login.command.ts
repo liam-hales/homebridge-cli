@@ -9,6 +9,7 @@ const loginCommand = {
   usage: '/login',
   description: 'Used to log in to Homebridge',
   run: '/login',
+  exitText: 'Login credentials set, check login status above',
   component: Login,
 } as const;
 

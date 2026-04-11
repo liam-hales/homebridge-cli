@@ -9,6 +9,7 @@ const logoutCommand = {
   usage: '/logout',
   description: 'Used to log out to Homebridge',
   run: '/logout',
+  exitText: 'Logout successful',
   component: Logout,
 } as const;
 

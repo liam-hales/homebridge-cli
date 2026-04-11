@@ -9,6 +9,7 @@ const initCommand = {
   usage: '/init',
   description: 'Used to connect to a Homebridge server',
   run: '/init',
+  exitText: 'Setup complete, config set',
   component: Init,
 } as const;
 
