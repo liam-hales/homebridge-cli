@@ -274,6 +274,21 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   };
 
   /**
+   * Used to remove the server login
+   * credentials from `keytar` and state
+   */
+  const _removeCredentials = async (): Promise<void> => {
+    if (credentials == null) {
+      return;
+    }
+
+    await keytar.deletePassword('homebridge-cli', credentials.username);
+    await apiClient?.clearAuth();
+
+    setCredentials(undefined);
+  };
+
+  /**
    * Used to validate and
    * execute a given input
    *
@@ -365,6 +380,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         setInputValue: setInputValue,
         setConfig: _setConfig,
         setCredentials: _setCredentials,
+        removeCredentials: _removeCredentials,
         executeInput: _executeInput,
       }
     }

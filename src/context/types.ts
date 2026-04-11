@@ -58,6 +58,12 @@ export interface AppActions {
   readonly setCredentials: (username: string, password: string) => Promise<void>;
 
   /**
+   * Used to remove the server login
+   * credentials from `keytar` and state
+   */
+  readonly removeCredentials: () => Promise<void>;
+
+  /**
    * Used to validate and
    * execute a given input
    *
