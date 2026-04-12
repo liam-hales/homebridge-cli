@@ -61,26 +61,32 @@ const App: FunctionComponent = (): ReactElement => {
         marginX={1}
         rowGap={1}
       >
-        <SetupInfo config={config} />
         {
-          (config != null && serverStatus != null) && (
-            <ServerInfo
-              status={serverStatus}
-              config={config}
-            />
-          )
-        }
-        {
-          (apiStatus != null) && (
-            <ApiInfo status={apiStatus} />
-          )
-        }
-        {
-          (apiStatus === 'up') && (
-            <LoginInfo
-              status={loginStatus}
-              credentials={credentials}
-            />
+          (mode !== 'starting') && (
+            <>
+              <SetupInfo config={config} />
+              {
+                (config != null && serverStatus != null) && (
+                  <ServerInfo
+                    status={serverStatus}
+                    config={config}
+                  />
+                )
+              }
+              {
+                (apiStatus != null) && (
+                  <ApiInfo status={apiStatus} />
+                )
+              }
+              {
+                (apiStatus === 'up') && (
+                  <LoginInfo
+                    status={loginStatus}
+                    credentials={credentials}
+                  />
+                )
+              }
+            </>
           )
         }
       </Box>
@@ -129,10 +135,32 @@ const App: FunctionComponent = (): ReactElement => {
       }
       {
         (mode === 'idle') && (
-          <CommandInput
-            value={inputValue}
-            onChange={setInputValue}
-          />
+          <Box flexDirection="column">
+            <CommandInput
+              value={inputValue}
+              onChange={setInputValue}
+            />
+            {
+              (inputValue.startsWith('/') === false) && (
+                <Box
+                  flexDirection="column"
+                  marginX={1}
+                >
+                  <Keybindings bindings={[
+                    {
+                      key: '/',
+                      action: 'for command list',
+                    },
+                    {
+                      key: 'ctrl + c',
+                      action: 'to exit',
+                    },
+                  ]}
+                  />
+                </Box>
+              )
+            }
+          </Box>
         )
       }
     </Box>
