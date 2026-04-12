@@ -59,8 +59,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `POST /api/login` endpoint and obtain
-   * an access token to use for other endpoints
+   * Used to call the `POST /api/login` endpoint
+   * and obtain an auth access token
    *
    * @param credentials The user credentials to use
    * @returns The login status
@@ -69,7 +69,8 @@ class ApiClient {
     const { username, password } = credentials;
 
     try {
-      const { accessToken } = await this._request<LoginResponse, Credentials>({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { access_token } = await this._request<LoginResponse, Credentials>({
         method: 'post',
         endpoint: '/auth/login',
         body: {
@@ -80,7 +81,7 @@ class ApiClient {
 
       // Store the access token so it can
       // be used for other requests
-      this._authToken = accessToken;
+      this._authToken = access_token;
       return 'authenticated';
     }
     // Catch any error that occurs while making the

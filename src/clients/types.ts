@@ -31,5 +31,6 @@ export interface PostRequestOptions<T extends object> {
  * the `POST /api/login` endpoint
  */
 export interface LoginResponse {
-  readonly accessToken: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  readonly access_token: string;
 }
