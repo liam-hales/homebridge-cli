@@ -117,7 +117,7 @@ const App: FunctionComponent = (): ReactElement => {
                   <Keybindings bindings={[
                     {
                       key: 'esc',
-                      action: 'to cancel',
+                      action: 'to close',
                     },
                   ]}
                   />

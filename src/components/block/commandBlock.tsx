@@ -17,7 +17,7 @@ type Props = Omit<ICommandBlock, 'type'>;
  * @param props The component props
  * @returns The `CommandBlock` component
  */
-const CommandBlock: FunctionComponent<Props> = ({ id, input, didCancel, commandId }): ReactElement<Props> => {
+const CommandBlock: FunctionComponent<Props> = ({ id, input, didUserClose, commandId }): ReactElement<Props> => {
   const { activeBlockId } = useApp();
   const { component: Content, exitText } = commandMap[commandId];
 
@@ -42,15 +42,15 @@ const CommandBlock: FunctionComponent<Props> = ({ id, input, didCancel, commandI
                 marginLeft={1}
               >
                 {
-                  (didCancel === true)
+                  (didUserClose === true)
                     ? (
                         <Text color={colours.lightGrey}>
-                          └─ Cancelled
+                          └─ Closed by user
                         </Text>
                       )
                     : (
                         <Text color={colours.lightGrey}>
-                          {`└─ ${exitText}`}
+                          {`└─ ${exitText ?? 'Exited'}`}
                         </Text>
                       )
                 }
