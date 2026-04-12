@@ -58,8 +58,20 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
           </Text>
         )
       }
+
       {
-        (credentials == null || status === 'failed') && (
+        (credentials == null) && (
+          <Text
+            color={colours.white}
+            backgroundColor={colours.orange}
+            underline={true}
+          >
+            {' → Login required '}
+          </Text>
+        )
+      }
+      {
+        (status === 'failed') && (
           <Text
             color={colours.white}
             backgroundColor={colours.red}
@@ -82,7 +94,7 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
               <Text color={colours.lightGrey}>
                 └─ Run
                 <Text
-                  color={colours.purple}
+                  color={colours.orange}
                   bold={true}
                 >
                   {' /login '}

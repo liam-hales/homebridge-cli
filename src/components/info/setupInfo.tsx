@@ -23,17 +23,27 @@ const SetupInfo: FunctionComponent<Props> = ({ config }): ReactElement<Props> =>
       flexDirection="column"
       rowGap={1}
     >
-      <Text
-        color={colours.white}
-        backgroundColor={colours.purple}
-        underline={true}
-      >
-        {
-          (config != null)
-            ? ' ✔ Setup '
-            : ' Setup required '
-        }
-      </Text>
+      {
+        (config != null)
+          ? (
+              <Text
+                color={colours.white}
+                backgroundColor={colours.purple}
+                underline={true}
+              >
+                {` ✔ Setup `}
+              </Text>
+            )
+          : (
+              <Text
+                color={colours.white}
+                backgroundColor={colours.orange}
+                underline={true}
+              >
+                {` → Setup required `}
+              </Text>
+            )
+      }
       <Box
         flexDirection="column"
         marginLeft={1}
@@ -59,7 +69,7 @@ const SetupInfo: FunctionComponent<Props> = ({ config }): ReactElement<Props> =>
                   <Text color={colours.lightGrey}>
                     └─ Run
                     <Text
-                      color={colours.purple}
+                      color={colours.orange}
                       bold={true}
                     >
                       {' /init '}
