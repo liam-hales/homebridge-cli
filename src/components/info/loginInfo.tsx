@@ -58,7 +58,6 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
           </Text>
         )
       }
-
       {
         (credentials == null) && (
           <Text

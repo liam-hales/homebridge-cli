@@ -47,14 +47,9 @@ const Init: FunctionComponent = (): ReactElement => {
       rowGap={1}
       marginLeft={1}
     >
-      <Box
-        flexDirection="column"
-        marginLeft={1}
-      >
-        <Text color={colours.lightGrey}>
-          └─ Enter Homebridge server details
-        </Text>
-      </Box>
+      <Text color={colours.lightGrey}>
+        └─ Enter Homebridge server details
+      </Text>
       <Box
         flexDirection="row"
         columnGap={1}
