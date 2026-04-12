@@ -115,7 +115,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   const _init = async (): Promise<void> => {
     // If the app is still starting then return
     // early to avoid checking too early
-    if (mode === 'starting' || config == null) {
+    if (mode === 'starting') {
       return;
     }
 
@@ -126,11 +126,13 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     setLoginStatus(undefined);
 
     try {
-      const { host, port } = config;
+      if (config == null) {
+        return;
+      }
 
       // Get the server status
       // and set it to state
-      const serverStatus = await _getServerStatus(host, port);
+      const serverStatus = await _getServerStatus(config.host, config.port);
       setServerStatus(serverStatus);
 
       if (serverStatus === 'down') {
