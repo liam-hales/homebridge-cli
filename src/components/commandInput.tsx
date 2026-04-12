@@ -94,83 +94,85 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
           onChange={onChange}
         />
       </Box>
-      {
-        (value !== '') && (
-          <Box
-            flexDirection="column"
-            rowGap={2}
-            marginX={1}
-          >
-            <Box flexDirection="row">
-              <Box
-                flexDirection="column"
-                width={20}
-              >
-                {
-                  // Map the commands into text components
-                  // used to render the command usage values
-                  commands.map((command, index) => {
-                    const { usage } = command;
+      <Box
+        flexDirection="column"
+        rowGap={2}
+        marginX={1}
+      >
+        {
+          (value.startsWith('/') === true) && (
+            <>
+              <Box flexDirection="row">
+                <Box
+                  flexDirection="column"
+                  width={20}
+                >
+                  {
+                    // Map the commands into text components
+                    // used to render the command usage values
+                    commands.map((command, index) => {
+                      const { usage } = command;
 
-                    return (
-                      <Text
-                        key={`command-usage-${usage}`}
-                        color={
-                          (index === listIndex)
-                            ? colours.purple
-                            : colours.white
-                        }
-                      >
-                        {usage}
-                      </Text>
-                    );
-                  })
-                }
-              </Box>
-              <Box
-                flexDirection="column"
-                flexGrow={1}
-              >
-                {
-                  // Map the commands into text components
-                  // used to render the command descriptions
-                  commands.map((command, index) => {
-                    const { description } = command;
+                      return (
+                        <Text
+                          key={`command-usage-${usage}`}
+                          color={
+                            (index === listIndex)
+                              ? colours.purple
+                              : colours.white
+                          }
+                        >
+                          {usage}
+                        </Text>
+                      );
+                    })
+                  }
+                </Box>
+                <Box
+                  flexDirection="column"
+                  flexGrow={1}
+                >
+                  {
+                    // Map the commands into text components
+                    // used to render the command descriptions
+                    commands.map((command, index) => {
+                      const { description } = command;
 
-                    return (
-                      <Text
-                        key={`command-description-${description}`}
-                        color={
-                          (index === listIndex)
-                            ? colours.purple
-                            : colours.white
-                        }
-                      >
-                        {description}
-                      </Text>
-                    );
-                  })
-                }
+                      return (
+                        <Text
+                          key={`command-description-${description}`}
+                          color={
+                            (index === listIndex)
+                              ? colours.purple
+                              : colours.white
+                          }
+                        >
+                          {description}
+                        </Text>
+                      );
+                    })
+                  }
+                </Box>
               </Box>
-            </Box>
-            <Keybindings bindings={[
-              {
-                key: '↑/↓',
-                action: 'to navigate',
-              },
-              {
-                key: 'tab',
-                action: 'to select',
-              },
-              {
-                key: 'esc',
-                action: 'to clear',
-              },
-            ]}
-            />
-          </Box>
-        )
-      }
+              <Keybindings bindings={[
+                {
+                  key: '↑/↓',
+                  action: 'to navigate',
+                },
+                {
+                  key: 'tab',
+                  action: 'to select',
+                },
+                {
+                  key: 'esc',
+                  action: 'to clear',
+                },
+              ]}
+              />
+            </>
+          )
+        }
+      </Box>
     </Box>
   );
 };
