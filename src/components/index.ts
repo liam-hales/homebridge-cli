@@ -6,6 +6,7 @@ import ApiCheck from './check/apiCheck.js';
 import LoginCheck from './check/loginCheck.js';
 import Keybindings from './common/keybindings.js';
 import List from './common/list.js';
+import Loader from './common/loader.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
@@ -20,6 +21,7 @@ export {
   LoginCheck,
   Keybindings,
   List,
+  Loader,
   CommandInput,
   CommandBlock,
   ErrorBlock,
