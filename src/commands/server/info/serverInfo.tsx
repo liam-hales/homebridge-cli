@@ -1,10 +1,8 @@
 import { FunctionComponent, ReactElement, useEffect, useMemo, useState } from 'react';
-import { Box, Text } from 'ink';
-import { colours } from '../../../constants.js';
+import { Box } from 'ink';
 import { useApiClient } from '../../../hooks/index.js';
 import { ServerInfoResponse } from '../../../clients/types.js';
-import Spinner from 'ink-spinner';
-import { List } from '../../../components/index.js';
+import { List, Loader } from '../../../components/index.js';
 import { ListItem } from '../../../components/types.js';
 
 /**
@@ -145,15 +143,9 @@ const ServerInfo: FunctionComponent = (): ReactElement => {
     <>
       {
         (data == null) && (
-          <Box
-            flexDirection="row"
-            columnGap={1}
-          >
-            <Spinner type="dots" />
-            <Text color={colours.lightGrey}>
-              Loading
-            </Text>
-          </Box>
+          <Loader>
+            Fetching server info
+          </Loader>
         )
       }
       {
