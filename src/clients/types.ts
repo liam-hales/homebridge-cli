@@ -34,3 +34,32 @@ export interface LoginResponse {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   readonly access_token: string;
 }
+
+/**
+ * Describes the server info response
+ * for the `GET /status/server-information` endpoint
+ */
+export interface ServerInfoResponse {
+  readonly serviceUser: string;
+  readonly homebridgeConfigJsonPath: string;
+  readonly homebridgeStoragePath: string;
+  readonly os: {
+    readonly platform: string;
+    readonly distro: string;
+    readonly kernel: string;
+    readonly arch: string;
+    readonly hostname: string;
+  };
+  readonly network: {
+    readonly iface: string;
+    readonly ip4: string;
+    readonly ip4subnet: string;
+    readonly ip6: string;
+    readonly ip6subnet: string;
+    readonly mac: string;
+    readonly type: string;
+    readonly duplex: string;
+    readonly speed: number;
+    readonly dnsSuffix: string;
+  };
+}
