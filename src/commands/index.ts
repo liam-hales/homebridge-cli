@@ -1,6 +1,7 @@
 import { initCommand } from './init/index.js';
 import { loginCommand } from './login/index.js';
 import { logoutCommand } from './logout/index.js';
+import { serverInfoCommand } from './server/info/index.js';
 import { CommandMap } from './types.js';
 
 /**
@@ -11,6 +12,7 @@ export const commands = [
   initCommand,
   loginCommand,
   logoutCommand,
+  serverInfoCommand,
 ];
 
 /**
