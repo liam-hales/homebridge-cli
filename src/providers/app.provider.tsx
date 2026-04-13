@@ -328,6 +328,10 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         return;
       }
 
+      if (input.startsWith('/') === false) {
+        throw new Error(`Command must start with a "/"`);
+      }
+
       // Attempt to find a command that matches
       // the users input via its run value
       const command = commands.find((command) => command.run === input);
