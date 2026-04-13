@@ -5,7 +5,7 @@ import { Credentials, LoginStatus } from '../../types.js';
 import os from 'node:os';
 
 /**
- * The `LoginInfo` component props
+ * The `LoginCheck` component props
  */
 interface Props {
   readonly status?: LoginStatus;
@@ -13,13 +13,13 @@ interface Props {
 }
 
 /**
- * Used to display the login info
- * when the app starts
+ * Used to display the login check
+ * status when the app starts
  *
  * @param props The component props
- * @returns The `LoginInfo` component
+ * @returns The `LoginCheck` component
  */
-const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElement<Props> => {
+const LoginCheck: FunctionComponent<Props> = ({ status, credentials }): ReactElement<Props> => {
   /**
    * Used to get the credentials store
    * name based on the OS platform
@@ -150,4 +150,4 @@ const LoginInfo: FunctionComponent<Props> = ({ status, credentials }): ReactElem
   );
 };
 
-export default LoginInfo;
+export default LoginCheck;

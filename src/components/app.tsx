@@ -4,10 +4,10 @@ import { useApp } from '../hooks/index.js';
 import { colours } from '../constants.js';
 import {
   Header,
-  SetupInfo,
-  ServerInfo,
-  ApiInfo,
-  LoginInfo,
+  SetupCheck,
+  ServerCheck,
+  ApiCheck,
+  LoginCheck,
   CommandInput,
   BlockSwitch,
   Keybindings,
@@ -64,10 +64,10 @@ const App: FunctionComponent = (): ReactElement => {
         {
           (mode !== 'starting') && (
             <>
-              <SetupInfo config={config} />
+              <SetupCheck config={config} />
               {
                 (config != null && serverStatus != null) && (
-                  <ServerInfo
+                  <ServerCheck
                     status={serverStatus}
                     config={config}
                   />
@@ -75,12 +75,12 @@ const App: FunctionComponent = (): ReactElement => {
               }
               {
                 (apiStatus != null) && (
-                  <ApiInfo status={apiStatus} />
+                  <ApiCheck status={apiStatus} />
                 )
               }
               {
                 (apiStatus === 'up') && (
-                  <LoginInfo
+                  <LoginCheck
                     status={loginStatus}
                     credentials={credentials}
                   />

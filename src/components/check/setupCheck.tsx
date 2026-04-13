@@ -11,13 +11,13 @@ interface Props {
 }
 
 /**
- * Used to display the setup info
- * when the app starts
+ * Used to display the setup check
+ * status when the app starts
  *
  * @param props The component props
  * @returns The `SetupInfo` component
  */
-const SetupInfo: FunctionComponent<Props> = ({ config }): ReactElement<Props> => {
+const SetupCheck: FunctionComponent<Props> = ({ config }): ReactElement<Props> => {
   return (
     <Box
       flexDirection="column"
@@ -84,4 +84,4 @@ const SetupInfo: FunctionComponent<Props> = ({ config }): ReactElement<Props> =>
   );
 };
 
-export default SetupInfo;
+export default SetupCheck;

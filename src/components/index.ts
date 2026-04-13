@@ -1,9 +1,9 @@
 import App from './app.js';
 import Header from './header.js';
-import SetupInfo from './info/setupInfo.js';
-import ServerInfo from './info/serverInfo.js';
-import ApiInfo from './info/apiInfo.js';
-import LoginInfo from './info/loginInfo.js';
+import SetupCheck from './check/setupCheck.js';
+import ServerCheck from './check/serverCheck.js';
+import ApiCheck from './check/apiCheck.js';
+import LoginCheck from './check/loginCheck.js';
 import Keybindings from './keybindings.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
@@ -13,10 +13,10 @@ import BlockSwitch from './block/blockSwitch.js';
 export {
   App,
   Header,
-  SetupInfo,
-  ServerInfo,
-  ApiInfo,
-  LoginInfo,
+  SetupCheck,
+  ServerCheck,
+  ApiCheck,
+  LoginCheck,
   Keybindings,
   CommandInput,
   CommandBlock,

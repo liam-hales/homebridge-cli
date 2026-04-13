@@ -1,23 +1,24 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../../constants.js';
-import { ApiStatus } from '../../types.js';
+import { Config, ServerStatus } from '../../types.js';
 
 /**
- * The `ApiInfo` component props
+ * The `ServerCheck` component props
  */
 interface Props {
-  readonly status: ApiStatus;
+  readonly status: ServerStatus;
+  readonly config: Config;
 }
 
 /**
- * Used to display the API info
- * when the app starts
+ * Used to display the server check
+ * status when the app starts
  *
  * @param props The component props
- * @returns The `ApiInfo` component
+ * @returns The `ServerCheck` component
  */
-const ApiInfo: FunctionComponent<Props> = ({ status }): ReactElement<Props> => {
+const ServerCheck: FunctionComponent<Props> = ({ status, config }): ReactElement<Props> => {
   return (
     <Box
       flexDirection="column"
@@ -31,7 +32,7 @@ const ApiInfo: FunctionComponent<Props> = ({ status }): ReactElement<Props> => {
                 backgroundColor={colours.purple}
                 underline={true}
               >
-                {' ✔ Homebridge API '}
+                {' ✔ Homebridge Server '}
               </Text>
             )
           : (
@@ -40,7 +41,7 @@ const ApiInfo: FunctionComponent<Props> = ({ status }): ReactElement<Props> => {
                 backgroundColor={colours.red}
                 underline={true}
               >
-                {' x Homebridge API '}
+                {' x Homebridge Server '}
               </Text>
             )
       }
@@ -51,26 +52,28 @@ const ApiInfo: FunctionComponent<Props> = ({ status }): ReactElement<Props> => {
         {
           (status === 'up') && (
             <Text color={colours.lightGrey}>
-              └─ API available at
+              └─ Successfully reached server at
               <Text
                 color={colours.purple}
                 bold={true}
               >
-                {' /api'}
+                {` ${config.host}:${config.port}`}
               </Text>
             </Text>
           )
         }
         {
           (status === 'down') && (
-            <>
-              <Text color={colours.lightGrey}>
-                └─ API unavailable, this CLI is powered by the same API used by Homebridge UI and is therefore required in order to function
+            <Text color={colours.lightGrey}>
+              └─ Failed to reach server at
+              <Text
+                color={colours.purple}
+                bold={true}
+              >
+                {` ${config.host}:${config.port}`}
               </Text>
-              <Text color={colours.lightGrey}>
-                └─ You will need to install Homebridge UI
-              </Text>
-            </>
+              , please check host
+            </Text>
           )
         }
       </Box>
@@ -78,4 +81,4 @@ const ApiInfo: FunctionComponent<Props> = ({ status }): ReactElement<Props> => {
   );
 };
 
-export default ApiInfo;
+export default ServerCheck;
