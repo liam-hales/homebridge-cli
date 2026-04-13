@@ -4,7 +4,7 @@ import SetupCheck from './check/setupCheck.js';
 import ServerCheck from './check/serverCheck.js';
 import ApiCheck from './check/apiCheck.js';
 import LoginCheck from './check/loginCheck.js';
-import Keybindings from './keybindings.js';
+import Keybindings from './common/keybindings.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
