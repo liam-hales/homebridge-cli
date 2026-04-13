@@ -5,4 +5,4 @@
 export interface Keybinding {
   readonly key: string;
   readonly action: string;
-};
+}
