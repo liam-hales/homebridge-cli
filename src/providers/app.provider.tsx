@@ -398,6 +398,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         loginStatus: loginStatus,
         config: config,
         credentials: credentials,
+        apiClient: apiClient,
         setMode: setMode,
         setInputValue: setInputValue,
         setConfig: _setConfig,
