@@ -1,15 +1,13 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { colours } from '../constants.js';
 import { Box, Text } from 'ink';
+import { Keybinding } from './types.js';
 
 /**
  * The `Keybindings` component props
  */
 interface Props {
-  readonly bindings: {
-    readonly key: string;
-    readonly action: string;
-  }[];
+  readonly bindings: Keybinding[];
 }
 
 /**
