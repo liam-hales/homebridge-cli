@@ -116,6 +116,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                       return (
                         <Text
                           key={`command-usage-${usage}`}
+                          bold={(index === listIndex)}
                           color={
                             (index === listIndex)
                               ? colours.purple
@@ -141,6 +142,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                       return (
                         <Text
                           key={`command-description-${description}`}
+                          bold={(index === listIndex)}
                           color={
                             (index === listIndex)
                               ? colours.purple
