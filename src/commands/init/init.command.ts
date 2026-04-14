@@ -1,4 +1,4 @@
-import Init from './init.js';
+import InitOutput from './initOutput.js';
 
 /**
  * Defines the `/init` command used to
@@ -9,8 +9,10 @@ const initCommand = {
   usage: '/init',
   description: 'Used to connect to a Homebridge server',
   run: '/init',
-  exitText: 'Setup complete, config set',
-  component: Init,
+  output: {
+    component: InitOutput,
+    exitText: 'Setup complete, config set',
+  },
 } as const;
 
 export default initCommand;

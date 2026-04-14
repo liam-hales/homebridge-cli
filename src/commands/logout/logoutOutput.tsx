@@ -4,12 +4,12 @@ import { colours } from '../../constants.js';
 import { useApp } from '../../hooks/index.js';
 
 /**
- * The component rendered when
+ * The output component rendered when
  * the `/logout` command is executed
  *
- * @returns The `Logout` component
+ * @returns The `LogoutOutput` component
  */
-const Logout: FunctionComponent = (): ReactElement => {
+const LogoutOutput: FunctionComponent = (): ReactElement => {
   const { removeCredentials } = useApp();
 
   /**
@@ -31,4 +31,4 @@ const Logout: FunctionComponent = (): ReactElement => {
   );
 };
 
-export default Logout;
+export default LogoutOutput;

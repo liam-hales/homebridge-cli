@@ -19,7 +19,9 @@ type Props = Omit<ICommandBlock, 'type'>;
  */
 const CommandBlock: FunctionComponent<Props> = ({ id, input, didUserClose, commandId }): ReactElement<Props> => {
   const { activeBlockId } = useApp();
-  const { component: Content, exitText } = commandMap[commandId];
+
+  const { output } = commandMap[commandId];
+  const { component: Output, exitText } = output;
 
   return (
     <Box
@@ -35,7 +37,7 @@ const CommandBlock: FunctionComponent<Props> = ({ id, input, didUserClose, comma
       </Text>
       {
         (id === activeBlockId)
-          ? <Content />
+          ? <Output />
           : (
               <Box
                 flexDirection="column"

@@ -1,4 +1,4 @@
-import ServerInfo from './serverInfo.js';
+import ServerInfoOutput from './serverInfoOutput.js';
 
 /**
  * Defines the `/server/info` command used
@@ -9,8 +9,10 @@ const serverInfoCommand = {
   usage: '/server/info',
   description: 'Used to display the Homebridge server info',
   run: '/server/info',
-  exitText: null,
-  component: ServerInfo,
+  output: {
+    component: ServerInfoOutput,
+    exitText: null,
+  },
 } as const;
 
 export default serverInfoCommand;

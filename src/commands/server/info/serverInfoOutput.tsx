@@ -6,12 +6,12 @@ import { List, Loader } from '../../../components/index.js';
 import { ListItem } from '../../../components/types.js';
 
 /**
- * The component rendered when
+ * The output component rendered when
  * the `/server/info` command is executed
  *
- * @returns The `ServerInfo` component
+ * @returns The `ServerInfoOutput` component
  */
-const ServerInfo: FunctionComponent = (): ReactElement => {
+const ServerInfoOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
   const [data, setData] = useState<ServerInfoResponse | undefined>();
 
@@ -174,4 +174,4 @@ const ServerInfo: FunctionComponent = (): ReactElement => {
   );
 };
 
-export default ServerInfo;
+export default ServerInfoOutput;

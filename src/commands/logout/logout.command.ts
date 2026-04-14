@@ -1,4 +1,4 @@
-import Logout from './logout.js';
+import LogoutOutput from './logoutOutput.js';
 
 /**
  * Defines the `/logout` command
@@ -9,8 +9,10 @@ const logoutCommand = {
   usage: '/logout',
   description: 'Used to log out to Homebridge',
   run: '/logout',
-  exitText: 'Logout successful',
-  component: Logout,
+  output: {
+    component: LogoutOutput,
+    exitText: 'Logout successful',
+  },
 } as const;
 
 export default logoutCommand;

@@ -5,12 +5,12 @@ import { Box, Text, useInput } from 'ink';
 import { colours } from '../../constants.js';
 
 /**
- * The component rendered when
+ * The output component rendered when
  * the `/login` command is executed
  *
- * @returns The `Login` component
+ * @returns The `LoginOutput` component
  */
-const Login: FunctionComponent = (): ReactElement => {
+const LoginOutput: FunctionComponent = (): ReactElement => {
   const { setCredentials } = useApp();
 
   const [stage, setStage] = useState<'set-username' | 'set-password'>('set-username');
@@ -92,4 +92,4 @@ const Login: FunctionComponent = (): ReactElement => {
   );
 };
 
-export default Login;
+export default LoginOutput;

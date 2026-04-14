@@ -5,12 +5,12 @@ import { colours } from '../../constants.js';
 import TextInput from 'ink-text-input';
 
 /**
- * The component rendered when
+ * The output component rendered when
  * the `/init` command is executed
  *
- * @returns The `Init` component
+ * @returns The `InitOutput` component
  */
-const Init: FunctionComponent = (): ReactElement => {
+const InitOutput: FunctionComponent = (): ReactElement => {
   const { setConfig } = useApp();
 
   const [stage, setStage] = useState<'set-host' | 'set-port'>('set-host');
@@ -91,4 +91,4 @@ const Init: FunctionComponent = (): ReactElement => {
   );
 };
 
-export default Init;
+export default InitOutput;
