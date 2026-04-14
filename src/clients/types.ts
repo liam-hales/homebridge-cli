@@ -27,8 +27,8 @@ export interface PostRequestOptions<T extends object> {
 }
 
 /**
- * Describes the response for
- * the `POST /api/login` endpoint
+ * Describes the login response returned
+ * by the `POST /api/login` endpoint
  */
 export interface LoginResponse {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -36,10 +36,10 @@ export interface LoginResponse {
 }
 
 /**
- * Describes the server info response
- * for the `GET /status/server-information` endpoint
+ * Describes the server info returned by
+ * the `GET /status/server-information` endpoint
  */
-export interface ServerInfoResponse {
+export interface ServerInfo {
   readonly serviceUser: string;
   readonly homebridgeConfigJsonPath: string;
   readonly homebridgeStoragePath: string;

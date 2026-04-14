@@ -1,5 +1,5 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, LoginResponse, ServerInfoResponse } from './types.js';
+import { RequestOptions, LoginResponse, ServerInfo } from './types.js';
 
 /**
  * The client used to interact
@@ -95,10 +95,10 @@ class ApiClient {
    * Used to call the `GET /status/server-information` endpoint
    * and obtain the server info data
    *
-   * @returns The server info response
+   * @returns The server info data
    */
-  public async getServerInfo(): Promise<ServerInfoResponse> {
-    return await this._request<ServerInfoResponse>({
+  public async getServerInfo(): Promise<ServerInfo> {
+    return await this._request<ServerInfo>({
       method: 'get',
       endpoint: '/status/server-information',
     });

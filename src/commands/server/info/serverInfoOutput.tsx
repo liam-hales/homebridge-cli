@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactElement, useEffect, useMemo, useState } from 'react';
 import { Box } from 'ink';
 import { useApiClient } from '../../../hooks/index.js';
-import { ServerInfoResponse } from '../../../clients/types.js';
+import { ServerInfo } from '../../../clients/types.js';
 import { List, Loader } from '../../../components/index.js';
 import { ListItem } from '../../../components/types.js';
 
@@ -13,7 +13,7 @@ import { ListItem } from '../../../components/types.js';
  */
 const ServerInfoOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
-  const [data, setData] = useState<ServerInfoResponse | undefined>();
+  const [data, setData] = useState<ServerInfo | undefined>();
 
   /**
    * Used to fetch the data when
