@@ -1,14 +1,12 @@
 import { FunctionComponent, ReactElement } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../../constants.js';
+import { IErrorBlock } from '../../types.js';
 
 /**
  * The `ErrorBlock` component props
  */
-interface Props {
-  readonly input: string;
-  readonly message: string;
-}
+type Props = Omit<IErrorBlock, 'type'>;
 
 /**
  * Used to render the error block
