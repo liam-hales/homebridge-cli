@@ -13,6 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "jsx": "react-jsx"
