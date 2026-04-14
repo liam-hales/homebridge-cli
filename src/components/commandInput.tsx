@@ -110,7 +110,10 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
         {
           (value.startsWith('/') === true) && (
             <>
-              <Box flexDirection="row">
+              <Box
+                height={6}
+                flexDirection="row"
+              >
                 <Box
                   flexDirection="column"
                   width={20}
