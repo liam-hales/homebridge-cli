@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import { FunctionComponent, ReactElement, useEffect, useMemo, useState } from 'react';
 import { Box, Text, useInput } from 'ink';
 import { colours } from '../constants.js';
 import { commands } from '../commands/index.js';
@@ -21,18 +21,22 @@ interface Props {
  * @returns The `CommandInput` component
  */
 const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactElement<Props> => {
-  const [listIndex, setListIndex] = useState<number>(-1);
+  const [listIndex, setListIndex] = useState<number>(0);
+
+  /**
+   * The filtered list of commands based
+   * on the current input value
+   */
+  const filteredCommands = useMemo(() => {
+    return commands.filter(({ usage }) => usage.includes(value));
+  }, [value]);
 
   /**
    * Used to reset the list index
-   * state when the value is empty
+   * state when the value changes
    */
-  useEffect(() => {
-    if (value === '') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setListIndex(-1);
-    }
-  }, [value]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setListIndex(0), [value]);
 
   /**
    * Used to monitor the user input and take
@@ -46,7 +50,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
     }
 
     if (key.tab === true && listIndex >= 0) {
-      const { run } = commands[listIndex];
+      const { run } = filteredCommands[listIndex];
 
       // Call `onChange` with the
       // command run value
@@ -54,23 +58,27 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
     }
 
     if (key.upArrow === true) {
-      const index = listIndex - 1;
+      const nextIndex = listIndex - 1;
 
-      // Only set the command list index if we
-      // are within the commands array length
-      if (index >= -1) {
-        setListIndex(index);
-      }
+      // Set the new list index based on the next one to be set
+      // If the user has reached the start of the list then send them to the end
+      setListIndex(
+        (nextIndex >= 0)
+          ? nextIndex
+          : filteredCommands.length - 1,
+      );
     }
 
     if (key.downArrow === true) {
-      const index = listIndex + 1;
+      const nextIndex = listIndex + 1;
 
-      // Only set the command list index if we
-      // are within the commands array length
-      if (index < commands.length) {
-        setListIndex(index);
-      }
+      // Set the new list index based on the next one to be set
+      // If the user has reached the end of the list then send them bac to the start
+      setListIndex(
+        (nextIndex < filteredCommands.length)
+          ? nextIndex
+          : 0,
+      );
     }
   });
 
@@ -110,7 +118,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                   {
                     // Map the commands into text components
                     // used to render the command usage values
-                    commands.map((command, index) => {
+                    filteredCommands.map((command, index) => {
                       const { usage } = command;
 
                       return (
@@ -136,7 +144,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                   {
                     // Map the commands into text components
                     // used to render the command descriptions
-                    commands.map((command, index) => {
+                    filteredCommands.map((command, index) => {
                       const { description } = command;
 
                       return (
