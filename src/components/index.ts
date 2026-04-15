@@ -7,6 +7,7 @@ import LoginCheck from './check/loginCheck.js';
 import Keybindings from './common/keybindings.js';
 import List from './common/list.js';
 import Loader from './common/loader.js';
+import Table from './common/table.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
@@ -22,6 +23,7 @@ export {
   Keybindings,
   List,
   Loader,
+  Table,
   CommandInput,
   CommandBlock,
   ErrorBlock,
