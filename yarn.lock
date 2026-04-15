@@ -15,6 +15,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alcalzone/ink-table@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@alcalzone/ink-table@npm:1.1.1"
+  dependencies:
+    object-hash: "npm:^2.0.3"
+  peerDependencies:
+    ink: ">=3.0.0"
+    react: ">=16.8.0"
+  checksum: 10/f5deb89ba05d4038636e0d4e898ef952b61547cab94ecddd34ecc0b2dd116d77e27b443e56465834f3d2690a05661cfff49ebab6793ed4a192d70abc07b41977
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.28.6, @babel/code-frame@npm:^7.29.0":
   version: 7.29.0
   resolution: "@babel/code-frame@npm:7.29.0"
@@ -2414,6 +2426,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "homebridge-cli@workspace:."
   dependencies:
+    "@alcalzone/ink-table": "npm:^1.1.1"
     "@eslint/js": "npm:^10.0.1"
     "@network-utils/tcp-ping": "npm:^1.2.3"
     "@stylistic/eslint-plugin": "npm:^5.10.0"
@@ -3307,6 +3320,13 @@ __metadata:
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: 10/fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
+  languageName: node
+  linkType: hard
+
+"object-hash@npm:^2.0.3":
+  version: 2.2.0
+  resolution: "object-hash@npm:2.2.0"
+  checksum: 10/dee06b6271bf5769ae5f1a7386fdd52c1f18aae9fcb0b8d4bb1232f2d743d06cb5b662be42378b60a1c11829f96f3f86834a16bbaa57a085763295fff8b93e27
   languageName: node
   linkType: hard
 
