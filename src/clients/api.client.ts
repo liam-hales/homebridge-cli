@@ -1,5 +1,5 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, LoginResponse, ServerInfo } from './types.js';
+import { RequestOptions, LoginResponse, User, ServerInfo } from './types.js';
 
 /**
  * The client used to interact
@@ -89,6 +89,19 @@ class ApiClient {
     catch {
       return 'failed';
     }
+  }
+
+  /**
+   * Used to call the `GET /api/users` endpoint
+   * and obtain the user data
+   *
+   * @returns The user data
+   */
+  public async getUsers(): Promise<User[]> {
+    return await this._request<User[]>({
+      method: 'get',
+      endpoint: '/users',
+    });
   }
 
   /**

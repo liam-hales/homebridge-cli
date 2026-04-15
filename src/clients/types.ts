@@ -36,6 +36,17 @@ export interface LoginResponse {
 }
 
 /**
+ * Describes the user data returned by
+ * the `GET /api/users` endpoint
+ */
+export interface User {
+  readonly id: number;
+  readonly name: string;
+  readonly username: string;
+  readonly admin: boolean;
+}
+
+/**
  * Describes the server info returned by
  * the `GET /status/server-information` endpoint
  */
