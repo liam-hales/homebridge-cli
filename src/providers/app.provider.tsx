@@ -103,6 +103,13 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     const config = _getConfig();
     const credentials = await _getCredentials();
 
+    // If both the config and credentials have not been set then it's pointless setting state for either
+    // The checks can just be skipped by setting the app mode to `idle` now
+    if (config == null && credentials == null) {
+      setMode('idle');
+      return;
+    }
+
     setMode('checking');
     setConfig(config);
     setCredentials(credentials);
