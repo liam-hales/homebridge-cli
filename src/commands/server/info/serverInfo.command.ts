@@ -1,13 +1,13 @@
 import ServerInfoOutput from './serverInfoOutput.js';
 
 /**
- * Defines the `/server/info` command used
- * to display the Homebridge server info
+ * Defines the `/server/info` command
+ * used to display the server info
  */
 const serverInfoCommand = {
   id: 'server-info',
   usage: '/server/info',
-  description: 'Used to display the Homebridge server info',
+  description: 'Used to display the server info',
   run: '/server/info',
   output: {
     component: ServerInfoOutput,
