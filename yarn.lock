@@ -2449,6 +2449,8 @@ __metadata:
     tsx: "npm:^4.21.0"
     typescript: "npm:^6.0.2"
     typescript-eslint: "npm:^8.58.1"
+  bin:
+    homebridge-cli: ./dist/main.js
   languageName: unknown
   linkType: soft
 

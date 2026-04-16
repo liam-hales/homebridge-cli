@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { FunctionComponent, ReactElement } from 'react';
 import { render } from 'ink';
 import { App } from './components/index.js';
