@@ -6,9 +6,8 @@ import InitOutput from './initOutput.js';
  */
 const initCommand = {
   id: 'init',
-  usage: '/init',
+  invoke: '/init',
   description: 'Used to connect to a Homebridge server',
-  run: '/init',
   output: {
     component: InitOutput,
     exitText: 'Setup complete, config set',

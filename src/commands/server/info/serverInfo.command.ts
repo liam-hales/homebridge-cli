@@ -6,9 +6,8 @@ import ServerInfoOutput from './serverInfoOutput.js';
  */
 const serverInfoCommand = {
   id: 'server-info',
-  usage: '/server/info',
+  invoke: '/server/info',
   description: 'Used to display the server info',
-  run: '/server/info',
   output: {
     component: ServerInfoOutput,
     exitText: null,

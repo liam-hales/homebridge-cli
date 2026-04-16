@@ -28,7 +28,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
    * on the current input value
    */
   const filteredCommands = useMemo(() => {
-    return commands.filter(({ usage }) => usage.includes(value));
+    return commands.filter(({ invoke }) => invoke.includes(value));
   }, [value]);
 
   /**
@@ -50,11 +50,11 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
     }
 
     if (key.tab === true && listIndex >= 0) {
-      const { run } = filteredCommands[listIndex];
+      const { invoke } = filteredCommands[listIndex];
 
       // Call `onChange` with the
-      // command run value
-      onChange(run);
+      // command invoke value
+      onChange(invoke);
     }
 
     if (key.upArrow === true) {
@@ -120,20 +120,20 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                 >
                   {
                     // Map the commands into text components
-                    // used to render the command usage values
+                    // used to render the command invoke values
                     filteredCommands.map((command, index) => {
-                      const { usage } = command;
+                      const { invoke } = command;
 
                       return (
                         <Text
-                          key={`command-usage-${usage}`}
+                          key={`command-invoke-${invoke}`}
                           color={
                             (index === listIndex)
                               ? colours.purple
                               : colours.white
                           }
                         >
-                          {usage}
+                          {invoke}
                         </Text>
                       );
                     })

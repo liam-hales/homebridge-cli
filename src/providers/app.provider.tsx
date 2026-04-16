@@ -340,8 +340,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       }
 
       // Attempt to find a command that matches
-      // the users input via its run value
-      const command = commands.find((command) => command.run === input);
+      // the users input via its invoke value
+      const command = commands.find((command) => command.invoke === input);
 
       // If no command could be found
       // then throw an error

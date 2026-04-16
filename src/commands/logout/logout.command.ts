@@ -6,9 +6,8 @@ import LogoutOutput from './logoutOutput.js';
  */
 const logoutCommand = {
   id: 'logout',
-  usage: '/logout',
+  invoke: '/logout',
   description: 'Used to log out to Homebridge',
-  run: '/logout',
   output: {
     component: LogoutOutput,
     exitText: 'Logout successful',

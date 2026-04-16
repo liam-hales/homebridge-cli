@@ -6,9 +6,8 @@ import UsersOutput from './usersOutput.js';
  */
 const usersCommand = {
   id: 'users',
-  usage: '/users',
+  invoke: '/users',
   description: 'Used to list all users',
-  run: '/users',
   output: {
     component: UsersOutput,
     exitText: null,

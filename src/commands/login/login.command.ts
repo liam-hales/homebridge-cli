@@ -6,9 +6,8 @@ import LoginOutput from './loginOutput.js';
  */
 const loginCommand = {
   id: 'login',
-  usage: '/login',
+  invoke: '/login',
   description: 'Used to log in to Homebridge',
-  run: '/login',
   output: {
     component: LoginOutput,
     exitText: 'Login credentials set, check login status above',
