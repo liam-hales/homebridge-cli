@@ -23,7 +23,7 @@ The recommended way of installing is simple. Use the below command to run the [`
 Once installed, run `homebridge-cli` to start.
 
 ```sh
-$ curl -fsSL https://github.com/liam-hales/homebridge-cli/install.sh | bash
+$ curl -fsSL https://raw.githubusercontent.com/liam-hales/homebridge-cli/main/install.sh | bash
 ```
 
 <br/>
