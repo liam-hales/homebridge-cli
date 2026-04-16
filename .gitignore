@@ -5,8 +5,9 @@ node_modules/*
 # Misc
 .DS_Store
 
-# Build
+# Build & Package
 dist/*
+*.tgz
 
 # TypeScript
 *.tsbuildinfo
