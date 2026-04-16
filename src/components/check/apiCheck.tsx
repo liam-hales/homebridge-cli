@@ -68,7 +68,13 @@ const ApiCheck: FunctionComponent<Props> = ({ status }): ReactElement<Props> => 
                 └─ API unavailable, this CLI is powered by the same API used by Homebridge UI and is therefore required in order to function
               </Text>
               <Text color={colours.lightGrey}>
-                └─ You will need to install Homebridge UI
+                └─ For more info, see the docs —
+                <Text
+                  color={colours.red}
+                  bold={true}
+                >
+                  {` https://github.com/liam-hales/homebridge-cli#api-unavailable- `}
+                </Text>
               </Text>
             </>
           )
