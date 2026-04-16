@@ -1,5 +1,3 @@
-![demo](demo.gif)
-
 # homebridge-cli
 
 An interactive CLI that allows you to configure and manage [Homebridge] from the terminal.
@@ -11,6 +9,9 @@ An interactive CLI that allows you to configure and manage [Homebridge] from the
 > A huge thank you to the Homebridge team and community for all you have built 🙏
 
 <br/>
+
+![demo](demo.gif)
+
 <br/>
 
 # Docs 📑
@@ -32,6 +33,15 @@ An interactive CLI that allows you to configure and manage [Homebridge] from the
 
 > ⚠️ _**WARNING** — Please make sure to follow the [Prerequisites](#prerequisites) section first before installing `homebridge-cli`_
 
+The recommended way of installing is simple. Use the below command to run the [`install.sh`](./install.sh) script which will automatically do everything for you.
+
+Once installed, run `homebridge-cli` to start.
+
+```sh
+$ curl -fsSL https://github.com/liam-hales/homebridge-cli/install.sh | bash
+```
+
+
 <br/>
 <br/>
 
@@ -40,6 +50,7 @@ An interactive CLI that allows you to configure and manage [Homebridge] from the
 There are only two prerequisites required before you can continue.
 
 - You must be running macOS or Linux
+- You must have `git` installed
 - You must have Node.js `>= v24.13` installed
 
 ## Install Node.js
@@ -47,7 +58,7 @@ There are only two prerequisites required before you can continue.
 Follow the steps below to install Node.js using [`nvm`] (Node Version Manager)
 
 1. Download and install [`nvm`]
-2. Install and use a version of Node.js `>= v24.13`
+2. Install and use Node.js `>= v24.13`
 
 ```sh
 $ nvm install 24.13
