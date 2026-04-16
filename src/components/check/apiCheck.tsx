@@ -40,7 +40,7 @@ const ApiCheck: FunctionComponent<Props> = ({ status }): ReactElement<Props> => 
                 backgroundColor={colours.red}
                 underline={true}
               >
-                {' x Homebridge API '}
+                {' × Homebridge API '}
               </Text>
             )
       }

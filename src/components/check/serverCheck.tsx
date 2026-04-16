@@ -41,7 +41,7 @@ const ServerCheck: FunctionComponent<Props> = ({ status, config }): ReactElement
                 backgroundColor={colours.red}
                 underline={true}
               >
-                {' x Homebridge Server '}
+                {' × Homebridge Server '}
               </Text>
             )
       }

@@ -76,7 +76,7 @@ const LoginCheck: FunctionComponent<Props> = ({ status, credentials }): ReactEle
             backgroundColor={colours.red}
             underline={true}
           >
-            {' x Login '}
+            {' × Login '}
           </Text>
         )
       }
