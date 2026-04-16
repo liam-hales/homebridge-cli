@@ -14,21 +14,6 @@ An interactive CLI that allows you to configure and manage [Homebridge] from the
 
 <br/>
 
-# Docs 📑
-
-- [Install 🚀](#install-)
-- [Prerequisites ✅](#prerequisites-)
-- [API Unavailable? 🤔](#api-unavailable-)
-- [Local Development 👨🏻‍💻](#local-development-)
-  - [Getting Started](#getting-started)
-  - [Development Build](#development-build)
-  - [Production Build](#production-build)
-  - [Dependency Management 📦](#dependency-management-)
-    - [Options](#options)
-
-<br/>
-<br/>
-
 # Install 🚀
 
 > ⚠️ _**WARNING** — Please make sure to follow the [Prerequisites](#prerequisites) section first before installing `homebridge-cli`_
@@ -40,7 +25,6 @@ Once installed, run `homebridge-cli` to start.
 ```sh
 $ curl -fsSL https://github.com/liam-hales/homebridge-cli/install.sh | bash
 ```
-
 
 <br/>
 <br/>
