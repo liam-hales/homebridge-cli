@@ -1,5 +1,5 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, LoginResponse, User, ServerInfo } from './types.js';
+import { RequestOptions, LoginResponse, User, ServerInfo, NodejsInfo } from './types.js';
 
 /**
  * The client used to interact
@@ -114,6 +114,19 @@ class ApiClient {
     return await this._request<ServerInfo>({
       method: 'get',
       endpoint: '/status/server-information',
+    });
+  }
+
+  /**
+   * Used to call the `GET /status/nodejs` endpoint
+   * and obtain the Node.js info data
+   *
+   * @returns The Node.js info data
+   */
+  public async getNodejsInfo(): Promise<NodejsInfo> {
+    return await this._request<NodejsInfo>({
+      method: 'get',
+      endpoint: '/status/nodejs',
     });
   }
 

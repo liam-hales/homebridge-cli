@@ -74,3 +74,14 @@ export interface ServerInfo {
     readonly dnsSuffix: string;
   };
 }
+
+/**
+ * Describes the Node.js info returned by
+ * the `GET /status/nodejs` endpoint
+ */
+export interface NodejsInfo {
+  readonly currentVersion: string;
+  readonly latestVersion: string;
+  readonly installPath: string;
+  readonly npmVersion: string;
+}

@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactElement, useEffect, useMemo, useState } from 'react';
 import { Box } from 'ink';
 import { useApiClient } from '../../../hooks/index.js';
-import { ServerInfo } from '../../../clients/types.js';
+import { NodejsInfo, ServerInfo } from '../../../clients/types.js';
 import { List, Loader } from '../../../components/index.js';
 import { ListItem } from '../../../components/types.js';
 
@@ -13,7 +13,9 @@ import { ListItem } from '../../../components/types.js';
  */
 const ServerInfoOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
-  const [data, setData] = useState<ServerInfo | undefined>();
+
+  const [serverInfo, setServerInfo] = useState<ServerInfo | undefined>();
+  const [nodejsInfo, setNodejsInfo] = useState<NodejsInfo | undefined>();
 
   /**
    * Used to fetch the data when
@@ -21,46 +23,48 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
    */
   useEffect(() => {
     void (async (): Promise<void> => {
-      const data = await client.getServerInfo();
-      setData(data);
+      // Fetch the server and Node.js info data
+      // and set it to state once fetched
+      setServerInfo(await client.getServerInfo());
+      setNodejsInfo(await client.getNodejsInfo());
     })();
-  }, [client, setData]);
+  }, [client, setServerInfo, setNodejsInfo]);
 
   /**
    * The list items for
    * the system list
    */
   const systemItems = useMemo<ListItem[]>(() => {
-    if (data == null) {
+    if (serverInfo == null) {
       return [];
     }
 
     return [
       {
         name: 'service user',
-        value: data.serviceUser,
+        value: serverInfo.serviceUser,
       },
       {
         name: 'config path',
-        value: data.homebridgeConfigJsonPath,
+        value: serverInfo.homebridgeConfigJsonPath,
       },
       {
         name: 'storage path',
-        value: data.homebridgeStoragePath,
+        value: serverInfo.homebridgeStoragePath,
       },
     ];
-  }, [data]);
+  }, [serverInfo]);
 
   /**
    * The list items for the
    * operating system list
    */
   const osItems = useMemo<ListItem[]>(() => {
-    if (data == null) {
+    if (serverInfo == null) {
       return [];
     }
 
-    const { os } = data;
+    const { os } = serverInfo;
     return [
       {
         name: 'platform',
@@ -83,18 +87,18 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
         value: os.hostname,
       },
     ];
-  }, [data]);
+  }, [serverInfo]);
 
   /**
    * The list items for
    * the network list
    */
   const networkItems = useMemo<ListItem[]>(() => {
-    if (data == null) {
+    if (serverInfo == null) {
       return [];
     }
 
-    const { network } = data;
+    const { network } = serverInfo;
     return [
       {
         name: 'interface',
@@ -137,19 +141,55 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
         value: network.dnsSuffix,
       },
     ];
-  }, [data]);
+  }, [serverInfo]);
+
+  /**
+   * The list items for
+   * the Node.js list
+   */
+  const nodejsItems = useMemo<ListItem[]>(() => {
+    if (nodejsInfo == null) {
+      return [];
+    }
+
+    return [
+      {
+        name: 'current version',
+        value: nodejsInfo.currentVersion,
+      },
+      {
+        name: 'latest version',
+        value: nodejsInfo.latestVersion,
+      },
+      {
+        name: 'install path',
+        value: nodejsInfo.installPath,
+      },
+      {
+        name: 'npm version',
+        value: nodejsInfo.npmVersion,
+      },
+    ];
+  }, [nodejsInfo]);
 
   return (
     <>
       {
-        (data == null) && (
+        (serverInfo == null) && (
           <Loader>
             Fetching server info
           </Loader>
         )
       }
       {
-        (data != null) && (
+        (nodejsInfo == null) && (
+          <Loader>
+            Fetching Node.js info
+          </Loader>
+        )
+      }
+      {
+        (serverInfo != null && nodejsInfo != null) && (
           <Box
             flexDirection="column"
             rowGap={1}
@@ -166,6 +206,10 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
             <List
               title="Network"
               items={networkItems}
+            />
+            <List
+              title="Node.js"
+              items={nodejsItems}
             />
           </Box>
         )
