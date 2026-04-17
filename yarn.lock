@@ -2449,6 +2449,7 @@ __metadata:
     tsx: "npm:^4.21.0"
     typescript: "npm:^6.0.2"
     typescript-eslint: "npm:^8.58.1"
+    zod: "npm:^4.3.6"
   bin:
     homebridge-cli: ./dist/main.js
   languageName: unknown
@@ -4607,7 +4608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.25.0 || ^4.0.0":
+"zod@npm:^3.25.0 || ^4.0.0, zod@npm:^4.3.6":
   version: 4.3.6
   resolution: "zod@npm:4.3.6"
   checksum: 10/25fc0f62e01b557b4644bf0b393bbaf47542ab30877c37837ea8caf314a8713d220c7d7fe51f68ffa72f0e1018ddfa34d96f1973d23033f5a2a5a9b6b9d9da01
