@@ -25,14 +25,13 @@ interface Props<T extends PrimitiveObject<T>> {
 const Table = <T extends PrimitiveObject<T>>({ items }: Props<T>): ReactElement<Props<T>> => {
   const data = items.map((item) => {
     return Object
-      .keys(item)
-      .reduce((map, key) => {
-        const value = item[key];
+      .entries(item)
+      .reduce((map, entry) => {
+        const [key, value] = entry;
 
         // Make sure the key has no case so it is not
         // rendered in its original camel-case format
         const formattedKey = key
-          .toString()
           .replace(/([A-Z])/g, ' $1')
           .toLowerCase();
 
