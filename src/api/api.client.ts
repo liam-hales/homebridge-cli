@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema } from './schemas/index.js';
 
 /**
  * The client used to interact
@@ -142,6 +142,23 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return nodejsInfoSchema.parse(data);
+  }
+
+  /**
+   * Used to call the `GET /api/server/pairings` endpoint
+   * and obtain the pairings data
+   *
+   * @returns The pairings data
+   */
+  public async getPairings(): Promise<Pairing[]> {
+    const data = await this._request<unknown[]>({
+      method: 'get',
+      endpoint: '/server/pairings',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return data.map((item) => pairingsSchema.parse(item));
   }
 
   /**
