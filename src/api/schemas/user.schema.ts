@@ -1,0 +1,23 @@
+import { z } from 'zod';
+
+/**
+ * The schema used to describe and transform the user data
+ * returned from the `GET /api/users` endpoint
+ */
+const userSchema = z
+  .object({
+    id: z.number(),
+    name: z.string(),
+    username: z.string(),
+    admin: z.boolean(),
+  })
+  .transform((data) => {
+    return {
+      id: data.id,
+      name: data.name,
+      username: data.username,
+      isAdmin: data.admin,
+    };
+  });
+
+export default userSchema;
