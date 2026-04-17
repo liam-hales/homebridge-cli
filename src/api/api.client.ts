@@ -1,5 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, LoginResponse, User, ServerInfo, NodejsInfo } from './types.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema } from './schemas/index.js';
 
 /**
  * The client used to interact
@@ -69,8 +70,7 @@ class ApiClient {
     const { username, password } = credentials;
 
     try {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      const { access_token } = await this._request<LoginResponse, Credentials>({
+      const data = await this._request<unknown, Credentials>({
         method: 'post',
         endpoint: '/auth/login',
         body: {
@@ -79,9 +79,11 @@ class ApiClient {
         },
       });
 
-      // Store the access token so it can
-      // be used for other requests
-      this._authToken = access_token;
+      // Parse and store the access token so
+      // it can be used for other requests
+      const { accessToken } = loginSchema.parse(data);
+      this._authToken = accessToken;
+
       return 'authenticated';
     }
     // Catch any error that occurs while making the
@@ -98,10 +100,14 @@ class ApiClient {
    * @returns The user data
    */
   public async getUsers(): Promise<User[]> {
-    return await this._request<User[]>({
+    const data = await this._request<unknown[]>({
       method: 'get',
       endpoint: '/users',
     });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return data.map((item) => userSchema.parse(item));
   }
 
   /**
@@ -111,10 +117,14 @@ class ApiClient {
    * @returns The server info data
    */
   public async getServerInfo(): Promise<ServerInfo> {
-    return await this._request<ServerInfo>({
+    const data = await this._request<unknown>({
       method: 'get',
       endpoint: '/status/server-information',
     });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return serverInfoSchema.parse(data);
   }
 
   /**
@@ -124,20 +134,27 @@ class ApiClient {
    * @returns The Node.js info data
    */
   public async getNodejsInfo(): Promise<NodejsInfo> {
-    return await this._request<NodejsInfo>({
+    const data = await this._request<unknown>({
       method: 'get',
       endpoint: '/status/nodejs',
     });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return nodejsInfoSchema.parse(data);
   }
 
   /**
    * Used to make a request to the API and return
    * the response and handle any errors
    *
+   * - Generic type `T` for the response
+   * - Generic type `B` for the request body
+   *
    * @param options The request options
    * @returns The response
    */
-  private async _request<T extends object, B extends object = never>(options: RequestOptions<B>): Promise<T> {
+  private async _request<T, B extends object = never>(options: RequestOptions<B>): Promise<T> {
     const { method, endpoint } = options;
 
     // Make the request to the API using

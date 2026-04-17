@@ -1,3 +1,6 @@
+import { userSchema, serverInfoSchema, nodejsInfoSchema } from './schemas/index.js';
+import { z } from 'zod';
+
 /**
  * Describes the API request options
  *
@@ -27,61 +30,19 @@ export interface PostRequestOptions<T extends object> {
 }
 
 /**
- * Describes the login response returned
- * by the `POST /api/login` endpoint
+ * Describes the user inferred
+ * by the `userSchema`
  */
-export interface LoginResponse {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  readonly access_token: string;
-}
+export type User = z.infer<typeof userSchema>;
 
 /**
- * Describes the user data returned by
- * the `GET /api/users` endpoint
+ * Describes the server info inferred
+ * by the `serverInfoSchema`
  */
-export interface User {
-  readonly id: number;
-  readonly name: string;
-  readonly username: string;
-  readonly admin: boolean;
-}
+export type ServerInfo = z.infer<typeof serverInfoSchema>;
 
 /**
- * Describes the server info returned by
- * the `GET /status/server-information` endpoint
+ * Describes the Node.js info inferred
+ * by the `nodejsInfoSchema`
  */
-export interface ServerInfo {
-  readonly serviceUser: string;
-  readonly homebridgeConfigJsonPath: string;
-  readonly homebridgeStoragePath: string;
-  readonly os: {
-    readonly platform: string;
-    readonly distro: string;
-    readonly kernel: string;
-    readonly arch: string;
-    readonly hostname: string;
-  };
-  readonly network: {
-    readonly iface: string;
-    readonly ip4: string;
-    readonly ip4subnet: string;
-    readonly ip6: string;
-    readonly ip6subnet: string;
-    readonly mac: string;
-    readonly type: string;
-    readonly duplex: string;
-    readonly speed: number;
-    readonly dnsSuffix: string;
-  };
-}
-
-/**
- * Describes the Node.js info returned by
- * the `GET /status/nodejs` endpoint
- */
-export interface NodejsInfo {
-  readonly currentVersion: string;
-  readonly latestVersion: string;
-  readonly installPath: string;
-  readonly npmVersion: string;
-}
+export type NodejsInfo = z.infer<typeof nodejsInfoSchema>;
