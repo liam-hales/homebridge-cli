@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
 import { useApiClient } from '../../hooks/index.js';
-import { User } from '../../clients/types.js';
+import { User } from '../../api/types.js';
 import { Loader, Table } from '../../components/index.js';
 import { Box } from 'ink';
 

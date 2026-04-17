@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactElement, useEffect, useMemo, useState } from 'react';
 import { Box } from 'ink';
 import { useApiClient } from '../../../hooks/index.js';
-import { NodejsInfo, ServerInfo } from '../../../clients/types.js';
+import { NodejsInfo, ServerInfo } from '../../../api/types.js';
 import { List, Loader } from '../../../components/index.js';
 import { ListItem } from '../../../components/types.js';
 

@@ -1,5 +1,5 @@
 import { AppMode, Block, Config, Credentials, ServerStatus, ApiStatus, LoginStatus } from '../types.js';
-import { ApiClient } from '../clients/index.js';
+import { ApiClient } from '../api/index.js';
 
 /**
  * Describes the app state

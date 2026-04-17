@@ -1,5 +1,5 @@
 import { useApp } from './index.js';
-import { ApiClient } from '../clients/index.js';
+import { ApiClient } from '../api/index.js';
 
 /**
  * Used to unwrap and access the `ApiClient`

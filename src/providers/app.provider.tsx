@@ -2,7 +2,7 @@ import { FunctionComponent, ReactElement, ReactNode, useEffect, useMemo, useStat
 import { AppContext } from '../context/index.js';
 import { ApiStatus, AppMode, Block, Config, Credentials, LoginStatus, ServerStatus } from '../types.js';
 import { commands } from '../commands/index.js';
-import { ApiClient } from '../clients/index.js';
+import { ApiClient } from '../api/index.js';
 import { nanoid } from 'nanoid';
 import { useApp, useInput } from 'ink';
 import { ping } from '@network-utils/tcp-ping';
