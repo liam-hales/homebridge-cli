@@ -10,7 +10,7 @@ An interactive CLI that allows you to configure and manage [Homebridge] from the
 
 <br/>
 
-![demo](demo.gif)
+![Demo](/img/demo.gif)
 
 <br/>
 
@@ -65,6 +65,10 @@ Check out their official [installation guide](https://nodejs.org/en/download) fo
 <br/>
 
 # API Unavailable? 🤔
+
+> _Most users can ignore this section, however you may be here because you came across the "API Unavailable" error during the "Homebridge API" check on startup as shown below._
+>
+> ![API Unavailable](/img/api-unavailable.webp)
 
 The Homebridge CLI is powered by the same API used by [Homebridge UI] and is therefore required in order to function. Most Homebridge installations already come preconfigured with this by default, however you may have a non-standard setup. If this is the case you will first need to install it.
 
