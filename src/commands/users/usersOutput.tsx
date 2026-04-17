@@ -20,6 +20,8 @@ const UsersOutput: FunctionComponent = (): ReactElement => {
    */
   useEffect(() => {
     void (async (): Promise<void> => {
+      // Fetch the users data and set
+      // it to state once fetched
       const data = await client.getUsers();
       setData(data);
     })();

@@ -28,5 +28,3 @@ export const commandMap = commands.reduce<CommandMap>((map, command) => {
     [id]: command,
   };
 }, {} as CommandMap);
-
-export * from './types.js';
