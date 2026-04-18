@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema } from './schemas/index.js';
 
 /**
  * The client used to interact
@@ -159,6 +159,23 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return data.map((item) => pairingsSchema.parse(item));
+  }
+
+  /**
+   * Used to call the `GET /api/config-editor/backups` endpoint
+   * and obtain the config backups data
+   *
+   * @returns The config backups data
+   */
+  public async getConfigBackups(): Promise<ConfigBackup[]> {
+    const data = await this._request<unknown[]>({
+      method: 'get',
+      endpoint: '/config-editor/backups',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return data.map((item) => configBackupsSchema.parse(item));
   }
 
   /**

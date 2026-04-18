@@ -3,6 +3,7 @@ import serverInfoSchema from './serverInfo.schema.js';
 import nodejsInfoSchema from './nodejsInfo.schema.js';
 import loginSchema from './login.schema.js';
 import pairingsSchema from './pairings.schema.js';
+import configBackupsSchema from './configBackups.schema.js';
 
 export {
   userSchema,
@@ -10,4 +11,5 @@ export {
   nodejsInfoSchema,
   loginSchema,
   pairingsSchema,
+  configBackupsSchema,
 };

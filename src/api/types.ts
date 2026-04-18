@@ -1,4 +1,4 @@
-import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema } from './schemas/index.js';
+import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema } from './schemas/index.js';
 import { z } from 'zod';
 
 /**
@@ -52,3 +52,9 @@ export type NodejsInfo = z.infer<typeof nodejsInfoSchema>;
  * by the `pairingsSchema`
  */
 export type Pairing = z.infer<typeof pairingsSchema>;
+
+/**
+ * Describes the config backup inferred
+ * by the `configBackupsSchema`
+ */
+export type ConfigBackup = z.infer<typeof configBackupsSchema>;
