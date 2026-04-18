@@ -31,9 +31,11 @@ const serverInfoSchema = z
   })
   .transform((data) => {
     return {
-      serviceUser: data.serviceUser,
-      configPath: data.homebridgeConfigJsonPath,
-      storagePath: data.homebridgeStoragePath,
+      system: {
+        serviceUser: data.serviceUser,
+        configPath: data.homebridgeConfigJsonPath,
+        storagePath: data.homebridgeStoragePath,
+      },
       os: {
         platform: data.os.platform,
         distribution: data.os.distro,
