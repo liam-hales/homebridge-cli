@@ -32,16 +32,9 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
   return (
     <>
       {
-        (serverInfo == null) && (
+        (serverInfo == null || nodejsInfo == null) && (
           <Loader>
             Fetching server info
-          </Loader>
-        )
-      }
-      {
-        (nodejsInfo == null) && (
-          <Loader>
-            Fetching Node.js info
           </Loader>
         )
       }
