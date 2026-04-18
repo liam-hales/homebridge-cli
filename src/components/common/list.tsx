@@ -1,24 +1,56 @@
-import { FunctionComponent, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { colours } from '../../constants.js';
 import { Box, Text } from 'ink';
-import { ListItem } from '../types.js';
+import { PrimitiveObject } from '../../types.js';
 
 /**
  * The `List` component props
+ *
+ * - Generic type `T` for the data
  */
-interface Props {
+interface Props<T extends PrimitiveObject<T>> {
   readonly title: string;
-  readonly items: ListItem[];
+  readonly data: T;
 }
 
 /**
  * Used to render a titled
  * list of items
  *
+ * - Generic type `T` for the data
+ *
  * @param props The component props
  * @returns The `List` component
  */
-const List: FunctionComponent<Props> = ({ title, items }): ReactElement<Props> => {
+const List = <T extends PrimitiveObject<T>>({ title, data }: Props<T>): ReactElement<Props<T>> => {
+  // Map the data entries into an array
+  // of list items to render
+  const items = Object
+    .entries(data)
+    .map((entry) => {
+      const [key, value] = entry;
+
+      // Derive the name from the key and make sure it has no case
+      // so it is not rendered in its original camel-case format
+      const name = key
+        .replace(/([A-Z])/g, ' $1')
+        .toLowerCase();
+
+      // If the value is a boolean then
+      // convert it to `yes` or `no`
+      if (typeof value === 'boolean') {
+        return {
+          name: name,
+          value: (value === true) ? '✔ yes' : '× no',
+        };
+      }
+
+      return {
+        name: name,
+        value: `${value}`,
+      };
+    });
+
   return (
     <Box
       flexDirection="column"
@@ -43,9 +75,7 @@ const List: FunctionComponent<Props> = ({ title, items }): ReactElement<Props> =
               const { name } = item;
               return (
                 <Text key={`list-${title}-name-${index}`}>
-                  └─
-                  {' '}
-                  {name}
+                  {`└─ ${name}`}
                 </Text>
               );
             })
