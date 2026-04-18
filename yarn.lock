@@ -1447,6 +1447,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.20":
+  version: 1.11.20
+  resolution: "dayjs@npm:1.11.20"
+  checksum: 10/5347533f21a55b8bb1b1ef559be9b805514c3a8fb7e68b75fb7e73808131c59e70909c073aa44ce8a0d159195cd110cdd4081cf87ab96cb06fee3edacae791c6
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.4.1, debug@npm:^4.4.3":
   version: 4.4.3
   resolution: "debug@npm:4.4.3"
@@ -2432,6 +2439,7 @@ __metadata:
     "@stylistic/eslint-plugin": "npm:^5.10.0"
     "@types/node": "npm:^24.12.2"
     "@types/react": "npm:^19.2.14"
+    dayjs: "npm:^1.11.20"
     dedent: "npm:^1.7.2"
     eslint: "npm:^10.2.0"
     eslint-import-resolver-typescript: "npm:^4.4.4"
