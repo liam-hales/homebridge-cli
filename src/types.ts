@@ -1,4 +1,4 @@
-import { Command } from './commands/index.js';
+import { Command } from './commands/types.js';
 
 /**
  * Describes the different
