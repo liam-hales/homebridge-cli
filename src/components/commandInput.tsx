@@ -24,12 +24,39 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
   const [listIndex, setListIndex] = useState<number>(0);
 
   /**
-   * The filtered list of commands based
-   * on the current input value
+   * Used to calculate the filtered list of commands
+   * based on the current input value
    */
   const filteredCommands = useMemo(() => {
     return commands.filter(({ invoke }) => invoke.includes(value));
   }, [value]);
+
+  /**
+   * Used to calculate the command window which
+   * consists of the window commands and the index
+   */
+  const [windowCommands, windowIndex] = useMemo(() => {
+    const windowSize = 6;
+    const windowScrollPoint = 3;
+
+    // Calculate the max and scroll offsets for the command
+    // window using the filtered commands and list index
+    const maxOffset = Math.max(0, filteredCommands.length - windowSize);
+    const scrollOffset = Math.min(
+      Math.max(0, listIndex - windowScrollPoint),
+      maxOffset,
+    );
+
+    // Calculate the command window and the window
+    // index which will be used to render the window
+    const commandWindow = filteredCommands.slice(scrollOffset, scrollOffset + windowSize);
+    const windowIndex = listIndex - scrollOffset;
+
+    return [
+      commandWindow,
+      windowIndex,
+    ];
+  }, [filteredCommands, listIndex]);
 
   /**
    * Used to reset the list index
@@ -121,14 +148,14 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                   {
                     // Map the commands into text components
                     // used to render the command invoke values
-                    filteredCommands.map((command, index) => {
+                    windowCommands.map((command, index) => {
                       const { invoke } = command;
 
                       return (
                         <Text
                           key={`command-invoke-${invoke}`}
                           color={
-                            (index === listIndex)
+                            (index === windowIndex)
                               ? colours.purple
                               : colours.white
                           }
@@ -146,14 +173,14 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                   {
                     // Map the commands into text components
                     // used to render the command descriptions
-                    filteredCommands.map((command, index) => {
+                    windowCommands.map((command, index) => {
                       const { description } = command;
 
                       return (
                         <Text
                           key={`command-description-${description}`}
                           color={
-                            (index === listIndex)
+                            (index === windowIndex)
                               ? colours.purple
                               : colours.white
                           }
