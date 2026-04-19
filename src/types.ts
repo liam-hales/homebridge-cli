@@ -34,7 +34,9 @@ export type Block = ICommandBlock | IErrorBlock;
  * Used to create an object of primitive
  * values `string | number | boolean`
  */
-export type PrimitiveObject<T> = { readonly [K in keyof T]: string | number | boolean; };
+export type PrimitiveObject<T> = {
+  readonly [K in keyof T]: string | number | boolean;
+};
 
 /**
  * Used to create a map type from a
