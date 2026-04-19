@@ -11,6 +11,9 @@ import { PrimitiveObject } from '../../types.js';
 interface Props<T extends PrimitiveObject<T>> {
   readonly title: string;
   readonly data: T;
+  readonly transform?: Partial<{
+    [K in keyof T]: (value: T[K]) => string;
+  }>;
 }
 
 /**
@@ -22,7 +25,7 @@ interface Props<T extends PrimitiveObject<T>> {
  * @param props The component props
  * @returns The `List` component
  */
-const List = <T extends PrimitiveObject<T>>({ title, data }: Props<T>): ReactElement<Props<T>> => {
+const List = <T extends PrimitiveObject<T>>({ title, data, transform = {} }: Props<T>): ReactElement<Props<T>> => {
   // Map the data entries into an array
   // of list items to render
   const items = Object
@@ -33,6 +36,7 @@ const List = <T extends PrimitiveObject<T>>({ title, data }: Props<T>): ReactEle
       // Derive the name from the key and make sure it has no case
       // so it is not rendered in its original camel-case format
       const name = key
+        .toString()
         .replace(/([A-Z])/g, ' $1')
         .toLowerCase();
 
@@ -45,9 +49,12 @@ const List = <T extends PrimitiveObject<T>>({ title, data }: Props<T>): ReactEle
         };
       }
 
+      // Check if there is a value transformer for
+      // the key and if so use it to transform the value
+      const transformer = transform[key];
       return {
         name: name,
-        value: `${value}`,
+        value: (transformer != null) ? transformer(value) : value,
       };
     });
 
