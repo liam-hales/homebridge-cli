@@ -8,6 +8,7 @@ import Keybindings from './common/keybindings.js';
 import List from './common/list.js';
 import Loader from './common/loader.js';
 import Table from './common/table.js';
+import Meter from './common/meter.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
@@ -24,6 +25,7 @@ export {
   List,
   Loader,
   Table,
+  Meter,
   CommandInput,
   CommandBlock,
   ErrorBlock,
