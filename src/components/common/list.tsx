@@ -9,8 +9,8 @@ import { PrimitiveObject } from '../../types.js';
  * - Generic type `T` for the data
  */
 interface Props<T extends PrimitiveObject<T>> {
-  readonly title: string;
   readonly data: T;
+  readonly title?: string;
   readonly transform?: Partial<{
     [K in keyof T]: (value: T[K]) => string;
   }>;
@@ -25,7 +25,7 @@ interface Props<T extends PrimitiveObject<T>> {
  * @param props The component props
  * @returns The `List` component
  */
-const List = <T extends PrimitiveObject<T>>({ title, data, transform = {} }: Props<T>): ReactElement<Props<T>> => {
+const List = <T extends PrimitiveObject<T>>({ data, title, transform = {} }: Props<T>): ReactElement<Props<T>> => {
   // Map the data entries into an array
   // of list items to render
   const items = Object
@@ -63,12 +63,16 @@ const List = <T extends PrimitiveObject<T>>({ title, data, transform = {} }: Pro
       flexDirection="column"
       rowGap={1}
     >
-      <Text
-        bold={true}
-        underline={true}
-      >
-        {title}
-      </Text>
+      {
+        (title != null) && (
+          <Text
+            bold={true}
+            underline={true}
+          >
+            {title}
+          </Text>
+        )
+      }
       <Box
         flexDirection="row"
         marginLeft={1}
@@ -81,7 +85,12 @@ const List = <T extends PrimitiveObject<T>>({ title, data, transform = {} }: Pro
             items.map((item, index) => {
               const { name } = item;
               return (
-                <Text key={`list-${title}-name-${index}`}>
+                <Text key={
+                  (title != null)
+                    ? `list-${title}-name-${index}`
+                    : `list-name-${index}`
+                }
+                >
                   {`└─ ${name}`}
                 </Text>
               );
@@ -94,7 +103,11 @@ const List = <T extends PrimitiveObject<T>>({ title, data, transform = {} }: Pro
               const { value } = item;
               return (
                 <Text
-                  key={`list-${title}-value-${index}`}
+                  key={
+                    (title != null)
+                      ? `list-${title}-value-${index}`
+                      : `list-value-${index}`
+                  }
                   color={colours.purple}
                 >
                   {value}
