@@ -32,6 +32,7 @@ const Table = <T extends PrimitiveObject<T>>({ items }: Props<T>): ReactElement<
         // Make sure the key has no case so it is not
         // rendered in its original camel-case format
         const formattedKey = key
+          .toString()
           .replace(/([A-Z])/g, ' $1')
           .toLowerCase();
 
