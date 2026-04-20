@@ -1,4 +1,4 @@
-import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema } from './schemas/index.js';
+import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
 import { z } from 'zod';
 
 /**
@@ -58,3 +58,15 @@ export type Pairing = z.infer<typeof pairingsSchema>;
  * by the `configBackupsSchema`
  */
 export type ConfigBackup = z.infer<typeof configBackupsSchema>;
+
+/**
+ * Describes the CPU usage inferred
+ * by the `cpuUsageSchema`
+ */
+export type CpuUsage = z.infer<typeof cpuUsageSchema>;
+
+/**
+ * Describes the memory usage inferred
+ * by the `memoryUsageSchema`
+ */
+export type MemoryUsage = z.infer<typeof memoryUsageSchema>;

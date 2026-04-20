@@ -4,6 +4,8 @@ import nodejsInfoSchema from './nodejsInfo.schema.js';
 import loginSchema from './login.schema.js';
 import pairingsSchema from './pairings.schema.js';
 import configBackupsSchema from './configBackups.schema.js';
+import cpuUsageSchema from './cpuUsage.schema.js';
+import memoryUsageSchema from './memoryUsage.schema.js';
 
 export {
   userSchema,
@@ -12,4 +14,6 @@ export {
   loginSchema,
   pairingsSchema,
   configBackupsSchema,
+  cpuUsageSchema,
+  memoryUsageSchema,
 };

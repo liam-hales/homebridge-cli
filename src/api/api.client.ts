@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, CpuUsage, MemoryUsage } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
 
 /**
  * The client used to interact
@@ -176,6 +176,40 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return data.map((item) => configBackupsSchema.parse(item));
+  }
+
+  /**
+   * Used to call the `GET /api/status/cpu` endpoint
+   * and obtain the CPU usage data
+   *
+   * @returns The CPU usage data
+   */
+  public async getCpuUsage(): Promise<CpuUsage> {
+    const data = await this._request<unknown>({
+      method: 'get',
+      endpoint: '/status/cpu',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return cpuUsageSchema.parse(data);
+  }
+
+  /**
+   * Used to call the `GET /api/status/ram` endpoint
+   * and obtain the memory usage data
+   *
+   * @returns The memory usage data
+   */
+  public async getMemoryUsage(): Promise<MemoryUsage> {
+    const data = await this._request<unknown>({
+      method: 'get',
+      endpoint: '/status/ram',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return memoryUsageSchema.parse(data);
   }
 
   /**
