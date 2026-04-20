@@ -79,7 +79,7 @@ const ServerUsageOutput: FunctionComponent = (): ReactElement => {
                   currentTemp: cpuUsage.currentTemp,
                   maxTemp: cpuUsage.maxTemp,
                 }}
-                spacing={4}
+                keyWidth={18}
                 transform={{
                   currentTemp: (value) => `${value} °C`,
                   maxTemp: (value) => `${value} °C`,
@@ -95,7 +95,7 @@ const ServerUsageOutput: FunctionComponent = (): ReactElement => {
                   total: memoryUsage.total,
                 }}
                 title="Memory Usage"
-                spacing={4}
+                keyWidth={12}
                 transform={{
                   total: (value) => `${value} GB`,
                 }}

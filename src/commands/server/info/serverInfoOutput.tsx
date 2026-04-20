@@ -48,22 +48,22 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
             <TextList
               data={serverInfo.system}
               title="System"
-              spacing={6}
+              keyWidth={26}
             />
             <TextList
               data={serverInfo.os}
               title="Operating System"
-              spacing={6}
+              keyWidth={26}
             />
             <TextList
               data={serverInfo.network}
               title="Network"
-              spacing={6}
+              keyWidth={26}
             />
             <TextList
               data={nodejsInfo}
               title="Node.js"
-              spacing={6}
+              keyWidth={26}
             />
           </Box>
         )

@@ -11,7 +11,7 @@ import { PrimitiveObject } from '../../types.js';
 interface Props<T extends PrimitiveObject<T>> {
   readonly data: T;
   readonly title?: string;
-  readonly spacing?: number;
+  readonly keyWidth?: number;
   readonly transform?: Partial<{
     readonly [K in keyof T]: (value: T[K]) => string;
   }>;
@@ -26,7 +26,7 @@ interface Props<T extends PrimitiveObject<T>> {
  * @param props The component props
  * @returns The `TextList` component
  */
-const TextList = <T extends PrimitiveObject<T>>({ data, title, spacing = 2, transform = {} }: Props<T>): ReactElement<Props<T>> => {
+const TextList = <T extends PrimitiveObject<T>>({ data, title, keyWidth = 20, transform = {} }: Props<T>): ReactElement<Props<T>> => {
   // Map the data entries into an array
   // of list items to render
   const items = Object
@@ -58,13 +58,6 @@ const TextList = <T extends PrimitiveObject<T>>({ data, title, spacing = 2, tran
         value: (transformer != null) ? transformer(value) : value,
       };
     });
-
-  // Calculate the key column width using
-  // the value with the longest length
-  const keyWidth = items.reduce((max, item) => {
-    const { name } = item;
-    return Math.max(max, `└─ ${name}`.length);
-  }, 0);
 
   return (
     <Box
@@ -98,7 +91,7 @@ const TextList = <T extends PrimitiveObject<T>>({ data, title, spacing = 2, tran
                 flexDirection="row"
               >
                 <Box
-                  width={keyWidth + spacing}
+                  width={keyWidth}
                   flexDirection="column"
                 >
                   <Text>{`└─ ${name}`}</Text>
