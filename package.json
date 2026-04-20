@@ -21,7 +21,7 @@
     "type": "git",
     "url": "https://github.com/liam-hales/homebridge-cli.git"
   },
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "yarn@4.14.1",
   "scripts": {
     "dev": "tsx src/main.tsx",
     "build": "tsc --project tsconfig.build.json",
