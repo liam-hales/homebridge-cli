@@ -9,6 +9,10 @@ const serverInfoSchema = z
     serviceUser: z.string(),
     homebridgeConfigJsonPath: z.string(),
     homebridgeStoragePath: z.string(),
+    homebridgePluginPath: z.string(),
+    homebridgeCustomPluginPath: z.string(),
+    homebridgeInsecureMode: z.boolean(),
+    homebridgeRunningInDocker: z.boolean(),
     os: z.object({
       platform: z.string(),
       distro: z.string(),
@@ -35,6 +39,10 @@ const serverInfoSchema = z
         serviceUser: data.serviceUser,
         configPath: data.homebridgeConfigJsonPath,
         storagePath: data.homebridgeStoragePath,
+        pluginPath: data.homebridgePluginPath,
+        customPluginPath: data.homebridgeCustomPluginPath,
+        insecureMode: data.homebridgeInsecureMode,
+        docker: data.homebridgeRunningInDocker,
       },
       os: {
         platform: data.os.platform,
