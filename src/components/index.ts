@@ -5,7 +5,7 @@ import ServerCheck from './check/serverCheck.js';
 import ApiCheck from './check/apiCheck.js';
 import LoginCheck from './check/loginCheck.js';
 import Keybindings from './common/keybindings.js';
-import List from './common/list.js';
+import TextList from './common/textList.js';
 import Loader from './common/loader.js';
 import Table from './common/table.js';
 import Meter from './common/meter.js';
@@ -22,7 +22,7 @@ export {
   ApiCheck,
   LoginCheck,
   Keybindings,
-  List,
+  TextList,
   Loader,
   Table,
   Meter,

@@ -4,28 +4,29 @@ import { Box, Text } from 'ink';
 import { PrimitiveObject } from '../../types.js';
 
 /**
- * The `List` component props
+ * The `TextList` component props
  *
  * - Generic type `T` for the data
  */
 interface Props<T extends PrimitiveObject<T>> {
   readonly data: T;
   readonly title?: string;
+  readonly spacing?: number;
   readonly transform?: Partial<{
-    [K in keyof T]: (value: T[K]) => string;
+    readonly [K in keyof T]: (value: T[K]) => string;
   }>;
 }
 
 /**
  * Used to render a titled
- * list of items
+ * list of text items
  *
  * - Generic type `T` for the data
  *
  * @param props The component props
- * @returns The `List` component
+ * @returns The `TextList` component
  */
-const List = <T extends PrimitiveObject<T>>({ data, title, transform = {} }: Props<T>): ReactElement<Props<T>> => {
+const TextList = <T extends PrimitiveObject<T>>({ data, title, spacing = 2, transform = {} }: Props<T>): ReactElement<Props<T>> => {
   // Map the data entries into an array
   // of list items to render
   const items = Object
@@ -58,6 +59,13 @@ const List = <T extends PrimitiveObject<T>>({ data, title, transform = {} }: Pro
       };
     });
 
+  // Calculate the key column width using
+  // the value with the longest length
+  const keyWidth = items.reduce((max, item) => {
+    const { name } = item;
+    return Math.max(max, `└─ ${name}`.length);
+  }, 0);
+
   return (
     <Box
       flexDirection="column"
@@ -74,51 +82,37 @@ const List = <T extends PrimitiveObject<T>>({ data, title, transform = {} }: Pro
         )
       }
       <Box
-        flexDirection="row"
+        flexDirection="column"
         marginLeft={1}
       >
-        <Box
-          flexDirection="column"
-          width={25}
-        >
-          {
-            items.map((item, index) => {
-              const { name } = item;
-              return (
-                <Text key={
+        {
+          items.map((item, index) => {
+            const { name, value } = item;
+            return (
+              <Box
+                key={
                   (title != null)
-                    ? `list-${title}-name-${index}`
-                    : `list-name-${index}`
+                    ? `list-${title}-item-${index}`
+                    : `list-item-${index}`
                 }
+                flexDirection="row"
+              >
+                <Box
+                  width={keyWidth + spacing}
+                  flexDirection="column"
                 >
-                  {`└─ ${name}`}
-                </Text>
-              );
-            })
-          }
-        </Box>
-        <Box flexDirection="column">
-          {
-            items.map((item, index) => {
-              const { value } = item;
-              return (
-                <Text
-                  key={
-                    (title != null)
-                      ? `list-${title}-value-${index}`
-                      : `list-value-${index}`
-                  }
-                  color={colours.purple}
-                >
+                  <Text>{`└─ ${name}`}</Text>
+                </Box>
+                <Text color={colours.purple}>
                   {value}
                 </Text>
-              );
-            })
-          }
-        </Box>
+              </Box>
+            );
+          })
+        }
       </Box>
     </Box>
   );
 };
 
-export default List;
+export default TextList;

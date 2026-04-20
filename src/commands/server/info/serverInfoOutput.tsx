@@ -2,7 +2,7 @@ import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
 import { Box } from 'ink';
 import { useApiClient } from '../../../hooks/index.js';
 import { NodejsInfo, ServerInfo } from '../../../api/types.js';
-import { List, Loader } from '../../../components/index.js';
+import { TextList, Loader } from '../../../components/index.js';
 
 /**
  * The output component rendered when
@@ -45,21 +45,25 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
             rowGap={1}
             marginY={1}
           >
-            <List
-              title="System"
+            <TextList
               data={serverInfo.system}
+              title="System"
+              spacing={6}
             />
-            <List
-              title="Operating System"
+            <TextList
               data={serverInfo.os}
+              title="Operating System"
+              spacing={6}
             />
-            <List
-              title="Network"
+            <TextList
               data={serverInfo.network}
+              title="Network"
+              spacing={6}
             />
-            <List
-              title="Node.js"
+            <TextList
               data={nodejsInfo}
+              title="Node.js"
+              spacing={6}
             />
           </Box>
         )
