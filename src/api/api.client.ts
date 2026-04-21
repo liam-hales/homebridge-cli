@@ -1,6 +1,7 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, CpuUsage, MemoryUsage, ConfigData } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
+import date from '../date.js';
 
 /**
  * The client used to interact
@@ -125,6 +126,40 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return serverInfoSchema.parse(data);
+  }
+
+  /**
+   * Used to call the `GET /api/backup/scheduled-backups` endpoint
+   * and obtain the server backups data
+   *
+   * @returns The server backups data
+   */
+  public async getServerBackups(): Promise<ServerBackup[]> {
+    const data = await this._request<unknown[]>({
+      method: 'get',
+      endpoint: '/backup/scheduled-backups',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return data.map((item) => serverBackupSchema.parse(item));
+  }
+
+  /**
+   * Used to call the `GET /api/backup/scheduled-backups/next` endpoint
+   * and obtain the next scheduled backup date
+   *
+   * @returns The next scheduled backup date
+   */
+  public async getNextServerBackup(): Promise<Date> {
+    const { next } = await this._request<{ readonly next: string; }>({
+      method: 'get',
+      endpoint: '/backup/scheduled-backups/next',
+    });
+
+    return date
+      .utc(next)
+      .toDate();
   }
 
   /**
