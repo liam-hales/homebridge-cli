@@ -70,3 +70,20 @@ export type CpuUsage = z.infer<typeof cpuUsageSchema>;
  * by the `memoryUsageSchema`
  */
 export type MemoryUsage = z.infer<typeof memoryUsageSchema>;
+
+/**
+ * Describes the config data returned
+ * by the `GET /api/config-editor` endpoint
+ */
+export interface ConfigData {
+  readonly bridge: {
+    readonly name: string;
+    readonly username: string;
+    readonly port: number;
+    readonly pin: string;
+    readonly advertiser: string;
+    readonly bind: string[];
+  };
+  readonly accessories: Record<string, unknown>[];
+  readonly platforms: Record<string, unknown>[];
+}

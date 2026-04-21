@@ -5,6 +5,7 @@ import { serverInfoCommand } from './server/info/index.js';
 import { serverUsageCommand } from './server/usage/index.js';
 import { pairingsCommand } from './pairings/index.js';
 import { usersCommand } from './users/index.js';
+import { configCommand } from './config/index.js';
 import { configBackupsCommand } from './config/backups/index.js';
 import { CommandMap } from './types.js';
 
@@ -20,6 +21,7 @@ export const commands = [
   serverUsageCommand,
   pairingsCommand,
   usersCommand,
+  configCommand,
   configBackupsCommand,
 ];
 

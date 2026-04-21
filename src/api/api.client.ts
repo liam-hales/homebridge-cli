@@ -1,5 +1,5 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, CpuUsage, MemoryUsage } from './types.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, CpuUsage, MemoryUsage, ConfigData } from './types.js';
 import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
 
 /**
@@ -159,6 +159,19 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return data.map((item) => pairingsSchema.parse(item));
+  }
+
+  /**
+   * Used to call the `GET /api/config-editor` endpoint
+   * and obtain the Homebridge config
+   *
+   * @returns The Homebridge config
+   */
+  public async getConfig(): Promise<ConfigData> {
+    return this._request<ConfigData>({
+      method: 'get',
+      endpoint: '/config-editor',
+    });
   }
 
   /**
