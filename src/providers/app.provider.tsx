@@ -58,14 +58,14 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
    * Used to call the `_onStart` function
    * when the app starts
    */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/immutability
   useEffect(() => void _onStart(), []);
 
   /**
    * Used to call the `_init` function
    * when the config or credentials change
    */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/immutability
   useEffect(() => void _init(), [config, credentials]);
 
   /**
