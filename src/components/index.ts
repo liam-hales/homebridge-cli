@@ -10,6 +10,7 @@ import MeterList from './common/meterList.js';
 import Loader from './common/loader.js';
 import Table from './common/table.js';
 import Meter from './common/meter.js';
+import CodeBlock from './common/codeBlock.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
@@ -32,4 +33,5 @@ export {
   CommandBlock,
   ErrorBlock,
   BlockSwitch,
+  CodeBlock,
 };
