@@ -182,7 +182,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
                           color={
                             (index === windowIndex)
                               ? colours.purple
-                              : colours.white
+                              : colours.lightGrey
                           }
                         >
                           {description}

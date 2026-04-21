@@ -64,6 +64,7 @@ const MeterList: FunctionComponent<Props> = ({ data, min, max, title, unit }): R
       {
         (title != null) && (
           <Text
+            color={colours.white}
             bold={true}
             underline={true}
           >
@@ -92,7 +93,7 @@ const MeterList: FunctionComponent<Props> = ({ data, min, max, title, unit }): R
                   width={nameWidth}
                   flexDirection="column"
                 >
-                  <Text>
+                  <Text color={colours.lightGrey}>
                     {name}
                   </Text>
                 </Box>

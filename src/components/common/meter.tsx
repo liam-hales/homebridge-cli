@@ -46,7 +46,7 @@ const Meter: FunctionComponent<Props> = ({ value, min, max }): ReactElement<Prop
     >
       {
         (complete > 0) && (
-          <Text>
+          <Text color={colours.lightGrey}>
             {'■'.repeat(complete)}
           </Text>
         )

@@ -51,6 +51,7 @@ const ServerUsageOutput: FunctionComponent = (): ReactElement => {
               rowGap={1}
             >
               <Text
+                color={colours.white}
                 bold={true}
                 underline={true}
               >
@@ -62,7 +63,7 @@ const ServerUsageOutput: FunctionComponent = (): ReactElement => {
                 columnGap={1}
                 marginLeft={1}
               >
-                <Text>
+                <Text color={colours.lightGrey}>
                   load
                 </Text>
                 <Meter

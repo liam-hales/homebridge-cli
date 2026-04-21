@@ -67,6 +67,7 @@ const TextList = <T extends PrimitiveObject<T>>({ data, title, keyWidth = 20, tr
       {
         (title != null) && (
           <Text
+            color={colours.white}
             bold={true}
             underline={true}
           >
@@ -94,7 +95,9 @@ const TextList = <T extends PrimitiveObject<T>>({ data, title, keyWidth = 20, tr
                   width={keyWidth}
                   flexDirection="column"
                 >
-                  <Text>{`└─ ${name}`}</Text>
+                  <Text color={colours.lightGrey}>
+                    {`└─ ${name}`}
+                  </Text>
                 </Box>
                 <Text color={colours.purple}>
                   {value}
