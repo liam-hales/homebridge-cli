@@ -40,7 +40,7 @@ const UsersOutput: FunctionComponent = (): ReactElement => {
         (data != null) && (
           <Box
             flexDirection="column"
-            marginY={1}
+            marginBottom={1}
           >
             <Table<User> items={data} />
           </Box>

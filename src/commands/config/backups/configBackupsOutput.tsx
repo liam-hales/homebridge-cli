@@ -40,7 +40,7 @@ const ConfigBackupsOutput: FunctionComponent = (): ReactElement => {
         (data != null) && (
           <Box
             flexDirection="column"
-            marginY={1}
+            marginBottom={1}
           >
             <Table<ConfigBackup> items={data} />
           </Box>
