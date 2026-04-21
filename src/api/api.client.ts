@@ -4,8 +4,8 @@ import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSc
 import date from '../date.js';
 
 /**
- * The client used to interact
- * with the Homebridge API
+ * The client used to interact with the Homebridge API and provide a one-to-one mapping
+ * of functions to endpoints, acting as a typed, local interface to the remote API.
  */
 class ApiClient {
   private readonly _host: string;
