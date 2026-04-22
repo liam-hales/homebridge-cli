@@ -3,7 +3,7 @@ import { Box } from 'ink';
 import { useApiClient } from '../../../hooks/index.js';
 import { ServerBackup } from '../../../api/types.js';
 import { Loader, Table, TextList } from '../../../components/index.js';
-import date from '../../../date.js';
+import { Date } from '../../../date.js';
 
 /**
  * The output component rendered when
@@ -55,9 +55,7 @@ const ServerBackupsOutput: FunctionComponent = (): ReactElement => {
             <TextList
               title="Backup Info"
               data={{
-                nextBackup: date
-                  .utc(nextBackup)
-                  .format('DD MMM YYYY [at] HH:mm'),
+                nextScheduled: nextBackup,
               }}
             />
           </Box>

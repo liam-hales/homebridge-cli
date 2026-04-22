@@ -1,7 +1,7 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
 import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData } from './types.js';
 import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
-import date from '../date.js';
+import date, { type Date } from '../date.js';
 
 /**
  * The client used to interact with the Homebridge API and provide a one-to-one mapping
@@ -157,9 +157,7 @@ class ApiClient {
       endpoint: '/backup/scheduled-backups/next',
     });
 
-    return date
-      .utc(next)
-      .toDate();
+    return date.utc(next);
   }
 
   /**
