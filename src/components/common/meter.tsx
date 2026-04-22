@@ -23,7 +23,7 @@ const Meter: FunctionComponent<Props> = ({ value, min, max }): ReactElement<Prop
   const [width, setWidth] = useState<number>(0);
 
   /**
-   * Used to set measure the outer `Box` component and
+   * Used to measure the outer `Box` component and
    * set the width state when the component loads
    */
   useEffect(() => {
