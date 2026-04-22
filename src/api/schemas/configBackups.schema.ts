@@ -15,15 +15,7 @@ const configBackupsSchema = z
     return {
       id: data.id,
       fileName: data.file,
-      date: date
-        .utc(data.timestamp)
-        .format('DD MMM YYYY'),
-      time: date
-        .utc(data.timestamp)
-        .format('HH:mm'),
-      relative: date
-        .utc(data.timestamp)
-        .fromNow(),
+      datetime: date.utc(data.timestamp),
     };
   });
 

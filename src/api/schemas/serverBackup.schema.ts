@@ -17,15 +17,7 @@ const serverBackupSchema = z
       id: data.id,
       instanceId: data.instanceId,
       fileName: data.fileName,
-      date: date
-        .utc(data.timestamp)
-        .format('DD MMM YYYY'),
-      time: date
-        .utc(data.timestamp)
-        .format('HH:mm'),
-      relative: date
-        .utc(data.timestamp)
-        .fromNow(),
+      datetime: date.utc(data.timestamp),
     };
   });
 
