@@ -54,8 +54,13 @@ const ServerBackupsOutput: FunctionComponent = (): ReactElement => {
             <Table<ServerBackup> items={data} />
             <TextList
               title="Backup Info"
+              keyWidth={22}
               data={{
                 nextScheduled: nextBackup,
+                interval: nextBackup
+                  .local()
+                  .format('[daily at] HH:mm'),
+                keptFor: '7 days',
               }}
             />
           </Box>
