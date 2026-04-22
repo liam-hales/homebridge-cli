@@ -36,7 +36,7 @@ const ErrorBlock: FunctionComponent<Props> = ({ input, message }): ReactElement<
           color={colours.red}
           bold={true}
         >
-          {`└─ × error - ${message}`}
+          {`└─ × error — ${message}`}
         </Text>
       </Box>
     </Box>
