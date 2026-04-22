@@ -2,14 +2,15 @@ import { ReactElement } from 'react';
 import { colours } from '../../constants.js';
 import { Text } from 'ink';
 import { Table as InkTable } from '@alcalzone/ink-table';
-import { PrimitiveObject } from '../../types.js';
+import { TableItem } from '../types.js';
+import { isDate } from '../../date.js';
 
 /**
  * The `Table` component props
  *
  * - Generic type `T` for the item
  */
-interface Props<T extends PrimitiveObject<T>> {
+interface Props<T extends TableItem> {
   readonly items: T[];
 }
 
@@ -22,7 +23,7 @@ interface Props<T extends PrimitiveObject<T>> {
  * @param props The component props
  * @returns The `Table` component
  */
-const Table = <T extends PrimitiveObject<T>>({ items }: Props<T>): ReactElement<Props<T>> => {
+const Table = <T extends TableItem>({ items }: Props<T>): ReactElement<Props<T>> => {
   const data = items.map((item) => {
     return Object
       .entries(item)
@@ -42,6 +43,17 @@ const Table = <T extends PrimitiveObject<T>>({ items }: Props<T>): ReactElement<
           return {
             ...map,
             [formattedKey]: (value === true) ? '✔ yes' : '× no',
+          };
+        }
+
+        // If the value is a date then convert it
+        // into a more readable format in local time
+        if (isDate(value) === true) {
+          return {
+            ...map,
+            [formattedKey]: value
+              .local()
+              .format('DD MMM YYYY, HH:mm'),
           };
         }
 

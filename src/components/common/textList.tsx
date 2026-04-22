@@ -1,14 +1,15 @@
 import { ReactElement } from 'react';
 import { colours } from '../../constants.js';
 import { Box, Text } from 'ink';
-import { PrimitiveObject } from '../../types.js';
+import { TextListData } from '../types.js';
+import { isDate } from '../../date.js';
 
 /**
  * The `TextList` component props
  *
  * - Generic type `T` for the data
  */
-interface Props<T extends PrimitiveObject<T>> {
+interface Props<T extends TextListData> {
   readonly data: T;
   readonly title?: string;
   readonly keyWidth?: number;
@@ -26,7 +27,7 @@ interface Props<T extends PrimitiveObject<T>> {
  * @param props The component props
  * @returns The `TextList` component
  */
-const TextList = <T extends PrimitiveObject<T>>({ data, title, keyWidth = 20, transform = {} }: Props<T>): ReactElement<Props<T>> => {
+const TextList = <T extends TextListData>({ data, title, keyWidth = 20, transform = {} }: Props<T>): ReactElement<Props<T>> => {
   // Map the data entries into an array
   // of list items to render
   const items = Object
@@ -50,12 +51,23 @@ const TextList = <T extends PrimitiveObject<T>>({ data, title, keyWidth = 20, tr
         };
       }
 
+      // If the value is a date then convert it
+      // into a more readable format in local time
+      if (isDate(value) === true) {
+        return {
+          name: name,
+          value: value
+            .local()
+            .format('DD MMM YYYY, HH:mm'),
+        };
+      }
+
       // Check if there is a value transformer for
       // the key and if so use it to transform the value
       const transformer = transform[key];
       return {
         name: name,
-        value: (transformer != null) ? transformer(value) : value,
+        value: (transformer != null) ? transformer(value) : value.toString(),
       };
     });
 
@@ -86,8 +98,8 @@ const TextList = <T extends PrimitiveObject<T>>({ data, title, keyWidth = 20, tr
               <Box
                 key={
                   (title != null)
-                    ? `list-${title}-item-${index}`
-                    : `list-item-${index}`
+                    ? `text-list-${title}-item-${index}`
+                    : `text-list-item-${index}`
                 }
                 flexDirection="row"
               >
