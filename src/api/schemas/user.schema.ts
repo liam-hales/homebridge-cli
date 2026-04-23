@@ -16,7 +16,7 @@ const userSchema = z
       id: data.id,
       name: data.name,
       username: data.username,
-      isAdmin: data.admin,
+      admin: data.admin,
     };
   });
 

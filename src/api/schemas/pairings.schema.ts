@@ -25,8 +25,8 @@ const pairingsSchema = z
       username: data._username,
       category: data._category,
       setupCode: data.pincode,
-      isMain: data._main,
-      isPaired: data._isPaired,
+      primary: data._main,
+      paired: data._isPaired,
     };
   });
 

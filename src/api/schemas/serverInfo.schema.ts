@@ -34,6 +34,7 @@ const serverInfoSchema = z
     }),
   })
   .transform((data) => {
+    const { os, network } = data;
     return {
       system: {
         serviceUser: data.serviceUser,
@@ -45,23 +46,23 @@ const serverInfoSchema = z
         docker: data.homebridgeRunningInDocker,
       },
       os: {
-        platform: data.os.platform,
-        distribution: data.os.distro,
-        kernel: data.os.kernel,
-        architecture: data.os.arch,
-        hostname: data.os.hostname,
+        platform: os.platform,
+        distribution: os.distro,
+        kernel: os.kernel,
+        architecture: os.arch,
+        hostname: os.hostname,
       },
       network: {
-        interface: data.network.iface,
-        ipv4Address: data.network.ip4,
-        ipv4Subnet: data.network.ip4subnet,
-        ipv6Address: data.network.ip6,
-        ipv6Subnet: data.network.ip6subnet,
-        macAddress: data.network.mac,
-        connection: data.network.type,
-        duplex: data.network.duplex,
-        speed: data.network.speed,
-        dnsSuffix: data.network.dnsSuffix,
+        interface: network.iface,
+        ipv4Address: network.ip4,
+        ipv4Subnet: network.ip4subnet,
+        ipv6Address: network.ip6,
+        ipv6Subnet: network.ip6subnet,
+        macAddress: network.mac,
+        connection: network.type,
+        duplex: network.duplex,
+        speed: network.speed,
+        dnsSuffix: network.dnsSuffix,
       },
     };
   });

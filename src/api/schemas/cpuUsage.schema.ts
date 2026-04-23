@@ -14,7 +14,6 @@ const cpuUsageSchema = z
   })
   .transform((data) => {
     const { currentLoad, cpuTemperature } = data;
-
     return {
       currentLoad: Math.round(currentLoad * 10) / 10,
       currentTemp: Math.round(cpuTemperature.main * 10) / 10,
