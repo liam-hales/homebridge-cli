@@ -8,6 +8,7 @@ import { pairingsCommand } from './pairings/index.js';
 import { usersCommand } from './users/index.js';
 import { configCommand } from './config/index.js';
 import { configBackupsCommand } from './config/backups/index.js';
+import { installedPluginsCommand } from './plugins/installed/index.js';
 import { CommandMap } from './types.js';
 
 /**
@@ -25,6 +26,7 @@ export const commands = [
   usersCommand,
   configCommand,
   configBackupsCommand,
+  installedPluginsCommand,
 ];
 
 /**

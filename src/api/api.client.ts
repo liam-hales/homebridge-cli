@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema } from './schemas/index.js';
 import date, { type Date } from '../date.js';
 
 /**
@@ -256,6 +256,23 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return memoryUsageSchema.parse(data);
+  }
+
+  /**
+   * Used to call the `GET /api/plugins` endpoint
+   * and obtain the installed plugins data
+   *
+   * @returns The installed plugins data
+   */
+  public async getInstalledPlugins(): Promise<InstalledPlugin[]> {
+    const data = await this._request<unknown[]>({
+      method: 'get',
+      endpoint: '/plugins',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return data.map((item) => installedPluginsSchema.parse(item));
   }
 
   /**

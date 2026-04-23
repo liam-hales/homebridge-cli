@@ -1,4 +1,4 @@
-import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema } from './schemas/index.js';
+import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema } from './schemas/index.js';
 import { z } from 'zod';
 
 /**
@@ -76,6 +76,12 @@ export type CpuUsage = z.infer<typeof cpuUsageSchema>;
  * by the `memoryUsageSchema`
  */
 export type MemoryUsage = z.infer<typeof memoryUsageSchema>;
+
+/**
+ * Describes the installed plugin inferred
+ * by the `installedPluginsSchema`
+ */
+export type InstalledPlugin = z.infer<typeof installedPluginsSchema>;
 
 /**
  * Describes the config data returned

@@ -7,6 +7,7 @@ import pairingsSchema from './pairings.schema.js';
 import configBackupsSchema from './configBackups.schema.js';
 import cpuUsageSchema from './cpuUsage.schema.js';
 import memoryUsageSchema from './memoryUsage.schema.js';
+import installedPluginsSchema from './installedPlugins.schema.js';
 
 export {
   userSchema,
@@ -18,4 +19,5 @@ export {
   configBackupsSchema,
   cpuUsageSchema,
   memoryUsageSchema,
+  installedPluginsSchema,
 };
