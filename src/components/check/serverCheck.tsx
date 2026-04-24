@@ -2,6 +2,7 @@ import { FunctionComponent, ReactElement } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../../constants.js';
 import { Config, ServerStatus } from '../../types.js';
+import { Loader } from '../index.js';
 
 /**
  * The `ServerCheck` component props
@@ -25,25 +26,37 @@ const ServerCheck: FunctionComponent<Props> = ({ status, config }): ReactElement
       rowGap={1}
     >
       {
-        (status === 'up')
-          ? (
-              <Text
-                color={colours.white}
-                backgroundColor={colours.purple}
-                underline={true}
-              >
-                {' ✔ Homebridge Server '}
-              </Text>
-            )
-          : (
-              <Text
-                color={colours.white}
-                backgroundColor={colours.red}
-                underline={true}
-              >
-                {' × Homebridge Server '}
-              </Text>
-            )
+        (status === 'up') && (
+          <Text
+            color={colours.white}
+            backgroundColor={colours.purple}
+            underline={true}
+          >
+            {' ✔ Homebridge Server '}
+          </Text>
+        )
+      }
+      {
+        (status === 'restarting') && (
+          <Text
+            color={colours.white}
+            backgroundColor={colours.orange}
+            underline={true}
+          >
+            {' Homebridge Server '}
+          </Text>
+        )
+      }
+      {
+        (status === 'down') && (
+          <Text
+            color={colours.white}
+            backgroundColor={colours.red}
+            underline={true}
+          >
+            {' × Homebridge Server '}
+          </Text>
+        )
       }
       <Box
         flexDirection="column"
@@ -63,11 +76,18 @@ const ServerCheck: FunctionComponent<Props> = ({ status, config }): ReactElement
           )
         }
         {
+          (status === 'restarting') && (
+            <Loader>
+              Server restarting...
+            </Loader>
+          )
+        }
+        {
           (status === 'down') && (
             <Text color={colours.lightGrey}>
               └─ Failed to reach server at
               <Text
-                color={colours.purple}
+                color={colours.red}
                 bold={true}
               >
                 {` ${config.host}:${config.port}`}
