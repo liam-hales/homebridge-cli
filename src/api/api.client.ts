@@ -1,6 +1,7 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
 import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin } from './types.js';
 import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema } from './schemas/index.js';
+import { z } from 'zod';
 import date, { type Date } from '../date.js';
 
 /**
@@ -71,7 +72,7 @@ class ApiClient {
     const { username, password } = credentials;
 
     try {
-      const data = await this._request<unknown, Credentials>({
+      const data = await this._request<z.input<typeof loginSchema>, Credentials>({
         method: 'post',
         endpoint: '/auth/login',
         body: {
@@ -101,7 +102,7 @@ class ApiClient {
    * @returns The user data
    */
   public async getUsers(): Promise<User[]> {
-    const data = await this._request<unknown[]>({
+    const data = await this._request<z.input<typeof userSchema>[]>({
       method: 'get',
       endpoint: '/users',
     });
@@ -118,7 +119,7 @@ class ApiClient {
    * @returns The server info data
    */
   public async getServerInfo(): Promise<ServerInfo> {
-    const data = await this._request<unknown>({
+    const data = await this._request<z.input<typeof serverInfoSchema>>({
       method: 'get',
       endpoint: '/status/server-information',
     });
@@ -135,7 +136,7 @@ class ApiClient {
    * @returns The server backups data
    */
   public async getServerBackups(): Promise<ServerBackup[]> {
-    const data = await this._request<unknown[]>({
+    const data = await this._request<z.input<typeof serverBackupSchema>[]>({
       method: 'get',
       endpoint: '/backup/scheduled-backups',
     });
@@ -167,7 +168,7 @@ class ApiClient {
    * @returns The Node.js info data
    */
   public async getNodejsInfo(): Promise<NodejsInfo> {
-    const data = await this._request<unknown>({
+    const data = await this._request<z.input<typeof nodejsInfoSchema>>({
       method: 'get',
       endpoint: '/status/nodejs',
     });
@@ -184,7 +185,7 @@ class ApiClient {
    * @returns The pairings data
    */
   public async getPairings(): Promise<Pairing[]> {
-    const data = await this._request<unknown[]>({
+    const data = await this._request<z.input<typeof pairingsSchema>[]>({
       method: 'get',
       endpoint: '/server/pairings',
     });
@@ -214,7 +215,7 @@ class ApiClient {
    * @returns The config backups data
    */
   public async getConfigBackups(): Promise<ConfigBackup[]> {
-    const data = await this._request<unknown[]>({
+    const data = await this._request<z.input<typeof configBackupsSchema>[]>({
       method: 'get',
       endpoint: '/config-editor/backups',
     });
@@ -231,7 +232,7 @@ class ApiClient {
    * @returns The CPU usage data
    */
   public async getCpuUsage(): Promise<CpuUsage> {
-    const data = await this._request<unknown>({
+    const data = await this._request<z.input<typeof cpuUsageSchema>>({
       method: 'get',
       endpoint: '/status/cpu',
     });
@@ -248,7 +249,7 @@ class ApiClient {
    * @returns The memory usage data
    */
   public async getMemoryUsage(): Promise<MemoryUsage> {
-    const data = await this._request<unknown>({
+    const data = await this._request<z.input<typeof memoryUsageSchema>>({
       method: 'get',
       endpoint: '/status/ram',
     });
@@ -265,7 +266,7 @@ class ApiClient {
    * @returns The installed plugins data
    */
   public async getInstalledPlugins(): Promise<InstalledPlugin[]> {
-    const data = await this._request<unknown[]>({
+    const data = await this._request<z.input<typeof installedPluginsSchema>[]>({
       method: 'get',
       endpoint: '/plugins',
     });
@@ -280,7 +281,7 @@ class ApiClient {
    * `PUT /platform-tools/docker/restart-container` endpoint
    */
   public async restartDockerContainer(): Promise<void> {
-    await this._request<unknown[]>({
+    await this._request({
       method: 'put',
       endpoint: '/platform-tools/docker/restart-container',
     });
@@ -291,7 +292,7 @@ class ApiClient {
    * `PUT /platform-tools/docker/restart-container` endpoint
    */
   public async restartLinuxHost(): Promise<void> {
-    await this._request<unknown[]>({
+    await this._request({
       method: 'put',
       endpoint: '/platform-tools/linux/restart-host',
     });
@@ -307,7 +308,7 @@ class ApiClient {
    * @param options The request options
    * @returns The response
    */
-  private async _request<T, B extends object = never>(options: RequestOptions<B>): Promise<T> {
+  private async _request<T extends object, B extends object = never>(options: RequestOptions<B>): Promise<T> {
     const { method, endpoint } = options;
 
     // Make the request to the API using
