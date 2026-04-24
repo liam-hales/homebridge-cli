@@ -28,7 +28,9 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
    * based on the current input value
    */
   const filteredCommands = useMemo(() => {
-    return commands.filter(({ invoke }) => invoke.includes(value));
+    return commands
+      .filter(({ invoke }) => invoke.includes(value))
+      .sort((a, b) => a.invoke.localeCompare(b.invoke));
   }, [value]);
 
   /**
@@ -143,7 +145,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
               >
                 <Box
                   flexDirection="column"
-                  width={20}
+                  width={24}
                 >
                   {
                     // Map the commands into text components
