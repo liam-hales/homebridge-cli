@@ -10,7 +10,7 @@ export type AppMode = 'starting' | 'checking' | 'idle' | 'running';
  * Describes the different
  * server statuses
  */
-export type ServerStatus = 'up' | 'down';
+export type ServerStatus = 'up' | 'restarting' | 'down';
 
 /**
  * Describes the different

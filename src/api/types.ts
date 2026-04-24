@@ -6,7 +6,7 @@ import { z } from 'zod';
  *
  * - Generic type `T` for the request body
  */
-export type RequestOptions<T extends object = never> = GetRequestOptions | PostRequestOptions<T>;
+export type RequestOptions<T extends object = never> = GetRequestOptions | PutRequestOptions | PostRequestOptions<T>;
 
 /**
  * Describes the API request options
@@ -14,6 +14,15 @@ export type RequestOptions<T extends object = never> = GetRequestOptions | PostR
  */
 export interface GetRequestOptions {
   readonly method: 'get';
+  readonly endpoint: string;
+}
+
+/**
+ * Describes the API request options
+ * for a `PUT` request
+ */
+export interface PutRequestOptions {
+  readonly method: 'put';
   readonly endpoint: string;
 }
 

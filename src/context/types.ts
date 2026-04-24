@@ -70,4 +70,10 @@ export interface AppActions {
    * @param input The input
    */
   readonly executeInput: (input: string) => void;
+
+  /**
+   * Used to restart the server and set the correct
+   * state to wait until the server comes back up
+   */
+  readonly restartServer: () => Promise<void>;
 }

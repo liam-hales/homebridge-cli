@@ -276,6 +276,28 @@ class ApiClient {
   }
 
   /**
+   * Used to call the `PUT /platform-tools/docker/restart-container` endpoint
+   * and restart the Docker container
+   */
+  public async restartDockerContainer(): Promise<void> {
+    await this._request<unknown[]>({
+      method: 'put',
+      endpoint: '/platform-tools/docker/restart-container',
+    });
+  }
+
+  /**
+   * Used to call the `PUT /platform-tools/docker/restart-container` endpoint
+   * and restart the linux host
+   */
+  public async restartLinuxHost(): Promise<void> {
+    await this._request<unknown[]>({
+      method: 'put',
+      endpoint: '/platform-tools/linux/restart-host',
+    });
+  }
+
+  /**
    * Used to make a request to the API and return
    * the response and handle any errors
    *
@@ -294,6 +316,9 @@ class ApiClient {
       method: method,
       ...(method === 'post') && {
         body: JSON.stringify(options.body),
+      },
+      ...(method === 'put') && {
+        body: '{}',
       },
       headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention

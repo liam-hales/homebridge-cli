@@ -62,11 +62,22 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   useEffect(() => void _onStart(), []);
 
   /**
-   * Used to call the `_init` function
+   * Used to call the `_performChecks` function
    * when the config or credentials change
    */
   // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/immutability
-  useEffect(() => void _init(), [config, credentials]);
+  useEffect(() => void _performChecks(), [config, credentials]);
+
+  /**
+   * Used to call the `_performChecks` function when
+   * the server status changes to `restarting`
+   */
+  useEffect(() => {
+    if (serverStatus === 'restarting') {
+      void _performChecks();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverStatus]);
 
   /**
    * Used to monitor the user input and take
@@ -116,10 +127,10 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   };
 
   /**
-   * Used to perform the necessary server/API
-   * checks and initialise the app state
+   * Used to perform the necessary
+   * server, API and login checks
    */
-  const _init = async (): Promise<void> => {
+  const _performChecks = async (): Promise<void> => {
     // If the app is still starting then return
     // early to avoid checking too early
     if (mode === 'starting') {
@@ -128,21 +139,30 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
 
     // Reset the status state before
     // running the below checks
-    setServerStatus(undefined);
     setApiStatus(undefined);
     setLoginStatus(undefined);
+
+    // Only reset the server status state
+    // if the server is not restarting
+    if (serverStatus !== 'restarting') {
+      setServerStatus(undefined);
+    }
 
     try {
       if (config == null) {
         return;
       }
 
+      // Define the number of server connection attempts based on
+      // the current server status to wait longer when restarting
+      const attempts = (serverStatus === 'restarting') ? 100 : 1;
+
       // Get the server status
       // and set it to state
-      const serverStatus = await _getServerStatus(config.host, config.port);
-      setServerStatus(serverStatus);
+      const status = await _getServerStatus(config.host, config.port, attempts);
+      setServerStatus(status);
 
-      if (serverStatus === 'down') {
+      if (status === 'down') {
         return;
       }
 
@@ -151,7 +171,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       const apiStatus = await apiClient?.getStatus();
       setApiStatus(apiStatus);
 
-      if (credentials == null) {
+      if (apiStatus === 'down' || credentials == null) {
         return;
       }
 
@@ -173,20 +193,19 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
    *
    * @param host The server host
    * @param port The server port
+   * @param attempts The number of times to try and connect to the server
    *
    * @returns The server status
    */
-  const _getServerStatus = async (host: string, port: number): Promise<ServerStatus> => {
+  const _getServerStatus = async (host: string, port: number, attempts = 1): Promise<'up' | 'down'> => {
     const { errors } = await ping({
       address: host,
       port: port,
-      attempts: 1,
-      timeout: 1000,
+      attempts: attempts,
+      timeout: 3000,
     });
 
-    // If there are no errors then
-    // the host is reachable
-    if (errors.length === 0) {
+    if (errors.length < attempts) {
       return 'up';
     }
 
@@ -306,6 +325,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       return;
     }
 
+    // Remove the credentials from keytar
+    // and clear auth from the API client
     await keytar.deletePassword('homebridge-cli', credentials.username);
     await apiClient?.clearAuth();
 
@@ -391,6 +412,35 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     }
   };
 
+  /**
+   * Used to restart the server based on
+   * the server system runtime
+   *
+   * - `docker` - Will restart the Docker container
+   * - `linux` - Will restart the Linux host
+   */
+  const _restartServer = async (): Promise<void> => {
+    if (apiClient == null) {
+      return;
+    }
+
+    // Fetch the server info to check the runtime which
+    // will determine how the server is restarted
+    const { system } = await apiClient.getServerInfo();
+    const { runtime } = system;
+
+    if (runtime === 'docker') {
+      await apiClient.restartDockerContainer();
+    }
+
+    if (runtime === 'linux') {
+      await apiClient.restartLinuxHost();
+    }
+
+    setServerStatus('restarting');
+    setMode('checking');
+  };
+
   return (
     <AppContext.Provider value={
       {
@@ -412,6 +462,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         setCredentials: _setCredentials,
         removeCredentials: _removeCredentials,
         executeInput: _executeInput,
+        restartServer: _restartServer,
       }
     }
     >
