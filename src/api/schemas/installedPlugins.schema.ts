@@ -23,7 +23,7 @@ const installedPluginsSchema = z
       author: data.author,
       installed: data.installedVersion,
       latest: data.latestVersion,
-      update: data.updateAvailable,
+      updateAvailable: data.updateAvailable,
       verified: data.verifiedPlugin,
       verifiedPlus: data.verifiedPlusPlugin,
     };

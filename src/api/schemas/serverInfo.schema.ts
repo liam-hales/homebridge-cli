@@ -43,7 +43,7 @@ const serverInfoSchema = z
         pluginPath: data.homebridgePluginPath,
         customPluginPath: data.homebridgeCustomPluginPath,
         insecureMode: data.homebridgeInsecureMode,
-        docker: data.homebridgeRunningInDocker,
+        runtime: (data.homebridgeRunningInDocker === true) ? 'docker' : 'linux',
       },
       os: {
         platform: os.platform,
@@ -64,7 +64,7 @@ const serverInfoSchema = z
         speed: network.speed,
         dnsSuffix: network.dnsSuffix,
       },
-    };
+    } as const;
   });
 
 export default serverInfoSchema;
