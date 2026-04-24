@@ -78,7 +78,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
       onChange('');
     }
 
-    if (key.tab === true && listIndex >= 0) {
+    if (key.tab === true && value.startsWith('/') === true) {
       const { invoke } = filteredCommands[listIndex];
 
       // Call `onChange` with the
