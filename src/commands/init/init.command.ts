@@ -10,7 +10,7 @@ const initCommand = {
   description: 'Used to configure the CLI and connect to a Homebridge server',
   output: {
     component: InitOutput,
-    exitText: 'Setup complete, config set',
+    exitText: 'Setup complete — config set',
   },
 } as const;
 
