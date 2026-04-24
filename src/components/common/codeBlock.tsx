@@ -25,7 +25,7 @@ const CodeBlock: FunctionComponent<Props> = ({ language, children }): ReactEleme
     attr: chalk.hex(colours.pink),
     string: chalk.hex(colours.green),
     number: chalk.hex(colours.coral),
-    literal: chalk.hex(colours.orange),
+    literal: chalk.hex(colours.peach),
   };
 
   // Highlight the children code string using
