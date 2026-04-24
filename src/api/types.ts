@@ -42,55 +42,55 @@ export interface PostRequestOptions<T extends object> {
  * Describes the user inferred
  * by the `userSchema`
  */
-export type User = z.infer<typeof userSchema>;
+export type User = z.output<typeof userSchema>;
 
 /**
  * Describes the server info inferred
  * by the `serverInfoSchema`
  */
-export type ServerInfo = z.infer<typeof serverInfoSchema>;
+export type ServerInfo = z.output<typeof serverInfoSchema>;
 
 /**
  * Describes the server backup inferred
  * by the `serverBackupSchema`
  */
-export type ServerBackup = z.infer<typeof serverBackupSchema>;
+export type ServerBackup = z.output<typeof serverBackupSchema>;
 
 /**
  * Describes the Node.js info inferred
  * by the `nodejsInfoSchema`
  */
-export type NodejsInfo = z.infer<typeof nodejsInfoSchema>;
+export type NodejsInfo = z.output<typeof nodejsInfoSchema>;
 
 /**
  * Describes the pairings inferred
  * by the `pairingsSchema`
  */
-export type Pairing = z.infer<typeof pairingsSchema>;
+export type Pairing = z.output<typeof pairingsSchema>;
 
 /**
  * Describes the config backup inferred
  * by the `configBackupsSchema`
  */
-export type ConfigBackup = z.infer<typeof configBackupsSchema>;
+export type ConfigBackup = z.output<typeof configBackupsSchema>;
 
 /**
  * Describes the CPU usage inferred
  * by the `cpuUsageSchema`
  */
-export type CpuUsage = z.infer<typeof cpuUsageSchema>;
+export type CpuUsage = z.output<typeof cpuUsageSchema>;
 
 /**
  * Describes the memory usage inferred
  * by the `memoryUsageSchema`
  */
-export type MemoryUsage = z.infer<typeof memoryUsageSchema>;
+export type MemoryUsage = z.output<typeof memoryUsageSchema>;
 
 /**
  * Describes the installed plugin inferred
  * by the `installedPluginsSchema`
  */
-export type InstalledPlugin = z.infer<typeof installedPluginsSchema>;
+export type InstalledPlugin = z.output<typeof installedPluginsSchema>;
 
 /**
  * Describes the config data returned
