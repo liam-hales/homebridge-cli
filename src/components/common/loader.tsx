@@ -23,7 +23,7 @@ const Loader: FunctionComponent<Props> = ({ children }): ReactElement<Props> => 
       flexDirection="row"
       columnGap={1}
     >
-      <Spinner type="dots" />
+      <Spinner type="line" />
       <Text color={colours.lightGrey}>
         {children}
       </Text>
