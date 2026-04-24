@@ -61,8 +61,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `POST /api/login` endpoint
-   * and obtain an auth access token
+   * Used to obtain an auth access token from
+   * the `POST /api/login` endpoint
    *
    * @param credentials The user credentials to use
    * @returns The login status
@@ -95,8 +95,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/users` endpoint
-   * and obtain the user data
+   * Used to obtain the users data from
+   * the `GET /api/users` endpoint
    *
    * @returns The user data
    */
@@ -112,8 +112,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /status/server-information` endpoint
-   * and obtain the server info data
+   * Used to obtain the server info data from
+   * the `GET /status/server-information` endpoint
    *
    * @returns The server info data
    */
@@ -129,8 +129,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/backup/scheduled-backups` endpoint
-   * and obtain the server backups data
+   * Used to obtain the server backups data from
+   * the `GET /api/backup/scheduled-backups` endpoint
    *
    * @returns The server backups data
    */
@@ -146,8 +146,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/backup/scheduled-backups/next` endpoint
-   * and obtain the next scheduled backup date
+   * Used to obtain the next scheduled backup date from
+   * the `GET /api/backup/scheduled-backups/next` endpoint
    *
    * @returns The next scheduled backup date
    */
@@ -161,8 +161,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /status/nodejs` endpoint
-   * and obtain the Node.js info data
+   * Used to obtain the Node.js info data from
+   * the `GET /status/nodejs` endpoint
    *
    * @returns The Node.js info data
    */
@@ -178,8 +178,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/server/pairings` endpoint
-   * and obtain the pairings data
+   * Used to obtain the pairings data from
+   * the `GET /api/server/pairings` endpoint
    *
    * @returns The pairings data
    */
@@ -195,10 +195,10 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/config-editor` endpoint
-   * and obtain the Homebridge config
+   * Used to obtain the config from
+   * the `GET /api/config-editor` endpoint
    *
-   * @returns The Homebridge config
+   * @returns The config
    */
   public async getConfig(): Promise<ConfigData> {
     return this._request<ConfigData>({
@@ -208,8 +208,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/config-editor/backups` endpoint
-   * and obtain the config backups data
+   * Used to obtain the config backups data from
+   * the `GET /api/config-editor/backups` endpoint
    *
    * @returns The config backups data
    */
@@ -225,8 +225,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/status/cpu` endpoint
-   * and obtain the CPU usage data
+   * Used to obtain the CPU usage data from
+   * the `GET /api/status/cpu` endpoint
    *
    * @returns The CPU usage data
    */
@@ -242,8 +242,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/status/ram` endpoint
-   * and obtain the memory usage data
+   * Used to obtain the memory usage data from
+   * the `GET /api/status/ram` endpoint
    *
    * @returns The memory usage data
    */
@@ -259,8 +259,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `GET /api/plugins` endpoint
-   * and obtain the installed plugins data
+   * Used to obtain the installed plugins data
+   * from the `GET /api/plugins` endpoint
    *
    * @returns The installed plugins data
    */
@@ -276,8 +276,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `PUT /platform-tools/docker/restart-container` endpoint
-   * and restart the Docker container
+   * Used to restart the Docker container using the
+   * `PUT /platform-tools/docker/restart-container` endpoint
    */
   public async restartDockerContainer(): Promise<void> {
     await this._request<unknown[]>({
@@ -287,8 +287,8 @@ class ApiClient {
   }
 
   /**
-   * Used to call the `PUT /platform-tools/docker/restart-container` endpoint
-   * and restart the linux host
+   * Used to restart the linux host using the
+   * `PUT /platform-tools/docker/restart-container` endpoint
    */
   public async restartLinuxHost(): Promise<void> {
     await this._request<unknown[]>({
