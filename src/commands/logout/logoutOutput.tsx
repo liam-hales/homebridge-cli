@@ -14,10 +14,9 @@ const LogoutOutput: FunctionComponent = (): ReactElement => {
 
   /**
    * Used to call the `removeCredentials`
-   * function when the component loads
+   * function when the component mounts
    */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => void removeCredentials(), []);
+  useEffect(() => void removeCredentials(), [removeCredentials]);
 
   return (
     <Box

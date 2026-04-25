@@ -56,7 +56,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
 
   /**
    * Used to call the `_onStart` function
-   * when the app starts
+   * on mount when the app starts
    */
   // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/immutability
   useEffect(() => void _onStart(), []);

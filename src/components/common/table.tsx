@@ -33,7 +33,7 @@ const Table = <T extends TableItem>({ items, pageSize = 10 }: Props<T>): ReactEl
 
   /**
    * Used to measure the `InkTable` component and
-   * set the width state when the component loads
+   * set the width state when the component mounts
    */
   useEffect(() => {
     if (ref.current != null) {

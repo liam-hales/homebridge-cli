@@ -14,7 +14,7 @@ const ServerRestartOutput: FunctionComponent = (): ReactElement => {
 
   /**
    * Used to call the `restartServer`
-   * function when the component loads
+   * function when the component mounts
    */
   useEffect(() => void restartServer(), [restartServer]);
 
