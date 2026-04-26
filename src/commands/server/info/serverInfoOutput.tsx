@@ -1,8 +1,7 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 import { Box } from 'ink';
-import { useApiClient } from '../../../hooks/index.js';
-import { NodejsInfo, ServerInfo } from '../../../api/types.js';
-import { TextList, Loader } from '../../../components/index.js';
+import { useApiClient, useQuery } from '../../../hooks/index.js';
+import { TextList, Loader, Error } from '../../../components/index.js';
 
 /**
  * The output component rendered when
@@ -12,61 +11,61 @@ import { TextList, Loader } from '../../../components/index.js';
  */
 const ServerInfoOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
-
-  const [serverInfo, setServerInfo] = useState<ServerInfo | undefined>();
-  const [nodejsInfo, setNodejsInfo] = useState<NodejsInfo | undefined>();
-
-  /**
-   * Used to fetch the data when
-   * the component mounts
-   */
-  useEffect(() => {
-    void (async (): Promise<void> => {
-      // Fetch the server and Node.js info data
-      // and set it to state once fetched
-      setServerInfo(await client.getServerInfo());
-      setNodejsInfo(await client.getNodejsInfo());
-    })();
-  }, [client, setServerInfo, setNodejsInfo]);
+  const { isLoading, data, error } = useQuery(async () => {
+    // Fetch all data in parallel as each
+    // request is not dependent on the other
+    return await Promise.all([
+      client.getServerInfo(),
+      client.getNodejsInfo(),
+    ]);
+  });
 
   return (
     <>
       {
-        (serverInfo == null || nodejsInfo == null) && (
+        (isLoading === true) && (
           <Loader>
             Fetching server info
           </Loader>
         )
       }
       {
-        (serverInfo != null && nodejsInfo != null) && (
-          <Box
-            flexDirection="column"
-            rowGap={1}
-            marginY={1}
-          >
-            <TextList
-              data={serverInfo.system}
-              title="System"
-              keyWidth={26}
-            />
-            <TextList
-              data={serverInfo.os}
-              title="Operating System"
-              keyWidth={26}
-            />
-            <TextList
-              data={serverInfo.network}
-              title="Network"
-              keyWidth={26}
-            />
-            <TextList
-              data={nodejsInfo}
-              title="Node.js"
-              keyWidth={26}
-            />
-          </Box>
+        (error != null) && (
+          <Error error={error} />
         )
+      }
+      {
+        (data != null) && (() => {
+          const [serverInfo, nodejsInfo] = data;
+          return (
+            <Box
+              flexDirection="column"
+              rowGap={1}
+              marginY={1}
+            >
+              <TextList
+                data={serverInfo.system}
+                title="System"
+                keyWidth={26}
+              />
+              <TextList
+                data={serverInfo.os}
+                title="Operating System"
+                keyWidth={26}
+              />
+              <TextList
+                data={serverInfo.network}
+                title="Network"
+                keyWidth={26}
+              />
+              <TextList
+                data={nodejsInfo}
+                title="Node.js"
+                keyWidth={26}
+              />
+            </Box>
+          );
+        })()
       }
     </>
   );

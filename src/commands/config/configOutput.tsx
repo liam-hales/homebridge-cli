@@ -1,8 +1,7 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 import { Box } from 'ink';
-import { useApiClient } from '../../hooks/index.js';
-import { ConfigData } from '../../api/types.js';
-import { CodeBlock, Loader } from '../../components/index.js';
+import { useApiClient, useQuery } from '../../hooks/index.js';
+import { CodeBlock, Error, Loader } from '../../components/index.js';
 
 /**
  * The output component rendered when
@@ -12,28 +11,20 @@ import { CodeBlock, Loader } from '../../components/index.js';
  */
 const ConfigOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
-  const [data, setData] = useState<ConfigData | undefined>();
-
-  /**
-   * Used to fetch the data when
-   * the component mounts
-   */
-  useEffect(() => {
-    void (async (): Promise<void> => {
-      // Fetch the config data and set
-      // it to state once fetched
-      const data = await client.getConfig();
-      setData(data);
-    })();
-  }, [client, setData]);
+  const { isLoading, data, error } = useQuery(() => client.getConfig());
 
   return (
     <>
       {
-        (data == null) && (
+        (isLoading === true) && (
           <Loader>
             Fetching config
           </Loader>
+        )
+      }
+      {
+        (error != null) && (
+          <Error error={error} />
         )
       }
       {

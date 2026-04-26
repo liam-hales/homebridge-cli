@@ -1,8 +1,8 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 import { Box } from 'ink';
-import { useApiClient } from '../../hooks/index.js';
+import { useApiClient, useQuery } from '../../hooks/index.js';
 import { Pairing } from '../../api/types.js';
-import { Loader, Table } from '../../components/index.js';
+import { Loader, Error, Table } from '../../components/index.js';
 
 /**
  * The output component rendered when
@@ -12,28 +12,20 @@ import { Loader, Table } from '../../components/index.js';
  */
 const PairingsOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
-  const [data, setData] = useState<Pairing[] | undefined>();
-
-  /**
-   * Used to fetch the data when
-   * the component mounts
-   */
-  useEffect(() => {
-    void (async (): Promise<void> => {
-      // Fetch the pairings data and set
-      // it to state once fetched
-      const data = await client.getPairings();
-      setData(data);
-    })();
-  }, [client, setData]);
+  const { isLoading, data, error } = useQuery(() => client.getPairings());
 
   return (
     <>
       {
-        (data == null) && (
+        (isLoading === true) && (
           <Loader>
             Fetching pairings
           </Loader>
+        )
+      }
+      {
+        (error != null) && (
+          <Error error={error} />
         )
       }
       {

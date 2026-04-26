@@ -1,8 +1,8 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
-import { useApiClient } from '../../../hooks/index.js';
-import { InstalledPlugin } from '../../../api/types.js';
-import { Loader, Table } from '../../../components/index.js';
+import { FunctionComponent, ReactElement } from 'react';
 import { Box } from 'ink';
+import { useApiClient, useQuery } from '../../../hooks/index.js';
+import { InstalledPlugin } from '../../../api/types.js';
+import { Loader, Error, Table } from '../../../components/index.js';
 
 /**
  * The output component rendered when
@@ -12,28 +12,20 @@ import { Box } from 'ink';
  */
 const InstalledPluginsOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
-  const [data, setData] = useState<InstalledPlugin[] | undefined>();
-
-  /**
-   * Used to fetch the data when
-   * the component mounts
-   */
-  useEffect(() => {
-    void (async (): Promise<void> => {
-      // Fetch the installed plugins data and set
-      // it to state once fetched
-      const data = await client.getInstalledPlugins();
-      setData(data);
-    })();
-  }, [client, setData]);
+  const { isLoading, data, error } = useQuery(() => client.getInstalledPlugins());
 
   return (
     <>
       {
-        (data == null) && (
+        (isLoading === true) && (
           <Loader>
             Fetching installed plugins
           </Loader>
+        )
+      }
+      {
+        (error != null) && (
+          <Error error={error} />
         )
       }
       {

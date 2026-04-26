@@ -1,7 +1,7 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
-import { useApiClient } from '../../hooks/index.js';
+import { FunctionComponent, ReactElement } from 'react';
+import { useApiClient, useQuery } from '../../hooks/index.js';
 import { User } from '../../api/types.js';
-import { Loader, Table } from '../../components/index.js';
+import { Loader, Error, Table } from '../../components/index.js';
 import { Box } from 'ink';
 
 /**
@@ -12,28 +12,20 @@ import { Box } from 'ink';
  */
 const UsersOutput: FunctionComponent = (): ReactElement => {
   const client = useApiClient();
-  const [data, setData] = useState<User[] | undefined>();
-
-  /**
-   * Used to fetch the data when
-   * the component mounts
-   */
-  useEffect(() => {
-    void (async (): Promise<void> => {
-      // Fetch the users data and set
-      // it to state once fetched
-      const data = await client.getUsers();
-      setData(data);
-    })();
-  }, [client, setData]);
+  const { isLoading, data, error } = useQuery(() => client.getUsers());
 
   return (
     <>
       {
-        (data == null) && (
+        (isLoading === true) && (
           <Loader>
             Fetching users
           </Loader>
+        )
+      }
+      {
+        (error != null) && (
+          <Error error={error} />
         )
       }
       {
