@@ -153,13 +153,11 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         return;
       }
 
-      // Define the number of server connection attempts based on
-      // the current server status to wait longer when restarting
-      const attempts = (serverStatus === 'restarting') ? 100 : 1;
+      const { host, port } = config;
 
-      // Get the server status
-      // and set it to state
-      const status = await _getServerStatus(config.host, config.port, attempts);
+      // Get the server status and set it to state
+      // Only try to ping once unless the server is restarting
+      const status = await _getServerStatus(host, port, (serverStatus !== 'restarting'));
       setServerStatus(status);
 
       if (status === 'down') {
@@ -188,27 +186,39 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   };
 
   /**
-   * Obtains the server status by
-   * performing a TCP ping
+   * Obtains the server status by performing a TCP ping
+   * using `@network-utils/tcp-ping` under the hood
    *
    * @param host The server host
    * @param port The server port
-   * @param attempts The number of times to try and connect to the server
+   * @param tryOnce Indicates if a server ping should be tried once
    *
    * @returns The server status
    */
-  const _getServerStatus = async (host: string, port: number, attempts = 1): Promise<'up' | 'down'> => {
-    const { errors } = await ping({
-      address: host,
-      port: port,
-      attempts: attempts,
-      timeout: 3000,
-    });
+  const _getServerStatus = async (host: string, port: number, tryOnce: boolean = false): Promise<'up' | 'down'> => {
+    const attempts = (tryOnce === true) ? 1 : 20;
 
-    if (errors.length < attempts) {
-      return 'up';
+    // Loop for the number
+    // of ping attempts
+    for (let index = 0; index < attempts; index++) {
+      const { errors } = await ping({
+        address: host,
+        port: port,
+        // Set to `2` for the first ping to handle ping
+        // running too early when server restarts
+        attempts: (index === 0) ? 2 : 1,
+        timeout: 2000,
+      });
+
+      // If there were no errors then
+      // the server must be up
+      if (errors.length === 0) {
+        return 'up';
+      }
     }
 
+    // If the loop completed then
+    // the server must be down
     return 'down';
   };
 
