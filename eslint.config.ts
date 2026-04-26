@@ -46,6 +46,7 @@ export default defineConfig(
         '@typescript-eslint/require-await': 'off',
         '@typescript-eslint/prefer-reduce-type-parameter': 'off',
         '@typescript-eslint/no-unnecessary-type-arguments': 'off',
+        '@typescript-eslint/no-inferrable-types': 'off',
         'react/display-name': 'off',
         'import-x/no-named-as-default-member': 'off',
 
