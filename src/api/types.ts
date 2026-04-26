@@ -1,4 +1,4 @@
-import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema } from './schemas/index.js';
+import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
 import { z } from 'zod';
 
 /**
@@ -91,6 +91,12 @@ export type MemoryUsage = z.output<typeof memoryUsageSchema>;
  * by the `installedPluginsSchema`
  */
 export type InstalledPlugin = z.output<typeof installedPluginsSchema>;
+
+/**
+ * Describes the child bridge inferred
+ * by the `childBridgesSchema`
+ */
+export type ChildBridge = z.output<typeof childBridgesSchema>;
 
 /**
  * Describes the config data returned

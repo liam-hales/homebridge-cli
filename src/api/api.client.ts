@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
 import { z } from 'zod';
 import date, { type Date } from '../date.js';
 
@@ -274,6 +274,23 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return data.map((item) => installedPluginsSchema.parse(item));
+  }
+
+  /**
+   * Used to obtain the child bridges data from
+   * the `GET /api/status/homebridge/child-bridges` endpoint
+   *
+   * @returns The child bridges data
+   */
+  public async getChildBridges(): Promise<ChildBridge[]> {
+    const data = await this._request<z.input<typeof childBridgesSchema>[]>({
+      method: 'get',
+      endpoint: '/status/homebridge/child-bridges',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return data.map((item) => childBridgesSchema.parse(item));
   }
 
   /**

@@ -8,6 +8,7 @@ import configBackupsSchema from './configBackups.schema.js';
 import cpuUsageSchema from './cpuUsage.schema.js';
 import memoryUsageSchema from './memoryUsage.schema.js';
 import installedPluginsSchema from './installedPlugins.schema.js';
+import childBridgesSchema from './childBridges.schema.js';
 
 export {
   userSchema,
@@ -20,4 +21,5 @@ export {
   cpuUsageSchema,
   memoryUsageSchema,
   installedPluginsSchema,
+  childBridgesSchema,
 };
