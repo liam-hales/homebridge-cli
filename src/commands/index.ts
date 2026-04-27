@@ -10,7 +10,7 @@ import { usersCommand } from './users/index.js';
 import { configCommand } from './config/index.js';
 import { configBackupsCommand } from './config/backups/index.js';
 import { installedPluginsCommand } from './plugins/installed/index.js';
-import { childBridgesCommand } from './child-bridges/index.js';
+import { childBridgesCommand } from './childBridges/index.js';
 import { CommandMap } from './types.js';
 
 /**
