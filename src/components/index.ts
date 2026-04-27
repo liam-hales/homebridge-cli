@@ -11,6 +11,7 @@ import Loader from './common/loader.js';
 import Error from './common/error.js';
 import Table from './common/table.js';
 import Meter from './common/meter.js';
+import Pagination from './common/pagination.js';
 import CodeBlock from './common/codeBlock.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
@@ -31,6 +32,7 @@ export {
   Error,
   Table,
   Meter,
+  Pagination,
   CommandInput,
   CommandBlock,
   ErrorBlock,
