@@ -13,8 +13,8 @@ const homebridgeInfoSchema = z
   })
   .transform((data) => {
     return {
-      current: data.installedVersion,
-      latest: data.latestVersion,
+      current: `v${data.installedVersion}`,
+      latest: `v${data.latestVersion}`,
       updateAvailable: data.updateAvailable,
       installPath: data.installPath,
     };
