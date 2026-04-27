@@ -9,14 +9,18 @@ const nodejsInfoSchema = z
     currentVersion: z.string(),
     latestVersion: z.string(),
     npmVersion: z.string(),
+    updateAvailable: z.boolean(),
     installPath: z.string(),
+    architecture: z.string(),
   })
   .transform((data) => {
     return {
       current: data.currentVersion,
       latest: data.latestVersion,
       npm: data.npmVersion,
+      updateAvailable: data.updateAvailable,
       installPath: data.installPath,
+      architecture: data.architecture,
     };
   });
 
