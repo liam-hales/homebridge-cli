@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { colours } from '../../constants.js';
 import { Box, DOMElement, measureElement, Text, useInput } from 'ink';
-import { Keybindings } from '../index.js';
+import { Keybindings, Pagination } from '../index.js';
 import { Table as InkTable } from '@alcalzone/ink-table';
 import { TableItem } from '../types.js';
 import { isDate } from '../../date.js';
@@ -162,27 +162,10 @@ const Table = <T extends TableItem>({ items, pageSize = 10 }: Props<T>): ReactEl
               },
             ]}
             />
-            <Box
-              flexDirection="row"
-              columnGap={1}
-            >
-              {
-                [...Array(totalPages)].map((_, index) => (
-                  <Text
-                    key={`page-${index}`}
-                    bold={index === page}
-                    underline={index === page}
-                    color={
-                      (index === page)
-                        ? colours.purple
-                        : colours.lightGrey
-                    }
-                  >
-                    {index + 1}
-                  </Text>
-                ))
-              }
-            </Box>
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+            />
           </Box>
         )
       }
