@@ -9,19 +9,18 @@ const installedPluginsSchema = z
     name: z.string(),
     displayName: z.string(),
     author: z.string(),
+    installedVersion: z.string(),
+    latestVersion: z.string(),
+    updateAvailable: z.boolean(),
     verifiedPlugin: z.boolean(),
     verifiedPlusPlugin: z.boolean(),
-    installedVersion: z.string(),
-    installPath: z.string(),
-    updateAvailable: z.boolean(),
-    latestVersion: z.string(),
   })
   .transform((data) => {
     return {
       name: data.name,
       displayName: data.displayName,
       author: data.author,
-      installed: data.installedVersion,
+      current: data.installedVersion,
       latest: data.latestVersion,
       updateAvailable: data.updateAvailable,
       verified: data.verifiedPlugin,
