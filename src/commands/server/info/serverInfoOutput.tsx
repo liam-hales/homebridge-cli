@@ -16,6 +16,7 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
     // request is not dependent on the other
     return await Promise.all([
       client.getServerInfo(),
+      client.getHomebridgeInfo(),
       client.getNodejsInfo(),
     ]);
   });
@@ -36,7 +37,7 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
       }
       {
         (data != null) && (() => {
-          const [serverInfo, nodejsInfo] = data;
+          const [serverInfo, homebridgeInfo, nodejsInfo] = data;
           return (
             <Box
               flexDirection="column"
@@ -56,6 +57,11 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
               <TextList
                 data={serverInfo.network}
                 title="Network"
+                keyWidth={26}
+              />
+              <TextList
+                data={homebridgeInfo}
+                title="Homebridge"
                 keyWidth={26}
               />
               <TextList

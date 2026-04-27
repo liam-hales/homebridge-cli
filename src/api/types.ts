@@ -1,4 +1,4 @@
-import { userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
+import { userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
 import { z } from 'zod';
 
 /**
@@ -61,6 +61,12 @@ export type ServerBackup = z.output<typeof serverBackupSchema>;
  * by the `nodejsInfoSchema`
  */
 export type NodejsInfo = z.output<typeof nodejsInfoSchema>;
+
+/**
+ * Describes the Homebridge info inferred
+ * by the `homebridgeInfoSchema`
+ */
+export type HomebridgeInfo = z.output<typeof homebridgeInfoSchema>;
 
 /**
  * Describes the pairings inferred

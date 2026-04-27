@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
 import { z } from 'zod';
 import date, { type Date } from '../date.js';
 
@@ -176,6 +176,23 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return nodejsInfoSchema.parse(data);
+  }
+
+  /**
+   * Used to obtain the Homebridge info data from
+   * the `GET /api/status/homebridge-version` endpoint
+   *
+   * @returns The Homebridge info data
+   */
+  public async getHomebridgeInfo(): Promise<HomebridgeInfo> {
+    const data = await this._request<z.input<typeof homebridgeInfoSchema>>({
+      method: 'get',
+      endpoint: '/status/homebridge-version',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return homebridgeInfoSchema.parse(data);
   }
 
   /**
