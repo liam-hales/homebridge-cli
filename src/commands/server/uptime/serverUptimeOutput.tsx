@@ -87,7 +87,6 @@ const ServerUptimeOutput: FunctionComponent = (): ReactElement => {
               <Box
                 flexDirection="column"
                 rowGap={1}
-                marginLeft={1}
               >
                 <Text
                   color={colours.white}
@@ -99,6 +98,7 @@ const ServerUptimeOutput: FunctionComponent = (): ReactElement => {
                 <Box
                   flexDirection="row"
                   columnGap={1}
+                  marginLeft={1}
                 >
                   <Text color={colours.lightGrey}>
                     └─
