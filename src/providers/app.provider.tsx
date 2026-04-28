@@ -206,7 +206,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         port: port,
         // Set to `4` for the first ping to handle ping
         // running too early when server restarts
-        attempts: (index === 0) ? 4 : 1,
+        attempts: (index === 0 && tryOnce === false) ? 4 : 1,
         timeout: 2000,
       });
 
