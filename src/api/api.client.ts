@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
+import { RequestOptions, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
 import { z } from 'zod';
 import date, { type Date } from '../date.js';
 
@@ -159,6 +159,23 @@ class ApiClient {
     });
 
     return date.utc(next);
+  }
+
+  /**
+   * Used to obtain the server uptime data from
+   * the `GET /api/status/uptime` endpoint
+   *
+   * @returns The server uptime data
+   */
+  public async getServerUptime(): Promise<ServerUptime> {
+    const data = await this._request<z.input<typeof serverUptimeSchema>>({
+      method: 'get',
+      endpoint: '/status/uptime',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return serverUptimeSchema.parse(data);
   }
 
   /**

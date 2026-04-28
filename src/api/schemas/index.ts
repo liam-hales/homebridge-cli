@@ -1,6 +1,7 @@
 import userSchema from './user.schema.js';
 import serverInfoSchema from './serverInfo.schema.js';
 import serverBackupSchema from './serverBackup.schema.js';
+import serverUptimeSchema from './serverUptime.schema.js';
 import nodejsInfoSchema from './nodejsInfo.schema.js';
 import homebridgeInfoSchema from './homebridgeInfo.schema.js';
 import loginSchema from './login.schema.js';
@@ -15,6 +16,7 @@ export {
   userSchema,
   serverInfoSchema,
   serverBackupSchema,
+  serverUptimeSchema,
   nodejsInfoSchema,
   homebridgeInfoSchema,
   loginSchema,
