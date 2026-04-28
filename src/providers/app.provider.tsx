@@ -204,9 +204,9 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       const { errors } = await ping({
         address: host,
         port: port,
-        // Set to `2` for the first ping to handle ping
+        // Set to `4` for the first ping to handle ping
         // running too early when server restarts
-        attempts: (index === 0) ? 2 : 1,
+        attempts: (index === 0) ? 4 : 1,
         timeout: 2000,
       });
 
