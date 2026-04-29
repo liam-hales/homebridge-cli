@@ -2,6 +2,12 @@ import { userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, p
 import { z } from 'zod';
 
 /**
+ * Describes the different
+ * API request methods
+ */
+export type RequestMethod = 'get' | 'put' | 'post';
+
+/**
  * Describes the API request options
  *
  * - Generic type `T` for the request body
