@@ -70,6 +70,17 @@ const LoginCheck: FunctionComponent<Props> = ({ status, credentials }): ReactEle
         )
       }
       {
+        (status === '2fa-enabled') && (
+          <Text
+            color={colours.white}
+            backgroundColor={colours.orange}
+            underline={true}
+          >
+            {' ⚠ Login - 2FA Enabled'}
+          </Text>
+        )
+      }
+      {
         (status === 'failed') && (
           <Text
             color={colours.white}
@@ -126,6 +137,31 @@ const LoginCheck: FunctionComponent<Props> = ({ status, credentials }): ReactEle
                       {` ${credentials.username}`}
                     </Text>
                   </Text>
+                )
+              }
+              {
+                (status === '2fa-enabled') && (
+                  <>
+                    <Text color={colours.lightGrey}>
+                      └─ User
+                      <Text
+                        color={colours.orange}
+                        bold={true}
+                      >
+                        {` ${credentials.username} `}
+                      </Text>
+                      has two-factor authentication (2FA) enabled which is not supported
+                    </Text>
+                    <Text color={colours.lightGrey}>
+                      └─ For more info, see the docs —
+                      <Text
+                        color={colours.orange}
+                        bold={true}
+                      >
+                        {` https://github.com/liam-hales/homebridge-cli#two-factor-authentication-`}
+                      </Text>
+                    </Text>
+                  </>
                 )
               }
               {

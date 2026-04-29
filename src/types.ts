@@ -22,7 +22,7 @@ export type ApiStatus = 'up' | 'down';
  * Describes the different
  * login statuses
  */
-export type LoginStatus = 'authenticated' | 'failed';
+export type LoginStatus = 'authenticated' | '2fa-enabled' | 'failed';
 
 /**
  * The union type for

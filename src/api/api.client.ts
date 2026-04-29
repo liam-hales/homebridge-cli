@@ -89,9 +89,19 @@ class ApiClient {
 
       return 'authenticated';
     }
-    // Catch any error that occurs while making the
-    // request and return the `failed` status
-    catch {
+    catch (error) {
+      // Check if the error is
+      // a known API error
+      if (error instanceof ApiError) {
+        const { statusCode } = error;
+
+        // If the status code is `412` then the user
+        // has 2FA enabled which is not supported
+        if (statusCode === 412) {
+          return '2fa-enabled';
+        }
+      }
+
       return 'failed';
     }
   }
