@@ -77,6 +77,19 @@ Check out their official [installation guide](https://github.com/homebridge/home
 <br/>
 <br/>
 
+# Two-Factor Authentication 🔐
+
+The Homebridge CLI does not currently support users with two-factor authentication (2FA) enabled. When running the `/login` command you must enter credentials for a user with 2FA disabled, or you will get the below warning.
+
+![Login - 2FA Enabled](/img/login-2fa-enabled.webp)
+
+This is due to limitations with the current authentication design. You would be required to enter a 2FA code each time the CLI is run which would feel cumbersome.
+
+> _**Recommendation** — Create a separate Homebridge user with 2FA disabled to use with the CLI._
+
+<br/>
+<br/>
+
 # Local Development 👨🏻‍💻
 
 > ⚠️ _**WARNING** — Please make sure to follow the [Prerequisites](#prerequisites) section first before continuing_
