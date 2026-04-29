@@ -45,6 +45,15 @@ export interface PostRequestOptions<T extends object> {
 }
 
 /**
+ * Describes the error response
+ * for a failed API request
+ */
+export interface ErrorResponse {
+  readonly statusCode: number;
+  readonly message: string;
+}
+
+/**
  * Describes the user inferred
  * by the `userSchema`
  */

@@ -1,7 +1,8 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
+import { RequestOptions, ErrorResponse, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
 import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
 import { z } from 'zod';
+import { ApiError } from './index.js';
 import date, { type Date } from '../date.js';
 
 /**
@@ -379,15 +380,22 @@ class ApiClient {
       },
     });
 
-    // Check if the request was successful,
-    // if not throw an error
+    // Unwrap the response
+    // body as JSON
+    const body = await response.json();
+
+    // Check if the request was successful, if not extract the
+    // message from the error response and throw an error
     if (response.ok === false) {
-      throw new Error(`[API Error]: ${response.status} - /api${endpoint}`);
+      const { message } = body as ErrorResponse;
+      throw new ApiError(message, {
+        method: method,
+        endpoint: endpoint,
+        statusCode: response.status,
+      });
     }
 
-    // Unwrap the response body
-    // as JSON and return it
-    return await response.json() as T;
+    return body as T;
   }
 }
 
