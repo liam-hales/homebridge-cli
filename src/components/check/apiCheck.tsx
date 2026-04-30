@@ -73,7 +73,7 @@ const ApiCheck: FunctionComponent<Props> = ({ status }): ReactElement<Props> => 
                   color={colours.red}
                   bold={true}
                 >
-                  {` https://github.com/liam-hales/homebridge-cli#api-unavailable- `}
+                  {` https://github.com/liam-hales/homebridge-cli#api-unavailable-`}
                 </Text>
               </Text>
             </>
