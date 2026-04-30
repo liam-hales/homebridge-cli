@@ -20,3 +20,12 @@ export interface Keybinding {
   readonly key: string;
   readonly action: string;
 }
+
+/**
+ * Describes a picker item used
+ * for the `Picker` component
+ */
+export interface PickerItem {
+  readonly name: string;
+  readonly description?: string;
+}
