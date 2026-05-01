@@ -81,6 +81,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
               <Picker
                 items={commandPickerItems}
                 onSelect={(item) => onChange(item.name)}
+                windowSize={8}
               />
               <Keybindings bindings={[
                 {
