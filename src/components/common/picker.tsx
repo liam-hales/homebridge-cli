@@ -107,6 +107,21 @@ const Picker: FunctionComponent<Props> = ({ items, onSelect }): ReactElement<Pro
               flexDirection="row"
             >
               <Box
+                width={2}
+                flexDirection="column"
+              >
+                {
+                  (index === windowIndex) && (
+                    <Text
+                      color={colours.purple}
+                      bold={true}
+                    >
+                      ⟶
+                    </Text>
+                  )
+                }
+              </Box>
+              <Box
                 width={24}
                 flexDirection="column"
               >
