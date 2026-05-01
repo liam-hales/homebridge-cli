@@ -9,16 +9,18 @@ import { PickerItem } from '../types.js';
 interface Props {
   readonly items: PickerItem[];
   readonly onSelect: (item: PickerItem) => void;
+  readonly windowSize?: number;
 }
 
 /**
- * Used to render a windowed list of items allowing the
- * user to navigate and select using the keyboard
+ * Used to render a list of items allowing the user to
+ * navigate and select using the keyboard. When `windowSize`
+ * is set the list is windowed otherwise all items are rendered
  *
  * @param props The component props
  * @returns The `Picker` component
  */
-const Picker: FunctionComponent<Props> = ({ items, onSelect }): ReactElement<Props> => {
+const Picker: FunctionComponent<Props> = ({ items, onSelect, windowSize }): ReactElement<Props> => {
   const [listIndex, setListIndex] = useState<number>(0);
 
   /**
@@ -26,8 +28,18 @@ const Picker: FunctionComponent<Props> = ({ items, onSelect }): ReactElement<Pro
    * consists of the window items and the index
    */
   const [windowItems, windowIndex] = useMemo(() => {
-    const windowSize = 6;
-    const windowScrollPoint = 3;
+    // If the window size has not been set then
+    // return all items and the list index
+    if (windowSize == null) {
+      return [
+        items,
+        listIndex,
+      ];
+    }
+
+    // Calculate the window scroll point which is
+    // half of (or as close to) the window size
+    const windowScrollPoint = Math.floor(windowSize / 2);
 
     // Calculate the max and scroll offsets for the item
     // window using the items and list index
@@ -46,7 +58,7 @@ const Picker: FunctionComponent<Props> = ({ items, onSelect }): ReactElement<Pro
       itemWindow,
       windowIndex,
     ];
-  }, [items, listIndex]);
+  }, [items, windowSize, listIndex]);
 
   /**
    * Used to reset the list index
@@ -95,7 +107,7 @@ const Picker: FunctionComponent<Props> = ({ items, onSelect }): ReactElement<Pro
 
   return (
     <Box
-      height={6}
+      height={windowSize}
       flexDirection="column"
     >
       {
