@@ -87,20 +87,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     // Check if the user has closed the
     // command by pressing the escape key
     if (key.escape === true) {
-      setMode('idle');
-
-      // Set the active block as user closed so we can distinguish
-      // the difference between an exited and closed block
-      setBlocks((previous) => {
-        return previous.map((block) => {
-          return (block.id === blocks.at(-1)?.id)
-            ? {
-                ...block,
-                didUserClose: true,
-              }
-            : block;
-        });
-      });
+      // eslint-disable-next-line react-hooks/immutability
+      _exit('Closed by user');
     }
   }, {
     isActive: (mode !== 'idle'),
@@ -131,9 +119,9 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
    * server, API and login checks
    */
   const _performChecks = async (): Promise<void> => {
-    // If the app is still starting then return
-    // early to avoid checking too early
-    if (mode === 'starting') {
+    // If the app is not in the checking state then
+    // return early to avoid checking too early
+    if (mode !== 'checking') {
       return;
     }
 
@@ -282,6 +270,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     // Write the data to the file
     // and set the config to state
     fs.writeFileSync(fullPath, data, 'utf8');
+
+    setMode('checking');
     setConfig(config);
   };
 
@@ -320,6 +310,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
 
     // Set the credentials to
     // state once stored
+    setMode('checking');
     setCredentials({
       username: username,
       password: password,
@@ -340,6 +331,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     await keytar.deletePassword('homebridge-cli', credentials.username);
     await apiClient?.clearAuth();
 
+    setMode('checking');
     setCredentials(undefined);
   };
 
@@ -387,7 +379,6 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
           type: 'command',
           id: blockId,
           input: input,
-          didUserClose: false,
           commandId: command.id,
         },
       ]);
@@ -420,6 +411,33 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       // block as been added to state
       setInputValue('');
     }
+  };
+
+  /**
+   * Used to exit and close the active
+   * command and reset the app state
+   *
+   * @param text The exit text for the command
+   */
+  const _exit = (text: string): void => {
+    // Set the app mode to `idle` only if
+    // the mode is currently set to running
+    setMode((previous) => {
+      return (previous === 'running') ? 'idle' : previous;
+    });
+
+    // Set the active block exit text which will be
+    // rendered once the app mode is set back to `idle`
+    setBlocks((previous) => {
+      return previous.map((block) => {
+        return (block.id === blocks.at(-1)?.id)
+          ? {
+              ...block,
+              exitText: text,
+            }
+          : block;
+      });
+    });
   };
 
   /**
@@ -472,6 +490,7 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
         setCredentials: _setCredentials,
         removeCredentials: _removeCredentials,
         executeInput: _executeInput,
+        exit: _exit,
         restartServer: _restartServer,
       }
     }

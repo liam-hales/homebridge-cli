@@ -74,7 +74,7 @@ export interface ICommandBlock {
   readonly type: 'command';
   readonly id: string;
   readonly input: string;
-  readonly didUserClose: boolean;
+  readonly exitText?: string;
   readonly commandId: Command['id'];
 }
 

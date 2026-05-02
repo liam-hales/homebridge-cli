@@ -72,6 +72,14 @@ export interface AppActions {
   readonly executeInput: (input: string) => void;
 
   /**
+   * Used to exit and close the active
+   * command and reset the app state
+   *
+   * @param text The exit text for the command
+   */
+  readonly exit: (text: string) => void;
+
+  /**
    * Used to restart the server and set the correct
    * state to wait until the server comes back up
    */

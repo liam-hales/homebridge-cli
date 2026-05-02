@@ -17,11 +17,11 @@ type Props = Omit<ICommandBlock, 'type'>;
  * @param props The component props
  * @returns The `CommandBlock` component
  */
-const CommandBlock: FunctionComponent<Props> = ({ id, input, didUserClose, commandId }): ReactElement<Props> => {
+const CommandBlock: FunctionComponent<Props> = ({ id, input, exitText, commandId }): ReactElement<Props> => {
   const { activeBlockId } = useApp();
 
   const { output } = commandMap[commandId];
-  const { component: Output, exitText } = output;
+  const { component: Output } = output;
 
   return (
     <Box
@@ -43,19 +43,9 @@ const CommandBlock: FunctionComponent<Props> = ({ id, input, didUserClose, comma
                 flexDirection="column"
                 marginLeft={1}
               >
-                {
-                  (didUserClose === true)
-                    ? (
-                        <Text color={colours.lightGrey}>
-                          └─ Closed by user
-                        </Text>
-                      )
-                    : (
-                        <Text color={colours.lightGrey}>
-                          {`└─ ${exitText ?? 'Exited'}`}
-                        </Text>
-                      )
-                }
+                <Text color={colours.lightGrey}>
+                  {`└─ ${exitText ?? 'Exited'}`}
+                </Text>
               </Box>
             )
       }
