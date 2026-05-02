@@ -10,13 +10,23 @@ import { useApp } from '../../hooks/index.js';
  * @returns The `LogoutOutput` component
  */
 const LogoutOutput: FunctionComponent = (): ReactElement => {
-  const { removeCredentials } = useApp();
+  const { removeCredentials, exit } = useApp();
 
   /**
-   * Used to call the `removeCredentials`
+   * Used to handle when the
+   * enter/return key is pressed
+   */
+  const _onMount = async (): Promise<void> => {
+    await removeCredentials();
+    exit('Logout successful');
+  };
+
+  /**
+   * Used to call the `_onMount`
    * function when the component mounts
    */
-  useEffect(() => void removeCredentials(), [removeCredentials]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => void _onMount(), []);
 
   return (
     <Box

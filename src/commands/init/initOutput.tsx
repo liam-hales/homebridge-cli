@@ -11,7 +11,7 @@ import TextInput from 'ink-text-input';
  * @returns The `InitOutput` component
  */
 const InitOutput: FunctionComponent = (): ReactElement => {
-  const { setConfig } = useApp();
+  const { setConfig, exit } = useApp();
 
   const [stage, setStage] = useState<'set-host' | 'set-port'>('set-host');
   const [host, setHost] = useState<string>('');
@@ -21,13 +21,14 @@ const InitOutput: FunctionComponent = (): ReactElement => {
    * Used to handle when the
    * enter/return key is pressed
    */
-  const onEnter = async (): Promise<void> => {
+  const _onEnter = async (): Promise<void> => {
     if (stage === 'set-host' && host !== '') {
       setStage('set-port');
     }
 
     if (stage === 'set-port' && port !== '') {
       setConfig(host, Number.parseInt(port));
+      exit('Setup complete — config set');
     }
   };
 
@@ -37,7 +38,7 @@ const InitOutput: FunctionComponent = (): ReactElement => {
    */
   useInput((_, key) => {
     if (key.return === true) {
-      void onEnter();
+      void _onEnter();
     }
   });
 

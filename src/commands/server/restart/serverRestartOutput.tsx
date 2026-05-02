@@ -11,23 +11,31 @@ import { ConfirmPrompt } from '../../../components/index.js';
  * @returns The `ServerRestartOutput` component
  */
 const ServerRestartOutput: FunctionComponent = (): ReactElement => {
-  const { setMode, restartServer } = useApp();
+  const { exit, restartServer } = useApp();
 
   const [answer, setAnswer] = useState<'yes' | 'no' | undefined>();
 
   /**
-   * Used to detect when the user has answered
-   * the yes/no confirmation prompt
+   * Used to handle when the
+   * answer state changes
    */
-  useEffect(() => {
+  const _onAnswerChange = async (): Promise<void> => {
     if (answer === 'yes') {
-      void restartServer();
+      await restartServer();
+      exit('Restart command sent — check server status above');
     }
 
     if (answer === 'no') {
-      setMode('idle');
+      exit('Cancelled by user');
     }
-  }, [answer, restartServer, setMode]);
+  };
+
+  /**
+   * Used to call the `_onAnswerChange`
+   * function when the `answer` state changes
+   */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => void _onAnswerChange(), [answer]);
 
   return (
     <Box

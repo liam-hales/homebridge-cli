@@ -11,7 +11,7 @@ import { colours } from '../../constants.js';
  * @returns The `LoginOutput` component
  */
 const LoginOutput: FunctionComponent = (): ReactElement => {
-  const { setCredentials } = useApp();
+  const { setCredentials, exit } = useApp();
 
   const [stage, setStage] = useState<'set-username' | 'set-password'>('set-username');
   const [username, setUsername] = useState<string>('');
@@ -21,13 +21,14 @@ const LoginOutput: FunctionComponent = (): ReactElement => {
    * Used to handle when the
    * enter/return key is pressed
    */
-  const onEnter = async (): Promise<void> => {
+  const _onEnter = async (): Promise<void> => {
     if (stage === 'set-username' && username !== '') {
       setStage('set-password');
     }
 
     if (stage === 'set-password' && password !== '') {
       await setCredentials(username, password);
+      exit('Login credentials set — check login status above');
     }
   };
 
@@ -37,7 +38,7 @@ const LoginOutput: FunctionComponent = (): ReactElement => {
    */
   useInput((_, key) => {
     if (key.return === true) {
-      void onEnter();
+      void _onEnter();
     }
   });
 
