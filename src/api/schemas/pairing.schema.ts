@@ -3,10 +3,10 @@
 import { z } from 'zod';
 
 /**
- * The schema used to describe and transform the pairings data
+ * The schema used to describe and transform the pairing data
  * returned from the `GET /api/server/pairings` endpoint
  */
-const pairingsSchema = z
+const pairingSchema = z
   .object({
     name: z.string(),
     displayName: z.string(),
@@ -30,4 +30,4 @@ const pairingsSchema = z
     };
   });
 
-export default pairingsSchema;
+export default pairingSchema;

@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 /**
- * The schema used to describe and transform the child bridges data
+ * The schema used to describe and transform the child bridge data
  * returned from the `GET /api/status/homebridge/child-bridges` endpoint
  */
-const childBridgesSchema = z.object({
+const childBridgeSchema = z.object({
   name: z.string(),
   plugin: z.string(),
   identifier: z.string(),
@@ -16,4 +16,4 @@ const childBridgesSchema = z.object({
   pid: z.number(),
 });
 
-export default childBridgesSchema;
+export default childBridgeSchema;

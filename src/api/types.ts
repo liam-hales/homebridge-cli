@@ -1,4 +1,4 @@
-import { userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
+import { userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema } from './schemas/index.js';
 import { z } from 'zod';
 
 /**
@@ -91,15 +91,15 @@ export type HomebridgeInfo = z.output<typeof homebridgeInfoSchema>;
 
 /**
  * Describes the pairings inferred
- * by the `pairingsSchema`
+ * by the `pairingSchema`
  */
-export type Pairing = z.output<typeof pairingsSchema>;
+export type Pairing = z.output<typeof pairingSchema>;
 
 /**
  * Describes the config backup inferred
- * by the `configBackupsSchema`
+ * by the `configBackupSchema`
  */
-export type ConfigBackup = z.output<typeof configBackupsSchema>;
+export type ConfigBackup = z.output<typeof configBackupSchema>;
 
 /**
  * Describes the CPU usage inferred
@@ -115,15 +115,15 @@ export type MemoryUsage = z.output<typeof memoryUsageSchema>;
 
 /**
  * Describes the installed plugin inferred
- * by the `installedPluginsSchema`
+ * by the `installedPluginSchema`
  */
-export type InstalledPlugin = z.output<typeof installedPluginsSchema>;
+export type InstalledPlugin = z.output<typeof installedPluginSchema>;
 
 /**
  * Describes the child bridge inferred
- * by the `childBridgesSchema`
+ * by the `childBridgeSchema`
  */
-export type ChildBridge = z.output<typeof childBridgesSchema>;
+export type ChildBridge = z.output<typeof childBridgeSchema>;
 
 /**
  * Describes the config data returned

@@ -5,12 +5,12 @@ import serverUptimeSchema from './serverUptime.schema.js';
 import nodejsInfoSchema from './nodejsInfo.schema.js';
 import homebridgeInfoSchema from './homebridgeInfo.schema.js';
 import loginSchema from './login.schema.js';
-import pairingsSchema from './pairings.schema.js';
-import configBackupsSchema from './configBackups.schema.js';
+import pairingSchema from './pairing.schema.js';
+import configBackupSchema from './configBackup.schema.js';
 import cpuUsageSchema from './cpuUsage.schema.js';
 import memoryUsageSchema from './memoryUsage.schema.js';
-import installedPluginsSchema from './installedPlugins.schema.js';
-import childBridgesSchema from './childBridges.schema.js';
+import installedPluginSchema from './installedPlugin.schema.js';
+import childBridgeSchema from './childBridges.schema.js';
 
 export {
   userSchema,
@@ -20,10 +20,10 @@ export {
   nodejsInfoSchema,
   homebridgeInfoSchema,
   loginSchema,
-  pairingsSchema,
-  configBackupsSchema,
+  pairingSchema,
+  configBackupSchema,
   cpuUsageSchema,
   memoryUsageSchema,
-  installedPluginsSchema,
-  childBridgesSchema,
+  installedPluginSchema,
+  childBridgeSchema,
 };

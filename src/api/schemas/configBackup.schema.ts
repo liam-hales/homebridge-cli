@@ -2,10 +2,10 @@ import { z } from 'zod';
 import date from '../../date.js';
 
 /**
- * The schema used to describe and transform the config backups data
+ * The schema used to describe and transform the config backup data
  * returned from the `GET /api/config-editor/backups` endpoint
  */
-const configBackupsSchema = z
+const configBackupSchema = z
   .object({
     id: z.string(),
     timestamp: z.iso.datetime(),
@@ -19,4 +19,4 @@ const configBackupsSchema = z
     };
   });
 
-export default configBackupsSchema;
+export default configBackupSchema;

@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
 import { RequestOptions, ErrorResponse, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingsSchema, configBackupsSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginsSchema, childBridgesSchema } from './schemas/index.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema } from './schemas/index.js';
 import { z } from 'zod';
 import { ApiError } from './index.js';
 import date, { type Date } from '../date.js';
@@ -230,14 +230,14 @@ class ApiClient {
    * @returns The pairings data
    */
   public async getPairings(): Promise<Pairing[]> {
-    const data = await this._request<z.input<typeof pairingsSchema>[]>({
+    const data = await this._request<z.input<typeof pairingSchema>[]>({
       method: 'get',
       endpoint: '/server/pairings',
     });
 
     // Parse and return the data using
     // the schema to transform the data
-    return data.map((item) => pairingsSchema.parse(item));
+    return data.map((item) => pairingSchema.parse(item));
   }
 
   /**
@@ -260,14 +260,14 @@ class ApiClient {
    * @returns The config backups data
    */
   public async getConfigBackups(): Promise<ConfigBackup[]> {
-    const data = await this._request<z.input<typeof configBackupsSchema>[]>({
+    const data = await this._request<z.input<typeof configBackupSchema>[]>({
       method: 'get',
       endpoint: '/config-editor/backups',
     });
 
     // Parse and return the data using
     // the schema to transform the data
-    return data.map((item) => configBackupsSchema.parse(item));
+    return data.map((item) => configBackupSchema.parse(item));
   }
 
   /**
@@ -311,14 +311,14 @@ class ApiClient {
    * @returns The installed plugins data
    */
   public async getInstalledPlugins(): Promise<InstalledPlugin[]> {
-    const data = await this._request<z.input<typeof installedPluginsSchema>[]>({
+    const data = await this._request<z.input<typeof installedPluginSchema>[]>({
       method: 'get',
       endpoint: '/plugins',
     });
 
     // Parse and return the data using
     // the schema to transform the data
-    return data.map((item) => installedPluginsSchema.parse(item));
+    return data.map((item) => installedPluginSchema.parse(item));
   }
 
   /**
@@ -328,14 +328,14 @@ class ApiClient {
    * @returns The child bridges data
    */
   public async getChildBridges(): Promise<ChildBridge[]> {
-    const data = await this._request<z.input<typeof childBridgesSchema>[]>({
+    const data = await this._request<z.input<typeof childBridgeSchema>[]>({
       method: 'get',
       endpoint: '/status/homebridge/child-bridges',
     });
 
     // Parse and return the data using
     // the schema to transform the data
-    return data.map((item) => childBridgesSchema.parse(item));
+    return data.map((item) => childBridgeSchema.parse(item));
   }
 
   /**
