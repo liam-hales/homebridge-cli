@@ -55,46 +55,6 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   }, [config]);
 
   /**
-   * Used to call the `_onStart` function
-   * on mount when the app starts
-   */
-  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/immutability
-  useEffect(() => void _onStart(), []);
-
-  /**
-   * Used to call the `_performChecks` function
-   * when the config or credentials change
-   */
-  // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/immutability
-  useEffect(() => void _performChecks(), [config, credentials]);
-
-  /**
-   * Used to call the `_performChecks` function when
-   * the server status changes to `restarting`
-   */
-  useEffect(() => {
-    if (serverStatus === 'restarting') {
-      void _performChecks();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverStatus]);
-
-  /**
-   * Used to monitor the user input and take
-   * acton based on the keys pressed
-   */
-  useInput((_, key) => {
-    // Check if the user has closed the
-    // command by pressing the escape key
-    if (key.escape === true) {
-      // eslint-disable-next-line react-hooks/immutability
-      _exit('Closed by user');
-    }
-  }, {
-    isActive: (mode !== 'idle'),
-  });
-
-  /**
    * Used to load the config and
    * credentials when the app strats
    */
@@ -468,6 +428,42 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
     setServerStatus('restarting');
     setMode('checking');
   };
+
+  /**
+   * Used to call the `_onStart` function
+   * on mount when the app starts
+   */
+  useEffect(() => void _onStart(), []);
+
+  /**
+   * Used to call the `_performChecks` function
+   * when the config or credentials change
+   */
+  useEffect(() => void _performChecks(), [config, credentials]);
+
+  /**
+   * Used to call the `_performChecks` function when
+   * the server status changes to `restarting`
+   */
+  useEffect(() => {
+    if (serverStatus === 'restarting') {
+      void _performChecks();
+    }
+  }, [serverStatus]);
+
+  /**
+   * Used to monitor the user input and take
+   * acton based on the keys pressed
+   */
+  useInput((_, key) => {
+    // Check if the user has closed the
+    // command by pressing the escape key
+    if (key.escape === true) {
+      _exit('Closed by user');
+    }
+  }, {
+    isActive: (mode !== 'idle'),
+  });
 
   return (
     <AppContext.Provider value={

@@ -25,7 +25,6 @@ const LogoutOutput: FunctionComponent = (): ReactElement => {
    * Used to call the `_onMount`
    * function when the component mounts
    */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => void _onMount(), []);
 
   return (

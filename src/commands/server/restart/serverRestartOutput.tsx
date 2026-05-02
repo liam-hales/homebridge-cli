@@ -34,7 +34,6 @@ const ServerRestartOutput: FunctionComponent = (): ReactElement => {
    * Used to call the `_onAnswerChange`
    * function when the `answer` state changes
    */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => void _onAnswerChange(), [answer]);
 
   return (

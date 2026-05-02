@@ -65,7 +65,6 @@ const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSi
    * Used to reset the list index
    * state when the items change
    */
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setListIndex(0), [items]);
 
   /**

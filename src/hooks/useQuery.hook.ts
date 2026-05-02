@@ -52,7 +52,6 @@ const useQuery = <T extends object>(fn: () => Promise<T>): QueryResult<T> => {
         setIsLoading(false);
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
