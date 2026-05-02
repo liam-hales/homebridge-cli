@@ -48,6 +48,8 @@ export default defineConfig(
         '@typescript-eslint/no-unnecessary-type-arguments': 'off',
         '@typescript-eslint/no-inferrable-types': 'off',
         'react/display-name': 'off',
+        'react-hooks/exhaustive-deps': 'off',
+        'react-hooks/set-state-in-effect': 'off',
         'import-x/no-named-as-default-member': 'off',
 
         // General rules
