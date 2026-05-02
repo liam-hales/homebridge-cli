@@ -15,6 +15,7 @@ import Pagination from './common/pagination.js';
 import Duration from './common/duration.js';
 import CodeBlock from './common/codeBlock.js';
 import Picker from './common/picker.js';
+import ConfirmPrompt from './common/confirmPrompt.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
@@ -37,6 +38,7 @@ export {
   Pagination,
   Duration,
   Picker,
+  ConfirmPrompt,
   CommandInput,
   CommandBlock,
   ErrorBlock,
