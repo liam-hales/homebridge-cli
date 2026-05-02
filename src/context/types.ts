@@ -25,14 +25,6 @@ export interface AppState {
 export interface AppActions {
   /**
    * Used to set the
-   * app mode
-   *
-   * @param mode The app mode
-   */
-  readonly setMode: (mode: AppMode) => void;
-
-  /**
-   * Used to set the
    * input value
    *
    * @param value The new input value
