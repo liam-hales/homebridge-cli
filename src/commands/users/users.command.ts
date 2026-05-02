@@ -10,7 +10,6 @@ const usersCommand = {
   description: 'Used to list all users',
   output: {
     component: UsersOutput,
-    exitText: null,
   },
 } as const;
 

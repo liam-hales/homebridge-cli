@@ -10,7 +10,6 @@ const serverRestartCommand = {
   description: 'Used to restart the server',
   output: {
     component: ServerRestartOutput,
-    exitText: 'Restart command sent — check server status above',
   },
 } as const;
 

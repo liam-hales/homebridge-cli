@@ -10,7 +10,6 @@ const serverUsageCommand = {
   description: 'Used to display the server CPU and memory usage',
   output: {
     component: ServerUsageOutput,
-    exitText: null,
   },
 } as const;
 

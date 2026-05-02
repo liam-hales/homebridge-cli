@@ -10,7 +10,6 @@ const loginCommand = {
   description: 'Used to log in and store credentials',
   output: {
     component: LoginOutput,
-    exitText: 'Login credentials set — check login status above',
   },
 } as const;
 

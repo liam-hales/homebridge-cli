@@ -10,7 +10,6 @@ const configBackupsCommand = {
   description: 'Used to list all config backups',
   output: {
     component: ConfigBackupsOutput,
-    exitText: null,
   },
 } as const;
 

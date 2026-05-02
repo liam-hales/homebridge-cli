@@ -10,7 +10,6 @@ const pairingsCommand = {
   description: 'Used to list all pairings',
   output: {
     component: PairingsOutput,
-    exitText: null,
   },
 } as const;
 

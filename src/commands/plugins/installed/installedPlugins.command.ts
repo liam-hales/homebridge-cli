@@ -10,7 +10,6 @@ const installedPluginsCommand = {
   description: 'Used to list all installed plugins',
   output: {
     component: InstalledPluginsOutput,
-    exitText: null,
   },
 } as const;
 

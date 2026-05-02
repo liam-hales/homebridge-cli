@@ -10,7 +10,6 @@ const serverBackupsCommand = {
   description: 'Used to list all server backups',
   output: {
     component: ServerBackupsOutput,
-    exitText: null,
   },
 } as const;
 

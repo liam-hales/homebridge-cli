@@ -10,7 +10,6 @@ const logoutCommand = {
   description: 'Used to log out and clear credentials',
   output: {
     component: LogoutOutput,
-    exitText: 'Logout successful',
   },
 } as const;
 

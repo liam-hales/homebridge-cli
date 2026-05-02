@@ -10,7 +10,6 @@ const serverInfoCommand = {
   description: 'Used to display the server info',
   output: {
     component: ServerInfoOutput,
-    exitText: null,
   },
 } as const;
 

@@ -10,7 +10,6 @@ const childBridgesCommand = {
   description: 'Used to list all child bridges',
   output: {
     component: ChildBridgesOutput,
-    exitText: null,
   },
 } as const;
 

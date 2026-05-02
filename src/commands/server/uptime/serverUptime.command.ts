@@ -10,7 +10,6 @@ const serverUptimeCommand = {
   description: 'Used to display the server and process uptime',
   output: {
     component: ServerUptimeOutput,
-    exitText: null,
   },
 } as const;
 
