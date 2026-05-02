@@ -80,6 +80,7 @@ const CommandInput: FunctionComponent<Props> = ({ value, onChange }): ReactEleme
             <>
               <Picker
                 items={commandPickerItems}
+                selectKey="tab"
                 onSelect={(item) => onChange(item.name)}
                 windowSize={8}
               />

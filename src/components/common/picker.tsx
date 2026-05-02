@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactElement, useEffect, useMemo, useState } from 'react';
-import { Box, Text, useInput } from 'ink';
+import { Box, Text, useInput, Key } from 'ink';
 import { colours } from '../../constants.js';
 import { PickerItem } from '../types.js';
 
@@ -8,6 +8,7 @@ import { PickerItem } from '../types.js';
  */
 interface Props {
   readonly items: PickerItem[];
+  readonly selectKey: keyof Key;
   readonly onSelect: (item: PickerItem) => void;
   readonly windowSize?: number;
 }
@@ -20,7 +21,7 @@ interface Props {
  * @param props The component props
  * @returns The `Picker` component
  */
-const Picker: FunctionComponent<Props> = ({ items, onSelect, windowSize }): ReactElement<Props> => {
+const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSize }): ReactElement<Props> => {
   const [listIndex, setListIndex] = useState<number>(0);
 
   /**
@@ -72,7 +73,7 @@ const Picker: FunctionComponent<Props> = ({ items, onSelect, windowSize }): Reac
    * acton based on the keys pressed
    */
   useInput((_, key) => {
-    if (key.tab === true && items.length > 0) {
+    if (key[selectKey] === true && items.length > 0) {
       const item = items[listIndex];
 
       // Call `onSelect` with the
