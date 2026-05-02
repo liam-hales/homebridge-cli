@@ -1,7 +1,8 @@
-import { FunctionComponent, ReactElement, useEffect } from 'react';
+import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
 import { useApp } from '../../../hooks/index.js';
 import { Box, Text } from 'ink';
 import { colours } from '../../../constants.js';
+import { ConfirmPrompt } from '../../../components/index.js';
 
 /**
  * The output component rendered when
@@ -10,22 +11,52 @@ import { colours } from '../../../constants.js';
  * @returns The `ServerRestartOutput` component
  */
 const ServerRestartOutput: FunctionComponent = (): ReactElement => {
-  const { restartServer } = useApp();
+  const { setMode, restartServer } = useApp();
+
+  const [answer, setAnswer] = useState<'yes' | 'no' | undefined>();
 
   /**
-   * Used to call the `restartServer`
-   * function when the component mounts
+   * Used to detect when the user has answered
+   * the yes/no confirmation prompt
    */
-  useEffect(() => void restartServer(), [restartServer]);
+  useEffect(() => {
+    if (answer === 'yes') {
+      void restartServer();
+    }
+
+    if (answer === 'no') {
+      setMode('idle');
+    }
+  }, [answer, restartServer, setMode]);
 
   return (
     <Box
       flexDirection="column"
       marginLeft={1}
     >
-      <Text color={colours.lightGrey}>
-        └─ Sending restart command...
-      </Text>
+      {
+        (answer == null) && (
+          <Box
+            flexDirection="row"
+            columnGap={1}
+          >
+            <Text color={colours.lightGrey}>
+              └─
+            </Text>
+            <ConfirmPrompt
+              title="Are you sure you want to restart the server?"
+              onConfirm={setAnswer}
+            />
+          </Box>
+        )
+      }
+      {
+        (answer === 'yes') && (
+          <Text color={colours.lightGrey}>
+            └─ Sending restart command...
+          </Text>
+        )
+      }
     </Box>
   );
 };
