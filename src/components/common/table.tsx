@@ -3,7 +3,7 @@ import { colours } from '../../constants.js';
 import { Box, DOMElement, measureElement, Text, useInput } from 'ink';
 import { Keybindings, Pagination } from '../index.js';
 import { Table as InkTable } from '@alcalzone/ink-table';
-import { TableItem } from '../types.js';
+import { TableItem, ValueFormatters } from '../types.js';
 import { isDate } from '../../date.js';
 
 /**
@@ -14,6 +14,7 @@ import { isDate } from '../../date.js';
 interface Props<T extends TableItem> {
   readonly items: T[];
   readonly pageSize?: number;
+  readonly format?: ValueFormatters<T>;
 }
 
 /**
@@ -25,7 +26,7 @@ interface Props<T extends TableItem> {
  * @param props The component props
  * @returns The `Table` component
  */
-const Table = <T extends TableItem>({ items, pageSize = 10 }: Props<T>): ReactElement<Props<T>> => {
+const Table = <T extends TableItem>({ items, pageSize = 10, format = {} }: Props<T>): ReactElement<Props<T>> => {
   const ref = useRef<DOMElement>(null);
 
   const [page, setPage] = useState<number>(0);
@@ -100,9 +101,12 @@ const Table = <T extends TableItem>({ items, pageSize = 10 }: Props<T>): ReactEl
             };
           }
 
+          // Check if there is a value formatter for
+          // the key and if so use it to transform the value
+          const formatter = format[key];
           return {
             ...map,
-            [formattedKey]: value,
+            [formattedKey]: (formatter != null) ? formatter(value) : value,
           };
         }, {});
     });
