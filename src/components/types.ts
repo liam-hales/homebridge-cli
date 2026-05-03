@@ -13,6 +13,18 @@ export type TextListData = Record<string, string | number | boolean | Date>;
 export type TableItem = Record<string, string | number | boolean | Date>;
 
 /**
+ * Used to map object keys to optional
+ * value formatter functions
+ *
+ * - Generic type `T` for the object
+ */
+export type ValueFormatters<T extends object> = Partial<
+  {
+    readonly [K in keyof T]: (value: T[K]) => string;
+  }
+>;
+
+/**
  * Describes a keybinding used for
  * the `Keybindings` component
  */

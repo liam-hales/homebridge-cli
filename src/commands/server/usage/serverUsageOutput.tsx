@@ -79,7 +79,7 @@ const ServerUsageOutput: FunctionComponent = (): ReactElement => {
                     maxTemp: cpuUsage.maxTemp,
                   }}
                   keyWidth={18}
-                  transform={{
+                  format={{
                     currentTemp: (value) => `${value} °C`,
                     maxTemp: (value) => `${value} °C`,
                   }}
@@ -95,7 +95,7 @@ const ServerUsageOutput: FunctionComponent = (): ReactElement => {
                   }}
                   title="Memory Usage"
                   keyWidth={12}
-                  transform={{
+                  format={{
                     total: (value) => `${value} GB`,
                   }}
                 />

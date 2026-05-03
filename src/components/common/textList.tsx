@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { colours } from '../../constants.js';
 import { Box, Text } from 'ink';
-import { TextListData } from '../types.js';
+import { TextListData, ValueFormatters } from '../types.js';
 import { isDate } from '../../date.js';
 
 /**
@@ -13,9 +13,7 @@ interface Props<T extends TextListData> {
   readonly data: T;
   readonly title?: string;
   readonly keyWidth?: number;
-  readonly transform?: Partial<{
-    readonly [K in keyof T]: (value: T[K]) => string;
-  }>;
+  readonly format?: ValueFormatters<T>;
 }
 
 /**
@@ -27,7 +25,7 @@ interface Props<T extends TextListData> {
  * @param props The component props
  * @returns The `TextList` component
  */
-const TextList = <T extends TextListData>({ data, title, keyWidth = 20, transform = {} }: Props<T>): ReactElement<Props<T>> => {
+const TextList = <T extends TextListData>({ data, title, keyWidth = 20, format = {} }: Props<T>): ReactElement<Props<T>> => {
   // Map the data entries into an array
   // of list items to render
   const items = Object
@@ -62,12 +60,12 @@ const TextList = <T extends TextListData>({ data, title, keyWidth = 20, transfor
         };
       }
 
-      // Check if there is a value transformer for
+      // Check if there is a value formatter for
       // the key and if so use it to transform the value
-      const transformer = transform[key];
+      const formatter = format[key];
       return {
         name: name,
-        value: (transformer != null) ? transformer(value) : value.toString(),
+        value: (formatter != null) ? formatter(value) : value.toString(),
       };
     });
 
