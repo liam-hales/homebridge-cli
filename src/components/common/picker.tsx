@@ -14,9 +14,8 @@ interface Props {
 }
 
 /**
- * Used to render a list of items allowing the user to
- * navigate and select using the keyboard. When `windowSize`
- * is set the list is windowed otherwise all items are rendered
+ * Used to render a list of items allowing the
+ * user to navigate and select using the keyboard
  *
  * @param props The component props
  * @returns The `Picker` component
@@ -83,8 +82,8 @@ const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSi
     if (key.upArrow === true) {
       const nextIndex = listIndex - 1;
 
-      // Set the new list index based on the next one to be set
-      // If the user has reached the start of the list then send them to the end
+      // If the user has reached the start of the
+      // list then send them to the end
       setListIndex(
         (nextIndex >= 0)
           ? nextIndex
@@ -95,8 +94,8 @@ const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSi
     if (key.downArrow === true) {
       const nextIndex = listIndex + 1;
 
-      // Set the new list index based on the next one to be set
-      // If the user has reached the end of the list then send them bac to the start
+      // If the user has reached the end of the
+      // list then send them back to the start
       setListIndex(
         (nextIndex < items.length)
           ? nextIndex
