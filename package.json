@@ -30,7 +30,6 @@
     "cleanup": "rm -rf dist/ *.tsbuildinfo"
   },
   "dependencies": {
-    "@alcalzone/ink-table": "^1.1.1",
     "@network-utils/tcp-ping": "^1.2.3",
     "chalk": "^5.6.2",
     "cli-highlight": "^2.1.11",
