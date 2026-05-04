@@ -24,20 +24,23 @@ const Pagination: FunctionComponent<Props> = ({ page, totalPages }): ReactElemen
       columnGap={1}
     >
       {
-        [...Array(totalPages)].map((_, index) => (
-          <Text
-            key={`pagination-page-${index}`}
-            bold={index === page}
-            underline={index === page}
-            color={
-              (index === page)
-                ? colours.purple
-                : colours.lightGrey
-            }
-          >
-            {index + 1}
-          </Text>
-        ))
+        [...Array(totalPages)].map((_, index) => {
+          const pageNumber = index + 1;
+          return (
+            <Text
+              key={`pagination-page-${index}`}
+              bold={pageNumber === page}
+              underline={pageNumber === page}
+              color={
+                (pageNumber === page)
+                  ? colours.purple
+                  : colours.lightGrey
+              }
+            >
+              {pageNumber}
+            </Text>
+          );
+        })
       }
     </Box>
   );
