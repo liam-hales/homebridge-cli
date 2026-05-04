@@ -21,7 +21,7 @@ interface Props {
  * @returns The `Picker` component
  */
 const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSize }): ReactElement<Props> => {
-  const [listIndex, setListIndex] = useState<number>(0);
+  const [cursorIndex, setCursorIndex] = useState<number>(0);
 
   /**
    * Used to calculate the item window which
@@ -29,11 +29,11 @@ const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSi
    */
   const [windowItems, windowIndex] = useMemo(() => {
     // If the window size has not been set then
-    // return all items and the list index
+    // return all items and the cursor index
     if (windowSize == null) {
       return [
         items,
-        listIndex,
+        cursorIndex,
       ];
     }
 
@@ -42,29 +42,29 @@ const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSi
     const windowScrollPoint = Math.floor(windowSize / 2);
 
     // Calculate the max and scroll offsets for the item
-    // window using the items and list index
+    // window using the items and cursor index
     const maxOffset = Math.max(0, items.length - windowSize);
     const scrollOffset = Math.min(
-      Math.max(0, listIndex - windowScrollPoint),
+      Math.max(0, cursorIndex - windowScrollPoint),
       maxOffset,
     );
 
     // Calculate the item window and the window
     // index which will be used to render the window
     const itemWindow = items.slice(scrollOffset, scrollOffset + windowSize);
-    const windowIndex = listIndex - scrollOffset;
+    const windowIndex = cursorIndex - scrollOffset;
 
     return [
       itemWindow,
       windowIndex,
     ];
-  }, [items, windowSize, listIndex]);
+  }, [items, windowSize, cursorIndex]);
 
   /**
-   * Used to reset the list index
+   * Used to reset the cursor index
    * state when the items change
    */
-  useEffect(() => setListIndex(0), [items]);
+  useEffect(() => setCursorIndex(0), [items]);
 
   /**
    * Used to monitor the user input and take
@@ -72,7 +72,7 @@ const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSi
    */
   useInput((_, key) => {
     if (key[selectKey] === true && items.length > 0) {
-      const item = items[listIndex];
+      const item = items[cursorIndex];
 
       // Call `onSelect` with the
       // currently selected item
@@ -80,26 +80,24 @@ const Picker: FunctionComponent<Props> = ({ items, selectKey, onSelect, windowSi
     }
 
     if (key.upArrow === true) {
-      const nextIndex = listIndex - 1;
+      const nextIndex = cursorIndex - 1;
 
       // If the user has reached the start of the
-      // list then send them to the end
-      setListIndex(
-        (nextIndex >= 0)
-          ? nextIndex
-          : items.length - 1,
+      // items list then send them to the end
+      setCursorIndex((nextIndex >= 0)
+        ? nextIndex
+        : items.length - 1,
       );
     }
 
     if (key.downArrow === true) {
-      const nextIndex = listIndex + 1;
+      const nextIndex = cursorIndex + 1;
 
-      // If the user has reached the end of the
+      // If the user has reached the end of the items
       // list then send them back to the start
-      setListIndex(
-        (nextIndex < items.length)
-          ? nextIndex
-          : 0,
+      setCursorIndex((nextIndex < items.length)
+        ? nextIndex
+        : 0,
       );
     }
   });
