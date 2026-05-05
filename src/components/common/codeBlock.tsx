@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactElement } from 'react';
-import { Text } from 'ink';
+import { Box, Text } from 'ink';
 import { highlight, Theme } from 'cli-highlight';
 import { colours } from '../../constants.js';
 import chalk from 'chalk';
@@ -36,10 +36,33 @@ const CodeBlock: FunctionComponent<Props> = ({ language, children }): ReactEleme
     ignoreIllegals: true,
   });
 
+  // Split the highlighted code into lines and calculate the
+  // line padding using the length of the last line number
+  const lines = highlighted.split('\n');
+  const linePadding = `${lines.length}`.length;
+
   return (
-    <Text>
-      {highlighted}
-    </Text>
+    <>
+      {
+        lines.map((line, index) => {
+          const lineNumber = `${index + 1}`;
+          return (
+            <Box
+              flexDirection="row"
+              key={`code-block-line-${lineNumber}`}
+              columnGap={3}
+            >
+              <Text color={colours.darkGrey}>
+                {`${lineNumber.padStart(linePadding)} |`}
+              </Text>
+              <Text>
+                {line}
+              </Text>
+            </Box>
+          );
+        })
+      }
+    </>
   );
 };
 
