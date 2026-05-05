@@ -1,7 +1,8 @@
-import { FunctionComponent, ReactElement, useEffect } from 'react';
+import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
 import { Box, Text } from 'ink';
 import { colours } from '../../constants.js';
 import { useApp } from '../../hooks/index.js';
+import { ConfirmPrompt } from '../../components/index.js';
 
 /**
  * The output component rendered when
@@ -12,29 +13,57 @@ import { useApp } from '../../hooks/index.js';
 const LogoutOutput: FunctionComponent = (): ReactElement => {
   const { removeCredentials, exit } = useApp();
 
+  const [answer, setAnswer] = useState<'yes' | 'no' | undefined>();
+
   /**
    * Used to handle when the
-   * enter/return key is pressed
+   * answer state changes
    */
-  const _onMount = async (): Promise<void> => {
-    await removeCredentials();
-    exit('Logout successful');
+  const _onAnswerChange = async (): Promise<void> => {
+    if (answer === 'yes') {
+      await removeCredentials();
+      exit('Logout successful');
+    }
+
+    if (answer === 'no') {
+      exit('Cancelled by user');
+    }
   };
 
   /**
-   * Used to call the `_onMount`
-   * function when the component mounts
+   * Used to call the `_onAnswerChange`
+   * function when the `answer` state changes
    */
-  useEffect(() => void _onMount(), []);
+  useEffect(() => void _onAnswerChange(), [answer]);
 
   return (
     <Box
       flexDirection="column"
       marginLeft={1}
     >
-      <Text color={colours.lightGrey}>
-        └─ Logging out...
-      </Text>
+      {
+        (answer == null) && (
+          <Box
+            flexDirection="row"
+            columnGap={1}
+          >
+            <Text color={colours.lightGrey}>
+              └─
+            </Text>
+            <ConfirmPrompt
+              title="Are you sure you want to log out?"
+              onConfirm={setAnswer}
+            />
+          </Box>
+        )
+      }
+      {
+        (answer === 'yes') && (
+          <Text color={colours.lightGrey}>
+            └─ Logging out...
+          </Text>
+        )
+      }
     </Box>
   );
 };
