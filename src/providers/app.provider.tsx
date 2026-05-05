@@ -268,6 +268,12 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
   const _setCredentials = async (username: string, password: string): Promise<void> => {
     await keytar.setPassword('homebridge-cli', username, password);
 
+    // If the credentials have already been set then remove
+    // the old ones from keytar to stop multiple existing
+    if (credentials != null) {
+      await keytar.deletePassword('homebridge-cli', credentials.username);
+    }
+
     // Set the credentials to
     // state once stored
     setMode('checking');
