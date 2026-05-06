@@ -249,8 +249,8 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       return;
     }
 
-    // There will only be one set of credentials
-    // so we can use the last one
+    // There should only be one set of credentials,
+    // however the latest ones should be used
     const [{ account, password }] = credentials.slice(-1);
     return {
       username: account,
