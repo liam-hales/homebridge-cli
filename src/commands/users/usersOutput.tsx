@@ -34,7 +34,10 @@ const UsersOutput: FunctionComponent = (): ReactElement => {
             flexDirection="column"
             marginBottom={1}
           >
-            <Table<User> items={data} />
+            <Table<User>
+              items={data}
+              showRowColumn={false}
+            />
           </Box>
         )
       }
