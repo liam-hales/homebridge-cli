@@ -55,11 +55,6 @@ const ServerInfoOutput: FunctionComponent = (): ReactElement => {
                 keyWidth={26}
               />
               <TextList
-                data={serverInfo.network}
-                title="Network"
-                keyWidth={26}
-              />
-              <TextList
                 data={homebridgeInfo}
                 title="Homebridge"
                 keyWidth={26}
