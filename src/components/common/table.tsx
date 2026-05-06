@@ -15,6 +15,7 @@ interface Props<T extends TableItem> {
   readonly pageSize?: number;
   readonly padding?: number;
   readonly format?: ValueFormatters<T>;
+  readonly showRowColumn?: boolean;
   readonly isSelectable?: boolean;
   readonly onSelect?: (item: T) => void;
 }
@@ -34,6 +35,7 @@ const Table = <T extends TableItem>(props: Props<T>): ReactElement<Props<T>> => 
     pageSize = 10,
     padding = 4,
     format,
+    showRowColumn = true,
     isSelectable = false,
     onSelect,
   } = props;
@@ -68,20 +70,23 @@ const Table = <T extends TableItem>(props: Props<T>): ReactElement<Props<T>> => 
   const [headers, rows, widths] = useMemo(() => {
     // Make sure the headers have no case so they are
     // not rendered in its original camel-case format
-    const headers = Object
-      .keys(items.at(0) ?? [])
-      .map((key) => {
-        return key
-          .replace(/([A-Z])/g, ' $1')
-          .toLowerCase();
-      });
+    const headers = [
+      ...(showRowColumn === true) ? ['row'] : [],
+      ...Object
+        .keys(items.at(0) ?? [])
+        .map((key) => {
+          return key
+            .replace(/([A-Z])/g, ' $1')
+            .toLowerCase();
+        }),
+    ];
 
     // Slice and map the items into rows
     // of formatted cell data to render
     const rows = items
       .slice((page - 1) * pageSize, page * pageSize)
-      .map((item) => {
-        return Object
+      .map((item, rowIndex) => {
+        const cells = Object
           .entries(item)
           .map((entry) => {
             const [key, value] = entry;
@@ -105,6 +110,12 @@ const Table = <T extends TableItem>(props: Props<T>): ReactElement<Props<T>> => 
             const formatter = format?.[key];
             return (formatter != null) ? formatter(value) : value.toString();
           });
+
+        const rowNumber = ((page - 1) * pageSize) + (rowIndex + 1);
+        return [
+          ...(showRowColumn === true) ? [rowNumber.toString()] : [],
+          ...cells,
+        ];
       });
 
     // Calculate each column width using the
