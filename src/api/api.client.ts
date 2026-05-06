@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, ErrorResponse, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge, Accessory } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema, accessorySchema } from './schemas/index.js';
+import { RequestOptions, ErrorResponse, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge, Accessory, ServerNetworkOverview } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, serverNetworkOverviewSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema, accessorySchema } from './schemas/index.js';
 import { z } from 'zod';
 import { ApiError } from './index.js';
 import date, { type Date } from '../date.js';
@@ -138,6 +138,23 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return serverInfoSchema.parse(data);
+  }
+
+  /**
+   * Used to obtain the server network overview data from
+   * the `GET /api/server/network/overview` endpoint
+   *
+   * @returns The server network overview data
+   */
+  public async getServerNetworkOverview(): Promise<ServerNetworkOverview> {
+    const data = await this._request<z.input<typeof serverNetworkOverviewSchema>>({
+      method: 'get',
+      endpoint: '/server/network/overview',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return serverNetworkOverviewSchema.parse(data);
   }
 
   /**

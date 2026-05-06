@@ -2,6 +2,7 @@ import { initCommand } from './init/index.js';
 import { loginCommand } from './login/index.js';
 import { logoutCommand } from './logout/index.js';
 import { serverInfoCommand } from './server/info/index.js';
+import { serverNetworkCommand } from './server/network/index.js';
 import { serverUsageCommand } from './server/usage/index.js';
 import { serverUptimeCommand } from './server/uptime/index.js';
 import { serverBackupsCommand } from './server/backups/index.js';
@@ -24,6 +25,7 @@ export const commands = [
   loginCommand,
   logoutCommand,
   serverInfoCommand,
+  serverNetworkCommand,
   serverUsageCommand,
   serverUptimeCommand,
   serverBackupsCommand,

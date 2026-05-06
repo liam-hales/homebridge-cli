@@ -1,4 +1,4 @@
-import { userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema, accessorySchema } from './schemas/index.js';
+import { userSchema, serverInfoSchema, serverNetworkOverviewSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema, accessorySchema } from './schemas/index.js';
 import { z } from 'zod';
 
 /**
@@ -64,6 +64,18 @@ export type User = z.output<typeof userSchema>;
  * by the `serverInfoSchema`
  */
 export type ServerInfo = z.output<typeof serverInfoSchema>;
+
+/**
+ * Describes the server network overview inferred
+ * by the `serverNetworkOverviewSchema`
+ */
+export type ServerNetworkOverview = z.output<typeof serverNetworkOverviewSchema>;
+
+/**
+ * Describes the server network entry inferred by the
+ * `entries` field from `serverNetworkOverviewSchema`
+ */
+export type ServerNetworkEntry = z.output<typeof serverNetworkOverviewSchema>['entries'][number];
 
 /**
  * Describes the server backup inferred

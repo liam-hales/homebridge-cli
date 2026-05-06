@@ -1,5 +1,6 @@
 import userSchema from './user.schema.js';
 import serverInfoSchema from './serverInfo.schema.js';
+import serverNetworkOverviewSchema from './serverNetworkOverview.schema.js';
 import serverBackupSchema from './serverBackup.schema.js';
 import serverUptimeSchema from './serverUptime.schema.js';
 import nodejsInfoSchema from './nodejsInfo.schema.js';
@@ -16,6 +17,7 @@ import accessorySchema from './accessory.schema.js';
 export {
   userSchema,
   serverInfoSchema,
+  serverNetworkOverviewSchema,
   serverBackupSchema,
   serverUptimeSchema,
   nodejsInfoSchema,
