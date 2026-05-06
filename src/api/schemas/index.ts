@@ -11,6 +11,7 @@ import cpuUsageSchema from './cpuUsage.schema.js';
 import memoryUsageSchema from './memoryUsage.schema.js';
 import installedPluginSchema from './installedPlugin.schema.js';
 import childBridgeSchema from './childBridges.schema.js';
+import accessorySchema from './accessory.schema.js';
 
 export {
   userSchema,
@@ -26,4 +27,5 @@ export {
   memoryUsageSchema,
   installedPluginSchema,
   childBridgeSchema,
+  accessorySchema,
 };

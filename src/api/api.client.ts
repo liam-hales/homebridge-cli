@@ -1,6 +1,6 @@
 import { ApiStatus, Credentials, LoginStatus } from '../types.js';
-import { RequestOptions, ErrorResponse, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge } from './types.js';
-import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema } from './schemas/index.js';
+import { RequestOptions, ErrorResponse, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge, Accessory } from './types.js';
+import { loginSchema, userSchema, serverInfoSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema, accessorySchema } from './schemas/index.js';
 import { z } from 'zod';
 import { ApiError } from './index.js';
 import date, { type Date } from '../date.js';
@@ -336,6 +336,23 @@ class ApiClient {
     // Parse and return the data using
     // the schema to transform the data
     return data.map((item) => childBridgeSchema.parse(item));
+  }
+
+  /**
+   * Used to obtain the accessories data from
+   * the `GET /api/accessories` endpoint
+   *
+   * @returns The accessories data
+   */
+  public async getAccessories(): Promise<Accessory[]> {
+    const data = await this._request<z.input<typeof accessorySchema>[]>({
+      method: 'get',
+      endpoint: '/accessories',
+    });
+
+    // Parse and return the data using
+    // the schema to transform the data
+    return data.map((item) => accessorySchema.parse(item));
   }
 
   /**
