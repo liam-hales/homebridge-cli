@@ -16,6 +16,7 @@ import Duration from './common/duration.js';
 import CodeBlock from './common/codeBlock.js';
 import Picker from './common/picker.js';
 import ConfirmPrompt from './common/confirmPrompt.js';
+import VersionInfo from './common/versionInfo.js';
 import CommandInput from './commandInput.js';
 import CommandBlock from './block/commandBlock.js';
 import ErrorBlock from './block/errorBlock.js';
@@ -39,6 +40,7 @@ export {
   Duration,
   Picker,
   ConfirmPrompt,
+  VersionInfo,
   CommandInput,
   CommandBlock,
   ErrorBlock,
