@@ -14,6 +14,7 @@ import { configBackupsCommand } from './config/backups/index.js';
 import { installedPluginsCommand } from './plugins/installed/index.js';
 import { childBridgesCommand } from './childBridges/index.js';
 import { accessoriesCommand } from './accessories/index.js';
+import { updateCheckCommand } from './update/check/index.js';
 import { CommandMap } from './types.js';
 
 /**
@@ -37,6 +38,7 @@ export const commands = [
   installedPluginsCommand,
   childBridgesCommand,
   accessoriesCommand,
+  updateCheckCommand,
 ];
 
 /**
