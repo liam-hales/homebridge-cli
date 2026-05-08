@@ -47,6 +47,7 @@ export default defineConfig(
         '@typescript-eslint/prefer-reduce-type-parameter': 'off',
         '@typescript-eslint/no-unnecessary-type-arguments': 'off',
         '@typescript-eslint/no-inferrable-types': 'off',
+        '@typescript-eslint/no-invalid-void-type': 'off',
         'react/display-name': 'off',
         'react-hooks/exhaustive-deps': 'off',
         'react-hooks/set-state-in-effect': 'off',
