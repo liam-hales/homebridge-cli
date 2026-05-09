@@ -71,7 +71,7 @@ const Table = <T extends TableItem>(props: Props<T>): ReactElement<Props<T>> => 
     // Make sure the headers have no case so they are
     // not rendered in its original camel-case format
     const headers = [
-      ...(showRowColumn === true) ? ['row'] : [],
+      ...(showRowColumn === true) ? ['#'] : [],
       ...Object
         .keys(items.at(0) ?? [])
         .map((key) => {
