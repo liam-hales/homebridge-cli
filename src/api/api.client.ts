@@ -2,7 +2,7 @@ import { ApiStatus, Credentials, LoginStatus } from '../types.js';
 import { RequestOptions, ErrorResponse, User, ServerInfo, NodejsInfo, HomebridgeInfo, Pairing, ConfigBackup, ServerBackup, ServerUptime, CpuUsage, MemoryUsage, ConfigData, InstalledPlugin, ChildBridge, Accessory, ServerNetworkOverview } from './types.js';
 import { loginSchema, userSchema, serverInfoSchema, serverNetworkOverviewSchema, nodejsInfoSchema, homebridgeInfoSchema, pairingSchema, configBackupSchema, serverBackupSchema, serverUptimeSchema, cpuUsageSchema, memoryUsageSchema, installedPluginSchema, childBridgeSchema, accessorySchema } from './schemas/index.js';
 import { z } from 'zod';
-import { ApiError } from './index.js';
+import { SocketClient, ApiError } from './index.js';
 import date, { type Date } from '../date.js';
 
 /**
@@ -12,10 +12,11 @@ import date, { type Date } from '../date.js';
 class ApiClient {
   private readonly _host: string;
   private readonly _port: number;
+  private readonly _socketClient: SocketClient;
   private _authToken?: string;
 
   /**
-   * Construct the `ApiService`
+   * Construct the `ApiClient`
    *
    * @param host The server host
    * @param port The server port
@@ -23,6 +24,15 @@ class ApiClient {
   public constructor(host: string, port: number) {
     this._host = host;
     this._port = port;
+    this._socketClient = new SocketClient(host, port, () => this._authToken);
+  }
+
+  /**
+   * The socket client used to interact
+   * with the Homebridge sockets
+   */
+  public get socket(): SocketClient {
+    return this._socketClient;
   }
 
   /**
