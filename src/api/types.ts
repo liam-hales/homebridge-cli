@@ -15,6 +15,18 @@ export type RequestMethod = 'get' | 'put' | 'post';
 export type RequestOptions<T extends object = never> = GetRequestOptions | PutRequestOptions | PostRequestOptions<T>;
 
 /**
+ * Describes the socket event
+ *
+ * - Generic type `T` for the message data
+ */
+export type SocketEvent<T> =
+  {
+    readonly type: 'connected' | 'disconnected';
+  }
+  | SocketMessageEvent<T>
+  | SocketErrorEvent;
+
+/**
  * Describes the API request options
  * for a `GET` request
  */
@@ -51,6 +63,36 @@ export interface PostRequestOptions<T extends object> {
 export interface ErrorResponse {
   readonly statusCode: number;
   readonly message: string;
+}
+
+/**
+ * Describes the options used
+ * to open a socket stream
+ */
+export interface SocketStreamOptions {
+  readonly namespace: string;
+  readonly listenOn: string;
+  readonly trigger: string;
+}
+
+/**
+ * Describes the socket
+ * message event
+ *
+ * - Generic type `T` for the message data
+ */
+export interface SocketMessageEvent<T> {
+  readonly type: 'message';
+  readonly data: T;
+}
+
+/**
+ * Describes the socket
+ * error event
+ */
+export interface SocketErrorEvent {
+  readonly type: 'error';
+  readonly error: Error;
 }
 
 /**
