@@ -292,10 +292,14 @@ const AppProvider: FunctionComponent<Props> = ({ children }): ReactElement<Props
       return;
     }
 
-    // Remove the credentials from keytar
-    // and clear auth from the API client
+    // Remove the current
+    // credentials from keytar
     await keytar.deletePassword('homebridge-cli', credentials.username);
+
+    // Clear auth from the API client
+    // and disconnect from all sockets
     await apiClient?.clearAuth();
+    await apiClient?.socket.disconnect();
 
     setMode('checking');
     setCredentials(undefined);
