@@ -40,6 +40,18 @@ class SocketClient {
   }
 
   /**
+   * Used to tail the logs from
+   * `/log -> stdout` via the socket
+   */
+  public async* tailLog(): AsyncGenerator<SocketEvent<string>> {
+    yield* this._stream<string>({
+      namespace: '/log',
+      listenOn: 'stdout',
+      trigger: 'tail-log',
+    });
+  }
+
+  /**
    * Connects to the socket using the given `options`, emits the trigger
    * event and yields any messages received as an async iterable
    *
