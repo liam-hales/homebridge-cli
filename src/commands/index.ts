@@ -7,6 +7,7 @@ import { serverUsageCommand } from './server/usage/index.js';
 import { serverUptimeCommand } from './server/uptime/index.js';
 import { serverBackupsCommand } from './server/backups/index.js';
 import { serverRestartCommand } from './server/restart/index.js';
+import { serverLogsCommand } from './server/logs/index.js';
 import { pairingsCommand } from './pairings/index.js';
 import { usersCommand } from './users/index.js';
 import { configCommand } from './config/index.js';
@@ -31,6 +32,7 @@ export const commands = [
   serverUptimeCommand,
   serverBackupsCommand,
   serverRestartCommand,
+  serverLogsCommand,
   pairingsCommand,
   usersCommand,
   configCommand,
